@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Firebase Archive test</title>
+  </head>
+  <body>
+
+    <pre id="object"></pre>
+
+    <ul id="list"></ul>
+
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    ///////////////////////////////these values were left empty fill them if you use this\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    var config = {
+      apiKey: "",
+      authDomain: "",
+      databaseURL: "",
+      projectId: "",
+      storageBucket: "",
+      messagingSenderId: ""
+    };
+    firebase.initializeApp(config);
+
+    const preObject = document.getElementById('object');
+    const ulList = document.getElementById('list');
+    const dbRefObject = firebase.database().ref().child('object');
+    const dbRefList = dbRefObject.child('messages');
+    dbRefObject.on('value', snap => {
+      preObject.innerText = JSON.stringify(snap.val(), null, 3);
+    });
+    dbRefList.on('child_added', snap => console.log(snap.val()));
+    </script>
+  </body>
+</html>
