@@ -23,7 +23,20 @@
         display: inline-block;
       }
     </style>
-
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCpwgCgLOfU9l27TvFGVYkFQdeyJJnB-ck",
+        authDomain: "askaround-01.firebaseapp.com",
+        databaseURL: "https://askaround-01.firebaseio.com/",
+        projectId: "askaround-01",
+        storageBucket: "askaround-01.appspot.com",
+        messagingSenderId: "527860430663"
+      };
+      firebase.initializeApp(config);
+    </script>
 </head>
 
 <body>
@@ -31,7 +44,7 @@
         Title: <input type="text" id="Title" value=""><br>
         Description: <input type="text" id="Description" value=""><br>
         Bounty: $<input type="text" id="Bounty" value=""><br>
-        <button onclick="doStuff()" type="submit" id='Submit'>Submit</button>
+        <button onclick="doStuff('US-'+ 1, 'jswan12', document.getElementById('Title').value, document.getElementById('Description').value, document.getElementById('Bounty').value, 'Gold')" type="submit" id='Submit'>Submit</button>
     </div><br>
         <div class="blue">
             <h4 id="postUsername"></h4><h5 id="postRank"></h5>
@@ -43,13 +56,19 @@
     </div>
     
     <script>
-      function doStuff(){
-        var postOne = new Post('getUsername()', document.getElementById('Title').value, document.getElementById('Description').value, document.getElementById('Bounty').value, 'Gold');
-        document.getElementById("postUsername").innerHTML = postOne.getUserId();
-        document.getElementById("postTitle").innerHTML = postOne.getTitle();
-        document.getElementById("postDescription").innerHTML = postOne.getDescription();
-        document.getElementById("postBounty").innerHTML = postOne.getCashAmount();
-        document.getElementById("postRank").innerHTML = postOne.getRanking();
+      function doStuff(userId, username, title, description, bounty, rank){
+        var postData = {
+          username: username,
+          title: title,
+          description: description,
+          bounty: bounty,
+          rank: rank}
+        firebase.database().ref('Posts/ ' + userId).set(postData);
+        document.getElementById("postUsername").innerHTML = username;
+        document.getElementById("postTitle").innerHTML = document.getElementById('Title').value;
+        document.getElementById("postDescription").innerHTML = document.getElementById('Description').value;
+        document.getElementById("postBounty").innerHTML = document.getElementById('Bounty').value;
+        document.getElementById("postRank").innerHTML = rank;
       }
     </script>
 </body>
