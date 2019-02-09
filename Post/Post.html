@@ -6,6 +6,23 @@
 
   <title>My site</title>
   <script type="text/javascript" src="Post.js"></script>
+  <style>
+      .main-content {
+        width: 25%;
+        margin-left: 0%;
+      }
+      .blue {
+        width: 7%;
+        border-style: solid;
+        border-left: 1px;
+        display:inline-block;
+      }
+      .green {
+        width: 20%;
+        word-wrap: break-word;
+        display: inline-block;
+      }
+    </style>
 
 </head>
 
@@ -14,7 +31,7 @@
         Title: <input type="text" id="Title" value=""><br>
         Description: <input type="text" id="Description" value=""><br>
         Bounty: $<input type="text" id="Bounty" value=""><br>
-        <button type="submit" id='Submit'>Submit</button>
+        <button onclick="doStuff()" type="submit" id='Submit'>Submit</button>
     </div><br>
         <div class="blue">
             <h4 id="postUsername"></h4><h5 id="postRank"></h5>
@@ -24,5 +41,16 @@
         <p id="postDescription"></p>
         <p id="postBounty"></p>
     </div>
+    
+    <script>
+      function doStuff(){
+        var postOne = new Post('getUsername()', document.getElementById('Title').value, document.getElementById('Description').value, document.getElementById('Bounty').value, 'Gold');
+        document.getElementById("postUsername").innerHTML = postOne.getUserId();
+        document.getElementById("postTitle").innerHTML = postOne.getTitle();
+        document.getElementById("postDescription").innerHTML = postOne.getDescription();
+        document.getElementById("postBounty").innerHTML = postOne.getCashAmount();
+        document.getElementById("postRank").innerHTML = postOne.getRanking();
+      }
+    </script>
 </body>
 </html>
