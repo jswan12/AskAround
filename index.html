@@ -17,12 +17,17 @@
 <link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/responsive.css">
+
+<link rel="shortcut icon" href="images/favicon - 32px x 32px.png" />
+<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="js/functions.js"></script>
+
 </head>
 
 
 <body>
-	
-
 	<div class="wrapper">
 		<header> 
 			<div class="container">
@@ -214,7 +219,7 @@
 											</li>
 											<li class="post-st">
 													<ul>
-														<li style="border-top: none"><a class="post-jb active" href="#" title="">Ask Around</a></li>
+														<li style="border-top: none"><a class="post-jb active" href="#" title="">Create Post</a></li>
 													</ul>
 											</li>
 											<li>
@@ -282,7 +287,7 @@
 
 
 
-
+		<!--
 		<div class="post-popup pst-pj">
 			<div class="post-project">
 				<h3>Ask Around</h3>
@@ -290,40 +295,40 @@
 					<form>
 						<div class="row">
 							<div class="col-lg-12">
-								<input type="text" name="title" placeholder="Title">
+								<input type="text" name="title" placeholder="Title" id="title">
 							</div>
 							<div class="col-lg-12">
 								<div class="inp-field">
-									<select>
-										<option>Category</option>
+									<select id="category">
 										<option>Category 1</option>
 										<option>Category 2</option>
 										<option>Category 3</option>
 									</select>
 								</div>
 							</div>
+							
 							<div class="col-lg-12">
 								<input type="text" name="skills" placeholder="Skills">
 							</div>
 							<div class="col-lg-12">
 								<div class="price-sec">
 									<div class="price-br">
-										<input type="text" name="price1" placeholder="Price">
+										<input type="number" name="price1" id="price1" placeholder="Bounty">
 										<i class="la la-dollar"></i>
 									</div>
 									<span>To</span>
 									<div class="price-br">
-										<input type="text" name="price1" placeholder="Price">
+										<input type="number" name="price1" id="price1" placeholder="Bounty">
 										<i class="la la-dollar"></i>
 									</div>
 								</div>
 							</div>
 							<div class="col-lg-12">
-								<textarea name="description" placeholder="Description"></textarea>
+								<textarea name="description" id="description" placeholder="Description"></textarea>
 							</div>
 							<div class="col-lg-12">
 								<ul>
-									<li><button class="active" type="submit" value="post">Post</button></li>
+									<li><button class="active" type="submit" value="post" id='Submit'>Post</button></li>
 									<li><a href="#" title="">Cancel</a></li>
 								</ul>
 							</div>
@@ -333,34 +338,39 @@
 				<a href="#" title=""><i class="la la-times-circle-o"></i></a>
 			</div>
 		</div>
+		-->
 
 		<div class="post-popup job_post">
 			<div class="post-project">
-				<h3>Ask Around</h3>
+				<h3>Ask Around: Create Post</h3>
 				<div class="post-project-fields">
-					<form>
+					<form id="postForm">
 						<div class="row">
 							<div class="col-lg-12">
-								<input type="text" name="title" placeholder="Title">
+								<input type="text" name="title" placeholder="Title" id="title" required>
+							</div>
+							<div class="col-lg-12">
+								<textarea name="description" id="description" placeholder="Description"></textarea required>
 							</div>
 							<div class="col-lg-12">
 								<div class="inp-field">
-									<select>
-										<option>Category</option>
-										<option>Category 1</option>
-										<option>Category 2</option>
-										<option>Category 3</option>
+									<select id="category" required>
+										<option value="" selected disabled hidden>Select Category</option>
+										<option value="1">Category 1</option>
+										<option value="2">Category 2</option>
+										<option value="3">Category 3</option>
 									</select>
+									<div class="price-br">
+										<input type="number" min="0" name="price" id="price" placeholder="Bounty" required>
+										<i class="la la-dollar"></i>
+									</div>
 								</div>
 							</div>
-							<div class="col-lg-12">
+							<!--<div class="col-lg-12">
 								<input type="text" name="skills" placeholder="Skills">
 							</div>
 							<div class="col-lg-6">
-								<div class="price-br">
-									<input type="text" name="price1" placeholder="Price">
-									<i class="la la-dollar"></i>
-								</div>
+								
 							</div>
 							<div class="col-lg-6">
 								<div class="inp-field">
@@ -369,20 +379,17 @@
 										<option>Half time</option>
 									</select>
 								</div>
-							</div>
-							<div class="col-lg-12">
-								<textarea name="description" placeholder="Description"></textarea>
-							</div>
+							</div>-->
 							<div class="col-lg-12">
 								<ul>
-									<li><button class="active" type="submit" value="post">Post</button></li>
-									<li><a href="#" title="">Cancel</a></li>
+									<li><button type="submit" class="active">Post</button></li>
+									<li><a href="index.html">Cancel</a></li>
 								</ul>
 							</div>
 						</div>
 					</form>
 				</div>
-				<a href="#" title=""><i class="la la-times-circle-o"></i></a>
+				<a href="#" title=""><i class="la-times-circle-o"></i></a>
 			</div>
 		</div>
 

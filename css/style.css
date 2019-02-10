@@ -1828,6 +1828,7 @@ main {
 }
 .post-project-fields form select {
 	height: 40px;
+	width: 250px;
 	padding: 0 10px;
 }
 .post-project-fields form ul {
@@ -1887,7 +1888,7 @@ main {
 	right: 0;
 	color: #b2b2b2;
 	font-size: 18px;
-	width: 40px;
+	width: 25;
 	height: 40px;
 	line-height: 40px;
 	border-left: 1px solid #e5e5e5;
@@ -1912,13 +1913,19 @@ select {
 .inp-field:before {
 	content: '\f107';
 	position: absolute;
-	top: 13px;
-	right: 15px;
-	color: #717171;
+	top: 0px;
+	right: 0px;
+	color: #b2b2b2;
+	font-size: 18px;
+	width: 25px;
+	height: 40px;
+	line-height: 40px;
+	border-left: 1px solid #e5e5e5;
+	text-align: center;
 	font-family: fontawesome;
 }
 .post-popup.job_post .price-br {
-	width: 100% !important;
+	width: 50% !important;
 }
 
 
