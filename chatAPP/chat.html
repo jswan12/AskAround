@@ -4,7 +4,7 @@
     <title>really basic socket io thinggy</title>
     <style>
       .title{
-        color: rgb(0,160,140);
+        color: rgb(62,31,88);
         width: 90%;
         margin-left: 5%;
         margin-right:5%;
@@ -18,7 +18,7 @@
         padding:5%;
       }
       .messagebox{
-        background-color: rgb(0,160,140);
+        background-color: rgb(62,31,88);
         width:90%;
         margin-left:5%;
         margin-right:5%;
@@ -32,7 +32,8 @@
       ul{
         list-style-type:none;
         height: 22em;
-        overflow: scroll;
+        overflow: auto;
+        color:rgb(252,247,59);
       }
       .textbox{
         margin:5%;
@@ -43,11 +44,12 @@
       input[type=button]{
         width:12%;
         height:2em;
-        color:rgb(0,160,140);
+        color:rgb(62,31,88);
         border-radius:5px;
       }
-    </style>    
-  </head>
+    </style>
+  </head>    
+  <script src="/socket.io/socket.io.js"></script>
   <body>
   <div class = "title">
     <h1> This is where you can text</h1>
@@ -58,6 +60,7 @@
   </div>
   <div class="textbox">
     <form onsubmit="return false" id="myMess">
+      <input type="text"  id="myName" name="myName">
       <input type="text"  id="message" name="message">
       <input type="button" id="mybutton" value="post">
     </form>
@@ -65,16 +68,31 @@
 
 
     <script>
+      var socket = io();
       var btn = document.getElementById("mybutton");
       btn.addEventListener("click", function(){
-        var mess = document.getElementById("message").value;
-        mess = "me: " + mess
+        var messA = document.getElementById("message").value;
+	var name =document.getElementById("myName").value;
+        var mess = name + ": " + messA
         var messLi = document.createElement("LI");
         var messTxt= document.createTextNode(mess);
         messLi.appendChild(messTxt);
         document.getElementById("txtBox").appendChild(messLi);
         document.getElementById("message").value = "";
+	socket.emit('messToServer', {messA, name});
       });
+      socket.on('messFromServer', function(msg){
+        var mess = msg.messA;
+	var title = msg.name;
+	mess = title + ": " + mess;
+        var messLi = document.createElement("LI");
+        var messTxt= document.createTextNode(mess);
+        messLi.appendChild(messTxt);
+        document.getElementById("txtBox").appendChild(messLi);
+        document.getElementById("message").value = "";
+
+      });
+
     </script>
 
 
