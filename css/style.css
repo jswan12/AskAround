@@ -1932,7 +1932,7 @@ select {
 /* ================= sign-in ================ */
 
 .sign-in {
-	background-color: #041681;
+	background-color: #3C1A5B;
 }
 .sign-in-page {
 	float: left;
@@ -1943,34 +1943,6 @@ select {
 	width: 870px;
 	margin: 0 auto;
 	position: relative;
-}
-.signin-popup:before {
-	content: '';
-	position: absolute;
-	top: -16px;
-	left: 56px;
-	width: 30px;
-	height: 30px;
-	background-color: #fff;
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
-	-ms-border-radius: 100px;
-	-o-border-radius: 100px;
-	border-radius: 100px;
-}
-.signin-popup:after {
-	content: '';
-	position: absolute;
-	top: -37px;
-	left: 43px;
-	width: 20px;
-	height: 20px;
-	background-color: #fff;
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
-	-ms-border-radius: 100px;
-	-o-border-radius: 100px;
-	border-radius: 100px;
 }
 .signin-pop {
 	float: left;
@@ -2017,7 +1989,7 @@ select {
 .cm-logo > p {
 	color: #000000;
 	font-size: 14px;
-	font-weight: 700;
+	font-weight: 400;
 	line-height: 24px;
 	float: left;
 	width: 100%;
@@ -2035,40 +2007,13 @@ select {
 	padding: 30px 0;
 	position: relative;
 }
-.login-sec:before {
-	content: '';
-	position: absolute;
-	bottom: -15px;
-	right: 70px;
-	width: 30px;
-	height: 30px;
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
-	-ms-border-radius: 100px;
-	-o-border-radius: 100px;
-	border-radius: 100px;
-	background-color: #fff;
-}
-.login-sec:after {
-	content: '';
-	position: absolute;
-	bottom: -40px;
-	right: 55px;
-	width: 20px;
-	height: 20px;
-	-webkit-border-radius: 100px;
-	-moz-border-radius: 100px;
-	-ms-border-radius: 100px;
-	-o-border-radius: 100px;
-	border-radius: 100px;
-	background-color: #fff;
-}
+
 .sign-control {
 	float: left;
 	width: 100%;
 	text-align: right;
 	padding-right: 50px;
-	margin-bottom: 70px;
+	margin-bottom: 30px;
 }
 .sign-control li {
 	display: inline-block;
@@ -2095,7 +2040,7 @@ select {
 	border-radius: 0 4px 4px 0;
 }
 .sign-control li.current a {
-	background-color: #041681;
+	background-color: #3C1A5B;
 	color: #fff;
 }
 .sign_in_sec {
@@ -2114,6 +2059,7 @@ select {
 	font-weight: 600;
 	position: relative;
 	padding-bottom: 10px;
+	padding-top: 50px;
 	margin-bottom: 30px;
 }
 .sign_in_sec h3:before {
@@ -2177,7 +2123,7 @@ select {
 .sign_in_sec form select {
 	width: 100%;
 	padding: 0 15px 0 40px;
-	color: #b2b2b2;
+	color: black;
 	font-size: 14px;
 	border:1px solid #e5e5e5;
 }
@@ -2188,7 +2134,7 @@ select {
 .sign_in_sec form button {
 	color: #ffffff;
 	font-size: 16px;
-	background-color: #041681;
+	background-color: #3C1A5B;
 	padding: 12px 27px;
 	border:0;
 	font-weight: 500;
@@ -2261,15 +2207,15 @@ select {
 	float: left;
 	color: #000000;
 	font-size: 14px;
-	font-weight: 600;
+	font-weight: 400;
 	margin-left: 10px;
-	font-weight: 700;
+	
 }
 .checky-sec > a {
 	float: right;
 	color: #000000;
 	font-size: 14px;
-	font-weight: 600;
+	font-weight: 400;
 }
 
 /* ======= Radio Button Styles ======= */
