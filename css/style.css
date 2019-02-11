@@ -227,7 +227,7 @@ nav ul li:hover > ul,
 header {
 	float: left;
 	width: 100%;
-	background-color: #1A237E;
+	background-color: #3C1A5B;
 }
 .header-data {
 	float: left;
@@ -490,8 +490,6 @@ nav > ul > li > a:hover {
 .user-account {
 	float: right;
 	width: 110px;
-	border-left: 1px solid #041681;
-	border-right: 1px solid #041681;
 	box-sizing: border-box;
 	position: relative;
 }
@@ -499,7 +497,7 @@ nav > ul > li > a:hover {
 	float: left;
 	width: 100%;
 	padding: 13px 10px;
-	position: relative;
+	position: relative;	
 }
 .user-account-settingss {
 	position: absolute;
@@ -969,7 +967,7 @@ main {
 }
 .post-st ul li a:hover,
 .post-st ul li a.active {
-	background-color: #36DAA2;
+	background-color: #3C1A5B;
 	color: #fff;
 }
 
@@ -1791,7 +1789,7 @@ main {
 .post-project h3 {
 	float: left;
 	width: 100%;
-	background-color: #1B267C;
+	background-color: #3C1A5B;
 	color: #fff;
 	text-align: center;
 	font-size: 18px;
@@ -1820,7 +1818,7 @@ main {
 .post-project-fields form textarea,
 .post-project-fields form select {
 	width: 100%;
-	color: #b2b2b2;
+	color: black;
 	font-size: 14px;
 	border: 1px solid #e5e5e5;
 	margin-bottom: 20px;
@@ -1828,7 +1826,7 @@ main {
 }
 .post-project-fields form select {
 	height: 40px;
-	width: 250px;
+	width: 240px;
 	padding: 0 10px;
 }
 .post-project-fields form ul {
@@ -1841,7 +1839,7 @@ main {
 	margin-right: 15px;
 }
 .post-project-fields form ul li button.active {
-	background-color: #36DAA2;
+	background-color: #3C1A5B;
 	color: #fff;
 }
 .post-project-fields form ul li button,

@@ -44,16 +44,15 @@
 					</div><!--search-bar end-->
 
 					<nav>
-						<ul>
+						<ul style="padding-top: 5px;">
 							<li>
-								<a href="index.html" title="">
-									<span><img src="images/icon1.png" alt=""></span>
+								<a href="index.html" title="">								
 									Home
 								</a>
 							</li>
 							<li>
 								<a href="" title="">
-									<span><img src="images/icon2.png" alt=""></span>
+									
 									Categories
 								</a>
 								<ul>
@@ -64,104 +63,14 @@
 							</li>
 							
 							<li>
-								<a href="#" title="" class="not-box-open">
-									<span><img src="images/icon6.png" alt=""></span>
+								<a href="#" title="" class="not-box-open">									
 									Chat
-								</a>
-								<div class="notification-box msg">
-									<div class="nt-title">
-										<h4>Setting</h4>
-										<a href="#" title="">Clear all</a>
-									</div>
-									<div class="nott-list">
-										<div class="notfication-details">
-							  				<div class="noty-user-img">
-							  					<img src="images/resources/ny-img1.png" alt="">
-							  				</div>
-							  				<div class="notification-info">
-							  					<h3><a href="messages.html" title="">Jassica William</a> </h3>
-							  					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do.</p>
-							  					<span>2 min ago</span>
-							  				</div>
-						  				</div>
-						  				<div class="notfication-details">
-							  				<div class="noty-user-img">
-							  					<img src="images/resources/ny-img2.png" alt="">
-							  				</div>
-							  				<div class="notification-info">
-							  					<h3><a href="messages.html" title="">Jassica William</a></h3>
-							  					<p>Lorem ipsum dolor sit amet.</p>
-							  					<span>2 min ago</span>
-							  				</div>
-						  				</div>
-						  				<div class="notfication-details">
-							  				<div class="noty-user-img">
-							  					<img src="images/resources/ny-img3.png" alt="">
-							  				</div>
-							  				<div class="notification-info">
-							  					<h3><a href="messages.html" title="">Jassica William</a></h3>
-							  					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempo incididunt ut labore et dolore magna aliqua.</p>
-							  					<span>2 min ago</span>
-							  				</div>
-						  				</div>
-						  				<div class="view-all-nots">
-						  					<a href="messages.html" title="">View All Messsages</a>
-						  				</div>
-									</div>
-								</div>
+								</a>							
 							</li>
 							<li>
 								<a href="#" title="" class="not-box-open">
-									<span><img src="images/icon7.png" alt=""></span>
 									Notification
-								</a>
-								<div class="notification-box">
-									<div class="nt-title">
-										<h4>Setting</h4>
-										<a href="#" title="">Clear all</a>
-									</div>
-									<div class="nott-list">
-										<div class="notfication-details">
-							  				<div class="noty-user-img">
-							  					<img src="images/resources/ny-img1.png" alt="">
-							  				</div>
-							  				<div class="notification-info">
-							  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-							  					<span>2 min ago</span>
-							  				</div>
-						  				</div>
-						  				<div class="notfication-details">
-							  				<div class="noty-user-img">
-							  					<img src="images/resources/ny-img2.png" alt="">
-							  				</div>
-							  				<div class="notification-info">
-							  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-							  					<span>2 min ago</span>
-							  				</div>
-						  				</div>
-						  				<div class="notfication-details">
-							  				<div class="noty-user-img">
-							  					<img src="images/resources/ny-img3.png" alt="">
-							  				</div>
-							  				<div class="notification-info">
-							  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-							  					<span>2 min ago</span>
-							  				</div>
-						  				</div>
-						  				<div class="notfication-details">
-							  				<div class="noty-user-img">
-							  					<img src="images/resources/ny-img2.png" alt="">
-							  				</div>
-							  				<div class="notification-info">
-							  					<h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-							  					<span>2 min ago</span>
-							  				</div>
-						  				</div>
-						  				<div class="view-all-nots">
-						  					<a href="#" title="">View All Notification</a>
-						  				</div>
-									</div>
-								</div>
+								</a>		
 							</li>
 						</ul>
 					</nav>
@@ -342,12 +251,12 @@
 
 		<div class="post-popup job_post">
 			<div class="post-project">
-				<h3>Ask Around: Create Post</h3>
+				<h3>Ask Around</h3>
 				<div class="post-project-fields">
 					<form id="postForm">
 						<div class="row">
 							<div class="col-lg-12">
-								<input type="text" name="title" placeholder="Title" id="title" required>
+								<input type="text" name="title" placeholder="Question" id="question" required>
 							</div>
 							<div class="col-lg-12">
 								<textarea name="description" id="description" placeholder="Description"></textarea required>
@@ -356,11 +265,11 @@
 								<div class="inp-field">
 									<select id="category" required>
 										<option value="" selected disabled hidden>Select Category</option>
-										<option value="1">Category 1</option>
-										<option value="2">Category 2</option>
-										<option value="3">Category 3</option>
+										<option value="1">Computer Science</option>
+										<option value="2">Mathematics</option>
+										<option value="3">Science</option>
 									</select>
-									<div class="price-br">
+									<div class="price-br" style="margin-right: 10px">
 										<input type="number" min="0" name="price" id="price" placeholder="Bounty" required>
 										<i class="la la-dollar"></i>
 									</div>
