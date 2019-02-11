@@ -662,7 +662,7 @@ nav ul li a {
 main {
 	float: left;
 	width: 100%;
-	padding: 60px 0;
+	padding: 35px 0;
 }
 .main-section {
 	float: left;
@@ -718,7 +718,7 @@ main {
 .user-specs {
 	float: left;
 	width: 100%;
-	padding: 63px 0 27px 0;
+	padding: 30px 15px 27px 15px;
 }
 .user-specs h3 {
 	color: #000000;
@@ -1055,7 +1055,6 @@ main {
 }
 .usy-name {
 	float: left;
-	margin-left: 10px;
 }
 .usy-name h3 {
 	color: #000000;
@@ -1149,7 +1148,7 @@ main {
 }
 .job_descp h3 {
 	color: #000000;
-	font-size: 18px;
+	font-size: 20px;
 	font-weight: 600;
 	margin-bottom: 20px;
 }
@@ -1185,7 +1184,6 @@ main {
 	color: #686868;
 	font-size: 16px;
 	line-height: 24px;
-	margin-bottom: 20px;
 }
 .job_descp > p a {
 	color: #041681;

@@ -90,6 +90,7 @@
 
 
 @media (max-width: 768px) {
+	.profile-block{ display:none;}
 	.login_register {display: none;}
 	.forum-bar ul {float: right;}
 	.comment_box input {width: 84%;}
