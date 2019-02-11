@@ -13,7 +13,7 @@
 		authDomain: "askaround-01.firebaseapp.com",
 		databaseURL: "https://askaround-01.firebaseio.com",
 		projectId: "askaround-01",
-		storageBucket: "askaround-01.appspot.com",
+		storageBucket: "gs://askaround-01.appspot.com/",
 		messagingSenderId: "527860430663"
 	};
 	firebase.initializeApp(config);
@@ -53,25 +53,40 @@
 	<body>
 		<!-- The surrounding HTML is left untouched by FirebaseUI.
 			Your app may use that space for branding, controls and other customizations.-->
-		<center><h1>AskAround Sign-In</h1></center><br><br>
+		<center><h1>AskAround Sign-In</h1><br>
+		<img src="https://github.com/jswan12/AskAround/blob/master/images/logo.png?raw=true" alt="" style="height: 200px;">
+		<p>AskAround is a platform where students and teachers can ask and answer each other's questions!</p></center><br><br>
 		<center><form name="frmLogin" id="frmLogin" method="post"> 
 		<table> 	
 			<tr> 		
-				<th colspan="2">Login Form</th> 	
+				<th colspan="2">Login</th> 	
 			</tr> 	
 			<tr> 		
 				<td>Username</td> 		
-				<td><input type="text" id="username" name="username" /></td> 	
+				<td><input type="text" id="username" name="username" placeholder="Username" /></td> 	
 			</tr> 	
 			<tr> 		
 				<td>Password</td> 		
-				<td><input type="password" id="password" name="password" /></td>
-			</tr> 
+				<td><input type="password" id="password" name="password" placeholder="Password" /></td>
+			</tr>
 			<tr> 		
 				<th colspan="2"><input type="submit" name="login" value="Login"></th>
 			</tr> 
 		</table> 
-		</form></center>
+		</form>
+		<div class="col-lg-12 no-pdd">
+			<div class="checky-sec">
+				<div class="fgt-sec">
+					<input type="checkbox" name="cc" id="c1">
+					<label for="c1">
+						<span></span>
+					</label>
+					<small>Remember me</small>
+				</div><!--fgt-sec end-->
+				<a href="#" title="">Forgot Password?</a>
+			</div>
+		</div>
+		</center>
 		<div id="firebaseui-auth-container"></div>
 	</body>
 </html>
