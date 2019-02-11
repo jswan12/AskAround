@@ -1,7 +1,9 @@
 
 
 @media (max-width: 1200px) {
-	header nav {position: fixed;top: 0;left: 0;width: 200px;height: 100%;background-color: #1A237E;padding: 25px 20px;opacity: 0;visibility: hidden;z-index: 0}
+	.search-bar {display:none;}
+	.header-data {justify-content: space-between; }
+	header nav {position: fixed;top: 0;left: 0;width: 200px;height: 100%;background-color: white;padding: 25px 20px;opacity: 0;visibility: hidden;z-index: 0}
 	header nav.active {opacity: 1;visibility: visible;z-index: 9999;}
 	header nav ul li {float: left;width: 100%;text-align: left;padding: 15px 0 15px 10px;}
 	.menu-btn {display: block;}
@@ -40,6 +42,7 @@
 	.notification-box {left: 100%;top: 0;}
 	nav ul ul {left: 50%;top: 0;border: 1px solid #e4e4e4;padding-left: 15px;padding-right: 20px;}
 	.sgt-text span {font-size: 12px;}
+	.user-info {display: none;}
 }
 
 
@@ -115,7 +118,7 @@
 @media (max-width: 576px) {
 	.signin-pop {margin-bottom: 40px;}
 	.login-resources ul li {margin-bottom: 7px;}
-	.logo {width: 100%;text-align: center;}
+	.logo {width: 100%;}
 	.logo img {float: none;}
 	.search-bar {width: 100%;}
 	.user-account {float: left;}

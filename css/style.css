@@ -38,7 +38,7 @@ body {
 	font-family: 'Source Sans Pro', sans-serif;
 	overflow-x: hidden;
 	font-weight: 400;
-	background-color: #eeeeee;
+	background-color: #FAFAFA;
 }
 ol, ul {
 	list-style: none;
@@ -225,19 +225,24 @@ nav ul li:hover > ul,
 }
 
 header {
+	display: flex;
+	align-items: center;
 	float: left;
 	width: 100%;
-	background-color: #3C1A5B;
+	background-color:white;
+	border-bottom: 1px solid #ddd;
+	min-height: 50px;
+	box-shadow: 0 3px 2px -2px rgba(200,200,200,0.2);
 }
 .header-data {
 	float: left;
 	width: 100%;
+	display: flex;
+	align-items: center;
 }
 .logo {
 	float: left;
-	width: 40px;
-	margin-right: 14px;
-	margin-top: 10px;
+	width: 50px;
 }
 .logo.pd-btm {
 	padding-bottom: 10px;
@@ -316,19 +321,20 @@ header {
 .search-bar {
 	float: left;
 	width: 280px;
-	margin-top: 9px;
 }
 .search-bar form {
+	border: 1px solid #e2e2e2;
+	border-radius: 4px;
 	float: left;
 	width: 100%;
 	position: relative;
 }
 .search-bar form input {
 	width: 100%;
-	background-color: #fff;
-	height: 38px;
-	color: #b2b2b2;
-	font-size: 12px;
+	background-color: #fafafa;
+	height: 30px;
+	color: black;
+	font-size: 15px;
 	border: 0;
 	padding: 0 10px;
 }
@@ -342,7 +348,7 @@ header {
 	border: 0;
 }
 .search-bar form button i {
-	color: #041681;
+	color: #3B1C5A;
 	font-size: 20px;
 	font-weight: bold;
 }
@@ -350,8 +356,7 @@ header {
 nav {
 	float: left;
 	width: 60%;
-	text-align: right;
-	padding-right: 13px;
+	padding-left: 8px;
 }
 nav ul li {
 	display: inline-block;
@@ -480,12 +485,10 @@ nav ul li span img {
 	float: none;
 }
 nav ul li a {
-	color: #ffffff;
-	font-size: 14px;
+	color: #666666;
+	font-size: 15px;
 }
-nav > ul > li > a:hover {
-	color: #fff;
-}
+
 
 .user-account {
 	float: right;
@@ -494,6 +497,7 @@ nav > ul > li > a:hover {
 	position: relative;
 }
 .user-info {
+	order: 2;
 	float: left;
 	width: 100%;
 	padding: 13px 10px;
@@ -631,14 +635,12 @@ nav > ul > li > a:hover {
 	border-radius: 100px;
 }
 .user-info a {
-	color: #fff;
-	font-size: 14px;
+	color: #666666;
+	font-size: 15px;
 	float: left;
-	margin-top: 8px;
+	
 }
-.user-info a:hover {
-	color: #fff;
-}
+
 .user-info > i {
 	position: absolute;
 	top: 51%;
@@ -981,10 +983,9 @@ main {
 .post-bar {
 	float: left;
 	width: 100%;
+	border: 1px solid #efefef;
 	background-color: #fff;
-	border-left: 1px solid #e4e4e4;
-	border-right: 1px solid #e4e4e4;
-	border-bottom: 1px solid #e4e4e4;
+	border-bottom: 1px solid #e2e2e2;
 	margin-bottom: 20px;
 }
 .post_topbar {
@@ -1145,7 +1146,6 @@ main {
 	float: left;
 	width: 100%;
 	padding: 0 20px 20px 20px;
-	border-bottom: 1px solid #e5e5e5;
 }
 .job_descp h3 {
 	color: #000000;
@@ -4103,13 +4103,13 @@ a:hover {
 /* ============ Menu Btn =============*/
 
 .menu-btn {
+	order: 3;
 	float: right;
 	display: none;
 }
 .menu-btn a {
 	font-size: 24px;
-	color: #fff;
-	display: inline-block;
+	color: black;
 	padding-top: 16px;
 	padding-left: 20px;
 }
