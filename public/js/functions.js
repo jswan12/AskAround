@@ -8,6 +8,9 @@
     messagingSenderId: "527860430663"
     };
     firebase.initializeApp(config);
+
+  // Reference to the post object in Firebase database
+  var posts = firebase.database().ref("Posts");
   
   // Save a new post to the database, using the input in the form
   var submitPost = function () {
@@ -17,9 +20,6 @@
   var description = document.getElementById('description').value;
   var bounty = document.getElementById('price').value;
   var category = document.getElementById('category').value;
-  // Reference to the post object in Firebase database
-  var posts = firebase.database().ref("Posts/" + category);
-  //var category = document.getElementById('category').value;
   
     // Push a new post to the database using those values
 

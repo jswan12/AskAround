@@ -1,0 +1,12 @@
+{
+  "name": "chatApp",
+  "version": "0.0.1",
+  "description": "beginnings of a socket chat application",
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
