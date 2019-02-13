@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AskAround</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" type="text/css" href="css/animate.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/line-awesome.css">
+<link rel="stylesheet" type="text/css" href="css/line-awesome-font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
+<link rel="stylesheet" type="text/css" href="lib/slick/slick.css">
+<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/responsive.css">
+
+<link rel="shortcut icon" href="images/favicon - 32px x 32px.png" />
+<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+
+</head>
+
+
+<body>
+	<div class="wrapper">
+		<header> 
+			<div class="container">
+				<div class="header-data">
+					<div class="logo">
+						<a href="index.html" title=""><img src="images/logo.png" alt="" style="height: 34px;"></a>
+					</div><!--logo end-->
+
+					<div class="search-bar">
+						<form>
+							<input type="text" name="search" placeholder="Search...">
+							<button type="submit"><i class="la la-search"></i></button>
+						</form>
+					</div><!--search-bar end-->
+
+					<nav>
+						<ul>
+							<li>
+								<a href="index.html" title="">								
+									Home
+								</a>
+							</li>
+							<li>
+								<a href="" title="">
+									
+									Categories
+								</a>
+							</li>
+							
+							<li>
+								<a href="#" title="" class="not-box-open">									
+									Chat
+								</a>							
+							</li>
+							<li>
+								<a href="#" title="" class="not-box-open">
+									Notification
+								</a>		
+							</li>
+						</ul>
+					</nav>
+					<div class="menu-btn">
+						<a href="#" title=""><i class="fa fa-bars"></i></a>
+					</div>
+					<div class="user-account">
+						<div class="user-info">
+							
+							<a href="#" title="">John</a>
+							<i class="la la-sort-down"></i>
+						</div>
+
+						<div class="user-account-settingss">
+													
+							<h3>Profile</h3>
+							<ul class="us-links">
+								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
+								<li><a href="#" title="">Privacy</a></li>
+								<li><a href="#" title="">Faqs</a></li>
+								<li><a href="#" title="">Terms & Conditions</a></li>
+							</ul>
+							<h3 class="tc"><a href="index.html" title="">Logout</a></h3>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<main>
+			<div class="main-section">
+				<div class="container">
+					<div class="main-section-data">
+						<div class="row">
+							<div class="col-lg-3 col-md-4 pd-left-none no-pd profile-block">
+								<div class="main-left-sidebar no-margin">
+									<div class="user-data full-width">
+										<div class="user-profile">
+											
+											<div class="user-specs">
+												<h3>Giovanni Gonzaga</h3>
+												<span>LSU Student</span>
+											</div>
+										</div>
+
+										<ul class="user-fw-status">
+											<li>
+												<h4>Upvotes</h4>
+												<span>30593</span>
+											</li>
+											<li class="post-st">
+													<ul>
+														<li style="border-top: none"><a class="post-jb active" href="#" title="">Post a Question</a></li>
+													</ul>
+											</li>
+											<li>
+												<a href="#" title="">View Profile</a>
+											</li>
+										</ul>
+									</div>
+									
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-8 no-pd">
+								<div class="main-ws-sec">
+									
+
+
+									<div class="posts-section" id="posts-section">
+                                        <div class="post-bar company-title">
+                                            <center><h3 id="pageTitle">Computer Science</h3></center>
+                                        </div>
+										<!--<div class="post-bar">
+											<div class="post_topbar">
+												<div class="usy-dt">
+													
+													<div class="usy-name">
+														<h3>Giovanni Gonzaga</h3>
+														<span><img src="images/clock.png" alt="">3 min ago</span>
+													</div>
+												</div>
+												<div class="ed-opts">
+													<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+													<ul class="ed-options">
+														<li><a href="#" title="">Edit Post</a></li>
+														<li><a href="#" title="">Unsaved</a></li>
+														<li><a href="#" title="">Unbid</a></li>
+														<li><a href="#" title="">Close</a></li>
+														<li><a href="#" title="">Hide</a></li>
+													</ul>
+												</div>
+											</div>
+
+											<div class="job_descp">
+												<h3>How to code html??</h3>
+												
+												<p>It keeps asking me to translate the page everytime I run a test so Im going ahead and 
+													putting it in English since we speak that. The quick brown fox jumped over the lazy dog. 
+													The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. 
+													The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. 
+													The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.
+													. . . . . . .
+												</p>
+												
+											</div>
+
+										</div>-->
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> 
+			</div>
+		</main>
+
+
+
+		<!--
+		<div class="post-popup pst-pj">
+			<div class="post-project">
+				<h3>Ask Around</h3>
+				<div class="post-project-fields">
+					<form>
+						<div class="row">
+							<div class="col-lg-12">
+								<input type="text" name="title" placeholder="Title" id="title">
+							</div>
+							<div class="col-lg-12">
+								<div class="inp-field">
+									<select id="category">
+										<option>Category 1</option>
+										<option>Category 2</option>
+										<option>Category 3</option>
+									</select>
+								</div>
+							</div>
+							
+							<div class="col-lg-12">
+								<input type="text" name="skills" placeholder="Skills">
+							</div>
+							<div class="col-lg-12">
+								<div class="price-sec">
+									<div class="price-br">
+										<input type="number" name="price1" id="price1" placeholder="Bounty">
+										<i class="la la-dollar"></i>
+									</div>
+									<span>To</span>
+									<div class="price-br">
+										<input type="number" name="price1" id="price1" placeholder="Bounty">
+										<i class="la la-dollar"></i>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<textarea name="description" id="description" placeholder="Description"></textarea>
+							</div>
+							<div class="col-lg-12">
+								<ul>
+									<li><button class="active" type="submit" value="post" id='Submit'>Post</button></li>
+									<li><a href="#" title="">Cancel</a></li>
+								</ul>
+							</div>
+						</div>
+					</form>
+				</div>
+				<a href="#" title=""><i class="la la-times-circle-o"></i></a>
+			</div>
+		</div>
+		-->
+
+		<div class="post-popup job_post">
+			<div class="post-project">
+				<h3>Ask Around: Create Post</h3>
+				<div class="post-project-fields">
+					<form id="postForm">
+						<div class="row">
+							<div class="col-lg-12">
+								<input type="text" name="title" placeholder="Question" id="question" required>
+							</div>
+							<div class="col-lg-12">
+								<textarea name="description" id="description" placeholder="Description"></textarea required>
+							</div>
+							<div class="col-lg-12">
+								<div class="inp-field">
+									<select id="category" required>
+										<option value="" selected disabled hidden>Select Category</option>
+										<option value="Computer Science">Computer Science</option>
+										<option value="Mathematics">Mathematics</option>
+										<option value="Science">Science</option>
+									</select>
+									<div class="price-br" style="margin-right: 10px">
+										<input type="number" min="0" name="price" id="price" placeholder="Bounty" required>
+										<i class="la la-dollar"></i>
+									</div>
+								</div>
+							</div>
+							<!--<div class="col-lg-12">
+								<input type="text" name="skills" placeholder="Skills">
+							</div>
+							<div class="col-lg-6">
+								
+							</div>
+							<div class="col-lg-6">
+								<div class="inp-field">
+									<select>
+										<option>Full Time</option>
+										<option>Half time</option>
+									</select>
+								</div>
+							</div>-->
+							<div class="col-lg-12">
+								<ul>
+									<li><button type="submit" class="active">Post</button></li>
+									<li><a href="index.html">Cancel</a></li>
+								</ul>
+							</div>
+						</div>
+					</form>
+				</div>
+				<a href="#" title=""><i class="la-times-circle-o"></i></a>
+			</div>
+		</div>
+
+
+
+
+	</div>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/popper.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.mCustomScrollbar.js"></script>
+<script type="text/javascript" src="lib/slick/slick.min.js"></script>
+<script type="text/javascript" src="js/scrollbar.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script src="js/functions.js"></script>
+
+</body>
+</html>
