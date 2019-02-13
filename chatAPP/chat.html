@@ -60,16 +60,20 @@
   </div>
   <div class="textbox">
     <form onsubmit="return false" id="myMess">
-      <input type="text"  id="myName" name="myName">
-      <input type="text"  id="message" name="message">
+      <input type="text"  id="myName" name="myName" placeholder="Enter Your Name Here">
+      <input type="text"  id="message" name="message" placeholder="put your message here">
       <input type="button" id="mybutton" value="post">
     </form>
+    <a href="javascript:void(0)" id="downLog">downlaod log</a>
   </div>
 
 
     <script>
       var socket = io();
+      var line = '';
       var btn = document.getElementById("mybutton");
+      var download = document.getElementById("downLog"); 
+
       btn.addEventListener("click", function(){
         var messA = document.getElementById("message").value;
 	var name =document.getElementById("myName").value;
@@ -80,6 +84,7 @@
         document.getElementById("txtBox").appendChild(messLi);
         document.getElementById("message").value = "";
 	socket.emit('messToServer', {messA, name});
+        line += (mess+"\n");
       });
       socket.on('messFromServer', function(msg){
         var mess = msg.messA;
@@ -90,9 +95,21 @@
         messLi.appendChild(messTxt);
         document.getElementById("txtBox").appendChild(messLi);
         document.getElementById("message").value = "";
-
+        line +=(mess+"\n");
       });
+      
+      download.addEventListener("click", function(){
 
+        var date = new Date();
+        var d = "messageOn-"+ date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear() + ".txt"
+        var atr = document.createAttribute("download");
+        atr.value = d;
+        this.setAttributeNode(atr);
+
+        var blob = new Blob([line], {type: "text/plain;charset=utf-8"});
+        var downloadUrl = URL.createObjectURL(blob);
+        this.setAttribute("href", downloadUrl);
+      });
     </script>
 
 
