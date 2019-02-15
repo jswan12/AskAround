@@ -62,6 +62,7 @@
               '</div>',
               '<div class="ed-opts">',
                   '<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>',
+                  '<button style="float:right; background-color: green; color: white; padding: 5px 7px; border: none;" ref="#">Claim Bounty</button>',
                   '<ul class="ed-options">',
                       '<li><a href="#" title="">Edit Post</a></li>',
                       '<li><a href="#" title="">Unsaved</a></li>',
@@ -80,8 +81,7 @@
               '<p>',
               description,
               '</p>',
-              
-          '</div>'
+         '</div>'
           ].join('');
           var div = document.createElement('div');
           div.setAttribute('class', 'post-bar');
