@@ -19,7 +19,7 @@
   var category = document.getElementById('category').value;
   // Reference to the post object in Firebase database
   posts = posts.ref("Posts/" + category);
-  
+
     // Push a new post to the database using those values
 
     posts.push({
@@ -50,7 +50,7 @@
         var html = [
           '<div class="post_topbar">',
               '<div class="usy-dt">',
-              
+
                   '<div class="usy-name">',
                       '<h3>',
                       'getUsername()',
@@ -62,7 +62,7 @@
               '</div>',
               '<div class="ed-opts">',
                   '<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>',
-                  '<button style="float:right; background-color: green; color: white; padding: 5px 7px; border: none;" ref="#">Claim Bounty</button>',
+                  '<button style="float:right; background-color: green; color: white; padding: 5px 7px; border: none;" ref="https://github.com/jswan12/AskAround/blob/master/chatAPP/chat.html">Claim Bounty</button>',
                   '<ul class="ed-options">',
                       '<li><a href="#" title="">Edit Post</a></li>',
                       '<li><a href="#" title="">Unsaved</a></li>',
@@ -72,12 +72,12 @@
                   '</ul>',
               '</div>',
           '</div>',
-          
+
           '<div class="job_descp">',
               '<h3>',
               question,
               '</h3>',
-              
+
               '<p>',
               description,
               '</p>',
