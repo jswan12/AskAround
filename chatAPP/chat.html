@@ -1,7 +1,8 @@
 <!doctype html>
 <html>
   <head>
-    <title>really basic socket io thinggy</title>
+    <meta charset="utf-8">
+    <title>AskAroundChat</title>
     <style>
       .title{
         color: rgb(62,31,88);
@@ -25,10 +26,10 @@
         top-margin:1%;
         bottom-margin:1%;
         height:25em;
-        float: left; 
+        float: left;
         border-radius:15px;
       }
-      
+
       ul{
         list-style-type:none;
         height: 22em;
@@ -39,7 +40,7 @@
         margin:5%;
       }
       input[type=text]{
-        width:85%; 
+        width:85%;
       }
       input[type=button]{
         width:12%;
@@ -48,11 +49,22 @@
         border-radius:5px;
       }
     </style>
-  </head>    
-  <script src="/socket.io/socket.io.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+    <script>
+      var config = {
+        apiKey: "AIzaSyCpwgCgLOfU9l27TvFGVYkFQdeyJJnB-ck",
+        authDomain: "askaround-01.firebaseapp.com",
+        databaseURL: "https://askaround-01.firebaseio.com",
+        projectId: "askaround-01",
+        storageBucket: "askaround-01.appspot.com",
+        messagingSenderId: "527860430663"
+      };
+      firebase.initializeApp(config);
+    </script>
+  </head>
   <body>
   <div class = "title">
-    <h1> This is where you can text</h1>
+    <h1> Welcome!</h1>
   </div>
   <div class = "messagebox">
 
@@ -60,6 +72,7 @@
   </div>
   <div class="textbox">
     <form onsubmit="return false" id="myMess">
+      <input type="text" id="chan" name="chan" placeholder="channel">
       <input type="text"  id="myName" name="myName" placeholder="Enter Your Name Here">
       <input type="text"  id="message" name="message" placeholder="put your message here">
       <input type="button" id="mybutton" value="post">
@@ -68,52 +81,44 @@
   </div>
 
 
-    <script>
-      var socket = io();
+  <script>
       var line = '';
       var btn = document.getElementById("mybutton");
-      var download = document.getElementById("downLog"); 
+      var download = document.getElementById("downLog");
+      var chan =document.getElementById("chan").value;
 
       btn.addEventListener("click", function(){
         var messA = document.getElementById("message").value;
-	var name =document.getElementById("myName").value;
-        var mess = name + ": " + messA
-        var messLi = document.createElement("LI");
-        var messTxt= document.createTextNode(mess);
-        messLi.appendChild(messTxt);
-        document.getElementById("txtBox").appendChild(messLi);
-        document.getElementById("message").value = "";
-	socket.emit('messToServer', {messA, name});
-        line += (mess+"\n");
-      });
-      socket.on('messFromServer', function(msg){
-        var mess = msg.messA;
-	var title = msg.name;
-	mess = title + ": " + mess;
-        var messLi = document.createElement("LI");
-        var messTxt= document.createTextNode(mess);
-        messLi.appendChild(messTxt);
-        document.getElementById("txtBox").appendChild(messLi);
-        document.getElementById("message").value = "";
-        line +=(mess+"\n");
-      });
-      
-      download.addEventListener("click", function(){
+	      var name =document.getElementById("myName").value;
 
+        var mess = name + ": " + messA
+        var messJ=mess;
+        firebase.database().ref('chats/'+chan+'/').push(messJ);
+      });
+
+      var chatRef = firebase.database().ref('chats/' + chan + '/');
+      chatRef.on('child_added', function(msg){
+        var mess = JSON.stringify(msg);
+        mess = mess.slice(1,mess.length-1)
+
+        var messLi = document.createElement("LI");
+        var messTxt= document.createTextNode(mess);
+        messLi.appendChild(messTxt);
+        document.getElementById("txtBox").appendChild(messLi);
+        line +=(mess+ '\n');
+      });
+
+      download.addEventListener("click", function(){
         var date = new Date();
         var d = "messageOn-"+ date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear() + ".txt"
         var atr = document.createAttribute("download");
         atr.value = d;
         this.setAttributeNode(atr);
-
         var blob = new Blob([line], {type: "text/plain;charset=utf-8"});
         var downloadUrl = URL.createObjectURL(blob);
         this.setAttribute("href", downloadUrl);
       });
-    </script>
-
-
-
+  </script>
 
   </body>
 </html>
