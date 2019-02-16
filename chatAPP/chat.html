@@ -7,6 +7,7 @@
       .title{
         color: rgb(62,31,88);
         width: 90%;
+        height: 75px;
         margin-left: 5%;
         margin-right:5%;
         margin-bottom:1%;
@@ -14,9 +15,6 @@
         text-align: center;
         background-color: rgb(100,100,100);
         border-radius: 15px;
-      }
-      h1{
-        padding:5%;
       }
       .messagebox{
         background-color: rgb(62,31,88);
@@ -72,10 +70,10 @@
   </div>
   <div class="textbox">
     <form onsubmit="return false" id="myMess">
-      <input type="text" id="chan" name="chan" placeholder="channel">
-      <input type="text"  id="myName" name="myName" placeholder="Enter Your Name Here">
+      <input type="text" id="chan" name="chan" placeholder="channel" required>
+      <input type="text"  id="myName" name="myName" placeholder="Enter Your Name Here" required>
       <input type="text"  id="message" name="message" placeholder="put your message here">
-      <input type="button" id="mybutton" value="post">
+      <input type="button" id="mybutton" value="send">
     </form>
     <a href="javascript:void(0)" id="downLog">downlaod log</a>
   </div>
@@ -86,28 +84,44 @@
       var line = '';
       var btn = document.getElementById("mybutton");
       var download = document.getElementById("downLog");
-      var chan =document.getElementById("chan").value;
+      var chan = 'default';
+      var messA = document.getElementById("message").value;
+      var name =document.getElementById("myName").value;
+      grabChat(chan);
 
       btn.addEventListener("click", function(){
-        var messA = document.getElementById("message").value;
-	      var name =document.getElementById("myName").value;
-
-        var mess = name + ": " + messA
-        var messJ=mess;
-        firebase.database().ref('chats/'+chan+'/').push(messJ);
+        messA = document.getElementById("message").value;
+        chan = document.getElementById("chan").value;
+	      name = document.getElementById("myName").value;
+        messJ = name + ": " + messA;
+        
+        if(chan == ""){
+          chan = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+          document.getElementById("chan").value = chan;
+        }
+        else if(name == ""){
+          name = "anonymous";
+          document.getElementById("myName").value = name;
+        }
+        else{
+          firebase.database().ref('chats/'+chan+'/').push(messJ);
+          grabChat(chan);
+          document.getElementById("message").value = '';
+        }
       });
 
-      var chatRef = firebase.database().ref('chats/' + chan + '/');
-      chatRef.on('child_added', function(msg){
-        var mess = JSON.stringify(msg);
-        mess = mess.slice(1,mess.length-1)
-
-        var messLi = document.createElement("LI");
-        var messTxt= document.createTextNode(mess);
-        messLi.appendChild(messTxt);
-        document.getElementById("txtBox").appendChild(messLi);
-        line +=(mess+ "\n");
-      });
+      function grabChat(chan){
+        var chatRef = firebase.database().ref('chats/' + chan + '/');
+        chatRef.on('child_added', function(msg){
+          var mess = JSON.stringify(msg);
+          mess = mess.slice(1,mess.length-1);
+          var messLi = document.createElement("LI");
+          var messTxt= document.createTextNode(mess);
+          messLi.appendChild(messTxt);
+          document.getElementById("txtBox").appendChild(messLi);
+          line += (mess+ "\n");
+        }, function(err){console.log(err);})
+      }
 
       download.addEventListener("click", function(){
         var date = new Date();
