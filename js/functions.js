@@ -36,12 +36,11 @@
   };
 
 
-    function getUser(aUID, aName, aRank){
-    // overwrite a name and rank with child Name and Rank based on a UID input
+    function getUser(aUID){
+    // return user name based on a UID input
     var currUser = firebase.database().ref('Users/' + aUID);
     var childData = childSnapshot.val();
-    aName = childData.Name;
-    aRank = childData.Rank;
+    return childData.Name;
   }
 
 
@@ -56,6 +55,7 @@
         var description = childData.description;
         var bounty = childData.bounty;
         var category = childData.category;
+        var uid = childData.uid;
         //console.log(question, "\n"+description, '\n'+bounty, "\n"+category);   
         
     var html = [
@@ -64,7 +64,8 @@
 
                 '<div class="usy-name">',
                     '<h3>',
-                    'getUsername()',
+                    //getUser(uid),
+                    'getUser(uid)',
                     '</h3>',
                     '<span><img src="images/clock.png" alt="">$',
                     bounty,
