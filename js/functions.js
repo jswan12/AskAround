@@ -38,27 +38,27 @@
 
     function getName(aUID){
     // return user name based on a UID input
-    var currUser = firebase.database().ref('Users/' + aUID);
-    var childData = childSnapshot.val();
-    return childData.Name;
+    //var currUser = firebase.database().ref('Users/' + aUID);
+    //return childSnapshot.val().childData.Name;
   }
 
   function getRank(aUID){
     // return rank based on a UID input
-    //var currUser = firebase.database().ref('Users/' + aUID);
-    //var childData = childSnapshot.val();
-    //return childData.Rank;
-    document.getElementById('rank').innerText = 77777;
+    var currUser = firebase.database().ref("Users/" + aUID).once('value', 
+    function(data){
+      document.getElementById('rank').innerText = data.val().Rank;
+    }, function(error){ console.log(error); }
+    );
   }
 
 
   function pushUser(aUID, aName, aRank){
     // push user to database
-    var userBase = firebase.database().ref('Users/' + aUID);
-    dataBase.push({
-      "Name": aName,
-      "Rank": aRank
-      });
+    // var userBase = firebase.database().ref('Users/' + aUID);
+    // dataBase.push({
+    //   "Name": aName,
+    //   "Rank": aRank
+    //   });
   }
 
 
@@ -82,8 +82,8 @@
 
                 '<div class="usy-name">',
                     '<h3>',
-                    //getUser(uid),
-                    'getUser(uid)',
+                    //getName(uid),
+                    'getName(uid)',
                     '</h3>',
                     '<span><img src="images/clock.png" alt="">$',
                     bounty,
@@ -125,4 +125,5 @@
 
   $(window).load(function() {
     $("#postForm").submit(submitPost);
-  }, getPost(document.getElementById("pageTitle").innerText), getRank(100) );
+  }, getPost(document.getElementById("pageTitle").innerText), 
+     getRank("KuopYAm6v4Y2BpsJo2SR0JZ5lq83") ); // UID for Evan
