@@ -52,6 +52,16 @@
   }
 
 
+  function pushUser(aUID, aName, aRank){
+    // push user to database
+    var userBase = firebase.database().ref('Users/' + aUID);
+    dataBase.push({
+      "Name": aName,
+      "Rank": aRank
+      });
+  }
+
+
 
   function getPost(sub){
     dataBase.ref("Posts/" + sub).once('value', function(data){
