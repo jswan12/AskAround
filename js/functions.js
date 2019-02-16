@@ -36,11 +36,18 @@
   };
 
 
-    function getUser(aUID){
+    function getName(aUID){
     // return user name based on a UID input
     var currUser = firebase.database().ref('Users/' + aUID);
     var childData = childSnapshot.val();
     return childData.Name;
+  }
+
+  function getRank(aUID){
+    // return rank based on a UID input
+    var currUser = firebase.database().ref('Users/' + aUID);
+    var childData = childSnapshot.val();
+    return childData.Rank;
   }
 
 
