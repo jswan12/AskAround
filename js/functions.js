@@ -92,7 +92,7 @@
             '</div>',
             '<div class="ed-opts">',
                 '<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>',
-                '<form action="chatAPP/chat.html" target="_blank">',
+                '<form action="chat.html" target="_blank">',
                 '<button style="float:right; background-color: green; color: white; padding: 5px 7px; border: none;" >Claim Bounty</button>',
                 '</form>',
                 '<ul class="ed-options">',

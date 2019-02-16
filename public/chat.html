@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AskAroundChat</title>
+    <style>
+      .title{
+        color: rgb(62,31,88);
+        width: 90%;
+        height: 75px;
+        margin-left: 5%;
+        margin-right:5%;
+        margin-bottom:1%;
+        float: left;
+        text-align: center;
+        background-color: rgb(100,100,100);
+        border-radius: 15px;
+      }
+      .messagebox{
+        background-color: rgb(62,31,88);
+        width:90%;
+        margin-left:5%;
+        margin-right:5%;
+        top-margin:1%;
+        bottom-margin:1%;
+        height:25em;
+        float: left;
+        border-radius:15px;
+      }
+      ul{
+        list-style-type:none;
+        height: 22em;
+        overflow: auto;
+        color:rgb(252,247,59);
+      }
+      .textbox{
+        margin:5%;
+      }
+      input[type=text]{
+        width:85%;
+      }
+      input[type=button]{
+        width:12%;
+        height:2em;
+        color:rgb(62,31,88);
+        border-radius:5px;
+      }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+    <script>
+      var config = {
+        apiKey: "AIzaSyCpwgCgLOfU9l27TvFGVYkFQdeyJJnB-ck",
+        authDomain: "askaround-01.firebaseapp.com",
+        databaseURL: "https://askaround-01.firebaseio.com",
+        projectId: "askaround-01",
+        storageBucket: "askaround-01.appspot.com",
+        messagingSenderId: "527860430663"
+      };
+      firebase.initializeApp(config);
+    </script>
+  </head>
+  <body>
+  <div class = "title">
+    <h1> Welcome!</h1>
+  </div>
+  <div class = "messagebox">
+
+    <ul id="txtBox"></ul>
+  </div>
+  <div class="textbox">
+    <form onsubmit="return false" id="myMess">
+      <input type="text" id="chan" name="chan" placeholder="channel" required>
+      <input type="text"  id="myName" name="myName" placeholder="Enter Your Name Here" required>
+      <input type="text"  id="message" name="message" placeholder="put your message here">
+      <input type="button" id="mybutton" value="send">
+    </form>
+    <a href="javascript:void(0)" id="downLog">downlaod log</a>
+  </div>
+
+
+  <script>
+    console.log(firebase.auth().currentUser);
+    var line = '';
+    var btn = document.getElementById("mybutton");
+    var download = document.getElementById("downLog");
+    var chan = document.getElementById("chan").value;
+    var messA = document.getElementById("message").value;
+    var name = firebase.auth().currentUser;//document.getElementById("myName").value;
+    console.log(name);
+    var chanA = document.getElementById("chan");
+    chanA.addEventListener("change", function(){
+      chan = chanA.value;
+      line = "";
+      document.getElementById("txtBox").innerHTML = "";
+      firebase.database().ref('chats/'+ chan + '/').once('value', function(chat){
+        chat.forEach(function(el){
+          var element = el.val();
+          var mess = JSON.stringify(element);
+          mess = mess.slice(1,mess.length-1);
+          var messLi = document.createElement("LI");
+          var messTxt= document.createTextNode(mess);
+          messLi.appendChild(messTxt);
+          document.getElementById("txtBox").appendChild(messLi);
+          line = line +(mess+ "\n");
+        });
+      });
+      chanA = document.getElementById("chan");
+    });
+
+    btn.addEventListener("click", function(){
+      messA = document.getElementById("message").value;
+	    //name = document.getElementById("myName").value;
+      if(name == null){
+        name = "anon";
+      }
+      chan = document.getElementById("chan").value;
+      if(chan == ""){
+        document.getElementById("chan").value = "default";
+        chan = document.getElementById("chan").value;
+      }
+      messJ = name + ": " + messA;
+      firebase.database().ref('chats/'+chan+'/').push(messJ);
+      document.getElementById("message").value = '';
+
+    });
+    var chatRef = firebase.database().ref('chats/' + chan + '/');
+    chatRef.on('child_added', function(msg){
+      var mess = JSON.stringify(msg);
+      mess = mess.slice(1,mess.length-1);
+      var messLi = document.createElement("LI");
+      var messTxt= document.createTextNode(mess);
+      messLi.appendChild(messTxt);
+      document.getElementById("txtBox").appendChild(messLi);
+      line = line +(mess+ "\n");
+    });
+
+    download.addEventListener("click", function(){
+      var date = new Date();
+      var d = "messageOn-"+ date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear() + ".txt"
+      var atr = document.createAttribute("download");
+      atr.value = d;
+      this.setAttributeNode(atr);
+      var blob = new Blob([line], {type: "text/plain;charset=utf-8"});
+      var downloadUrl = URL.createObjectURL(blob);
+      this.setAttribute("href", downloadUrl);
+    });
+  </script>
+
+  </body>
+</html>
