@@ -87,9 +87,21 @@
     var name =document.getElementById("myName").value;
     var chanA = document.getElementById("chan");
    chanA.addEventListener("change", function(){
-      chan = document.getElementById("chan").value;
-      window.location.reload(false);
-      document.getElementById("chan").value = chan;
+      chan = chanA.value;
+      line = "";
+      document.getElementById("txtBox").innerHTML = "";
+      firebase.database().ref('chats/'+ chan + '/').once('value', function(chat){
+        chat.forEach(function(el){
+          var element = el.val();
+          var mess = JSON.stringify(element);
+          mess = mess.slice(1,mess.length-1);
+          var messLi = document.createElement("LI");
+          var messTxt= document.createTextNode(mess);
+          messLi.appendChild(messTxt);
+          document.getElementById("txtBox").appendChild(messLi);
+          line = line +(mess+ "/n");
+        });
+      });
     });
 
     btn.addEventListener("click", function(){
@@ -116,7 +128,7 @@
       var messTxt= document.createTextNode(mess);
       messLi.appendChild(messTxt);
       document.getElementById("txtBox").appendChild(messLi);
-      line = line +(mess+ "");
+      line = line +(mess+ "/n");
     });
 
     download.addEventListener("click", function(){
