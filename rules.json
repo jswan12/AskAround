@@ -1,12 +1,12 @@
 {
   "rules": {
-     "foo": {
-        // allows read to /foo/*
-        ".read": "data.child('baz').val() === true",
-        "bar": {
-          /* ignored, since read was allowed already */
-          ".read": false
+    "askaround-01": {
+	    "users": {
+  	    "2bMe2JvkpvV7cKnxP2x81grGcN92": {
+    	    ".read": "2bMe2JvkpvV7cKnxP2x81grGcN92",
+      	  ".write": "2bMe2JvkpvV7cKnxP2x81grGcN92",
         }
-     }
+      }
+    }
   }
 }
