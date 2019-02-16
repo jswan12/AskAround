@@ -45,9 +45,10 @@
 
   function getRank(aUID){
     // return rank based on a UID input
-    var currUser = firebase.database().ref('Users/' + aUID);
-    var childData = childSnapshot.val();
-    return childData.Rank;
+    //var currUser = firebase.database().ref('Users/' + aUID);
+    //var childData = childSnapshot.val();
+    //return childData.Rank;
+    document.getElementById('rank').innerText = 77777;
   }
 
 
@@ -114,4 +115,4 @@
 
   $(window).load(function() {
     $("#postForm").submit(submitPost);
-  }, getPost(document.getElementById("pageTitle").innerText));
+  }, getPost(document.getElementById("pageTitle").innerText), getRank(100) );
