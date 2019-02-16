@@ -1,6 +1,6 @@
 {
 	"rules": {
-		".read": "auth != null",
-		".write": "auth != null"
+		".read": "'2bMe2JvkpvV7cKnxP2x81grGcN92' === auth.uid",
+		".write": "'2bMe2JvkpvV7cKnxP2x81grGcN92' === auth.uid"
 	}
 }
