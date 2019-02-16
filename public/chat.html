@@ -79,14 +79,16 @@
 
 
   <script>
+    console.log(firebase.auth().currentUser);
     var line = '';
     var btn = document.getElementById("mybutton");
     var download = document.getElementById("downLog");
     var chan = document.getElementById("chan").value;
     var messA = document.getElementById("message").value;
-    var name =document.getElementById("myName").value;
+    var name = firebase.auth().currentUser;//document.getElementById("myName").value;
+    console.log(name);
     var chanA = document.getElementById("chan");
-   chanA.addEventListener("change", function(){
+    chanA.addEventListener("change", function(){
       chan = chanA.value;
       line = "";
       document.getElementById("txtBox").innerHTML = "";
@@ -99,15 +101,16 @@
           var messTxt= document.createTextNode(mess);
           messLi.appendChild(messTxt);
           document.getElementById("txtBox").appendChild(messLi);
-          line = line +(mess+ "/n");
+          line = line +(mess+ "\n");
         });
       });
+      chanA = document.getElementById("chan");
     });
 
     btn.addEventListener("click", function(){
       messA = document.getElementById("message").value;
-	    name = document.getElementById("myName").value;
-      if(name == ""){
+	    //name = document.getElementById("myName").value;
+      if(name == null){
         name = "anon";
       }
       chan = document.getElementById("chan").value;
@@ -128,7 +131,7 @@
       var messTxt= document.createTextNode(mess);
       messLi.appendChild(messTxt);
       document.getElementById("txtBox").appendChild(messLi);
-      line = line +(mess+ "/n");
+      line = line +(mess+ "\n");
     });
 
     download.addEventListener("click", function(){
