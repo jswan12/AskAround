@@ -35,6 +35,24 @@
     });
   };
 
+
+    function getName(aUID){
+    // return user name based on a UID input
+    var currUser = firebase.database().ref('Users/' + aUID);
+    var childData = childSnapshot.val();
+    return childData.Name;
+  }
+
+  function getRank(aUID){
+    // return rank based on a UID input
+    //var currUser = firebase.database().ref('Users/' + aUID);
+    //var childData = childSnapshot.val();
+    //return childData.Rank;
+    document.getElementById('rank').innerText = 77777;
+  }
+
+
+
   function getPost(sub){
     dataBase.ref("Posts/" + sub).once('value', function(data){
     data.forEach(function(childSnapshot){
@@ -45,6 +63,7 @@
         var description = childData.description;
         var bounty = childData.bounty;
         var category = childData.category;
+        var uid = childData.uid;
         //console.log(question, "\n"+description, '\n'+bounty, "\n"+category);   
         
     var html = [
@@ -53,7 +72,8 @@
 
                 '<div class="usy-name">',
                     '<h3>',
-                    'getUsername()',
+                    //getUser(uid),
+                    'getUser(uid)',
                     '</h3>',
                     '<span><img src="images/clock.png" alt="">$',
                     bounty,
@@ -95,4 +115,4 @@
 
   $(window).load(function() {
     $("#postForm").submit(submitPost);
-  }, getPost(document.getElementById("pageTitle").innerText));
+  }, getPost(document.getElementById("pageTitle").innerText), getRank(100) );
