@@ -35,6 +35,17 @@
     });
   };
 
+
+    function getUser(aUID, aName, aRank){
+    // overwrite a name and rank with child Name and Rank based on a UID input
+    var currUser = firebase.database().ref('Users/' + aUID);
+    var childData = childSnapshot.val();
+    aName = childData.Name;
+    aRank = childData.Rank;
+  }
+
+
+
   function getPost(sub){
     dataBase.ref("Posts/" + sub).once('value', function(data){
     data.forEach(function(childSnapshot){
