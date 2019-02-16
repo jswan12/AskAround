@@ -37,16 +37,19 @@
 
 
     function getName(aUID){
-    // return user name based on a UID input
-    //var currUser = firebase.database().ref('Users/' + aUID);
-    //return childSnapshot.val().childData.Name;
+    // return name based on a UID input
+    var currUser = firebase.database().ref("Users/" + aUID).once('value', 
+    function(data){
+      document.getElementById('userName').innerText = data.val().Name;
+    }, function(error){ console.log(error); }
+    );
   }
 
   function getRank(aUID){
     // return rank based on a UID input
     var currUser = firebase.database().ref("Users/" + aUID).once('value', 
     function(data){
-      document.getElementById('rank').innerText = data.val().Rank;
+      document.getElementById('userRank').innerText = data.val().Rank;
     }, function(error){ console.log(error); }
     );
   }
@@ -126,4 +129,5 @@
   $(window).load(function() {
     $("#postForm").submit(submitPost);
   }, getPost(document.getElementById("pageTitle").innerText), 
-     getRank("KuopYAm6v4Y2BpsJo2SR0JZ5lq83") ); // UID for Evan
+     getRank("KuopYAm6v4Y2BpsJo2SR0JZ5lq83"), // placeholder UID (Evan's)
+     getName("KuopYAm6v4Y2BpsJo2SR0JZ5lq83") ); 
