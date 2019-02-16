@@ -1,12 +1,6 @@
 {
-  "rules": {
-     "foo": {
-        // allows read to /foo/*
-        ".read": "data.child('baz').val() === true",
-        "bar": {
-          /* ignored, since read was allowed already */
-          ".read": false
-        }
-     }
-  }
+	"rules": {
+		".read": "auth != null",
+		".write": "auth != null"
+	}
 }
