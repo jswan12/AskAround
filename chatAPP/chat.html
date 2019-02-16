@@ -87,7 +87,9 @@
     var name =document.getElementById("myName").value;
     var chanA = document.getElementById("chan");
    chanA.addEventListener("change", function(){
+      chan = document.getElementById("chan").value;
       window.location.reload(false);
+      document.getElementById("chan").value = chan;
     });
 
     btn.addEventListener("click", function(){
