@@ -1,12 +1,6 @@
 {
 	"rules": {
-		"askaround-01": {
-			"users": {
-				"2bMe2JvkpvV7cKnxP2x81grGcN92": {
-    	    				".read": "2bMe2JvkpvV7cKnxP2x81grGcN92",
-      	  				".write": "2bMe2JvkpvV7cKnxP2x81grGcN92",
-        			}
-      			}
-    		}
- 	}
+		".read": "auth != null",
+		".write": "auth != null"
+	}
 }
