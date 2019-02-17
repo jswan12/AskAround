@@ -26,7 +26,6 @@
 
 </head>
 
-
 <body>
 	<div class="wrapper">
 		<header>
@@ -305,6 +304,7 @@
 <script type="text/javascript" src="js/scrollbar.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 <script src="js/functions.js"></script>
+
 <script>
     firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
     firebase.auth().onAuthStateChanged(function(user){
@@ -312,7 +312,9 @@
 		   document.getElementById("usernameID").innerText = user.email;
 		   document.getElementById("userName").innerText = user.email;
 		   // want to switch to ... = firebase.auth().currentUser.displayName; for online version
-		   console.log(user);
+			 console.log(user);
+			 
+
 	   }
 	 });
 </script>
