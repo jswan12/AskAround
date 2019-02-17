@@ -85,6 +85,7 @@
     var chan = 'a';
     var messA = document.getElementById("message").value;
     var name = /*firebase.auth().currentUser;*/document.getElementById("myName").value;
+    var txtBox = document.getElementById("txtBox");
     console.log(name);
       firebase.database().ref('chats/'+ chan + '/').once('value', function(chat){
         chat.forEach(function(el){
@@ -96,6 +97,7 @@
           messLi.appendChild(messTxt);
           document.getElementById("txtBox").appendChild(messLi);
           line = line +(mess+ "\n");
+          txtBox.scrollTop = txtBox.scrollHeight;
         });
       });
 
@@ -108,7 +110,6 @@
       messJ = name + ": " + messA;
       firebase.database().ref('chats/'+chan+'/').push(messJ);
       document.getElementById("message").value = '';
-
     });
     var chatRef = firebase.database().ref('chats/' + chan + '/');
 
@@ -120,6 +121,7 @@
       messLi.appendChild(messTxt);
       document.getElementById("txtBox").appendChild(messLi);
       line = line +(mess+ "\n");
+      txtBox.scrollTop = txtBox.scrollHeight;
     });
 
     download.addEventListener("click", function(){
