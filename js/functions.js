@@ -37,6 +37,14 @@ var submitPost = function () {
 
   // Get input values from each of the form elements
   //var uid = authdata.uid;
+  firebase.auth().onAuthStateChanged(function (user) {
+		if (user) {
+			var uid = firebase.auth().currentUser.getToken();
+    }
+    else {
+      var uid = null;
+    }
+	});
   var question = document.getElementById('question').value;
   var description = document.getElementById('description').value;
   var bounty = document.getElementById('price').value;
@@ -48,6 +56,7 @@ var submitPost = function () {
 
   dataBase.push({
     "uid": uid,
+    "displayName": firebase.auth().currUser.displayName,
     "question": question,
     "description": description,
     "bounty": bounty,
@@ -98,7 +107,9 @@ function getPost(sub) {
       var description = childData.description;
       var bounty = childData.bounty;
       var category = childData.category;
+      var displayName = childData.displayName;
       var uid = childData.uid;
+      //var uid = childData.uid;
       //console.log(question, "\n"+description, '\n'+bounty, "\n"+category);   
 
       var html = [
@@ -107,8 +118,8 @@ function getPost(sub) {
 
         '<div class="usy-name">',
         '<h3>',
-        //getName(uid),
-        'getName(uid)',
+        displayName,
+        //'getName(uid)',
         '</h3>',
         '<span><img src="images/clock.png" alt="">$',
         bounty,
