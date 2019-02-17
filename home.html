@@ -39,7 +39,7 @@ var user = firebase.auth().onAuthStateChanged(function(user) {
 	if (user) {
 	//blank if correct login
 	} else {
-		window.location.href = 'askaround-01.firebaseapp.com/index.html'; 
+		window.location.href = 'askaround-01.firebaseapp.com/index.html';
 	}
 });
 </script>
@@ -129,9 +129,7 @@ var user = firebase.auth().onAuthStateChanged(function(user) {
 
 											<div class="user-specs">
 												<h3 id="usernameID"></h3>
-												<script type="text/javascript">
-													document.getElementById("usernameID").innerText = firebase.auth().currentUser.displayName;
-												</script>
+
 												<span>LSU Student</span>
 											</div>
 										</div>
@@ -330,7 +328,12 @@ var user = firebase.auth().onAuthStateChanged(function(user) {
 <script type="text/javascript" src="js/script.js"></script>
 <script src="js/functions.js"></script>
 <script>
-	  //document.getElementById("usernameID").innerText = firebase.auth().currentUser.displayName;
+    firebase.auth().createInWithEmailAndPassword("priver3@lsu.edu", "password");
+    firebase.auth().onAuthStateChanged(function(user){
+     if(user){
+		   document.getElementById("usernameID").innerText = user.displayName;
+	   }
+	 });
 </script>
 
 </body>
