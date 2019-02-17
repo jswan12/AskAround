@@ -69,7 +69,6 @@
   </div>
   <div class="textbox">
     <form onsubmit="return false" id="myMess">
-      <input type="text" id="chan" name="chan" placeholder="channel" required>
       <input type="text"  id="myName" name="myName" placeholder="Enter Your Name Here" required>
       <input type="text"  id="message" name="message" placeholder="put your message here">
       <input type="button" id="mybutton" value="send">
@@ -83,15 +82,10 @@
     var line = '';
     var btn = document.getElementById("mybutton");
     var download = document.getElementById("downLog");
-    var chan = document.getElementById("chan").value;
+    var chan = 'a';
     var messA = document.getElementById("message").value;
-    var name = firebase.auth().currentUser;//document.getElementById("myName").value;
+    var name = /*firebase.auth().currentUser;*/document.getElementById("myName").value;
     console.log(name);
-    var chanA = document.getElementById("chan");
-    chanA.addEventListener("change", function(){
-      chan = chanA.value;
-      line = "";
-      document.getElementById("txtBox").innerHTML = "";
       firebase.database().ref('chats/'+ chan + '/').once('value', function(chat){
         chat.forEach(function(el){
           var element = el.val();
@@ -104,19 +98,12 @@
           line = line +(mess+ "\n");
         });
       });
-      chanA = document.getElementById("chan");
-    });
 
     btn.addEventListener("click", function(){
       messA = document.getElementById("message").value;
-	    //name = document.getElementById("myName").value;
+	    name = document.getElementById("myName").value;
       if(name == null){
         name = "anon";
-      }
-      chan = document.getElementById("chan").value;
-      if(chan == ""){
-        document.getElementById("chan").value = "default";
-        chan = document.getElementById("chan").value;
       }
       messJ = name + ": " + messA;
       firebase.database().ref('chats/'+chan+'/').push(messJ);
@@ -124,6 +111,7 @@
 
     });
     var chatRef = firebase.database().ref('chats/' + chan + '/');
+
     chatRef.on('child_added', function(msg){
       var mess = JSON.stringify(msg);
       mess = mess.slice(1,mess.length-1);
