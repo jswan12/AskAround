@@ -148,5 +148,5 @@ function getPost(sub) {
 $(window).load(function () {
   $("#postForm").submit(submitPost);
 }, getPost(document.getElementById("pageTitle").innerText),
-  getRank(uid));
+  getRank(firebase.auth().currentUser.uid));
 
