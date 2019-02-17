@@ -1,6 +1,22 @@
 {
-	"rules": {
-		".read": "'2bMe2JvkpvV7cKnxP2x81grGcN92' === auth.uid",
-		".write": "'2bMe2JvkpvV7cKnxP2x81grGcN92' === auth.uid"
-	}
+  "rules": {
+    "Posts": {
+    	"2bMe2JvkpvV7cKnxP2x81grGcN92": {
+        ".read": "'2bMe2JvkpvV7cKnxP2x81grGcN92' === auth.uid",
+        ".write": "'2bMe2JvkpvV7cKnxP2x81grGcN92' === auth.uid"
+      }
+    },
+    "Users": {
+      "2bMe2JvkpvV7cKnxP2x81grGcN92": {
+        ".read": "'2bMe2JvkpvV7cKnxP2x81grGcN92' === auth.uid",
+        ".write": "'2bMe2JvkpvV7cKnxP2x81grGcN92' === auth.uid"
+      }
+    },
+    "chats": {
+    	"2bMe2JvkpvV7cKnxP2x81grGcN92": {
+        ".read": "'2bMe2JvkpvV7cKnxP2x81grGcN92' === auth.uid",
+        ".write": "'2bMe2JvkpvV7cKnxP2x81grGcN92' === auth.uid"
+      }
+    }
+  }
 }
