@@ -173,8 +173,8 @@
       uvote.style.visibility = "hidden";
       dvote.style.visibility = "hidden";
       if(val ===1){
-        var them =  "KuopYAm6v4Y2BpsJo2SR0JZ5lq83";
-        //var them = document.getElementById("you").textContent;
+        //var them =  "KuopYAm6v4Y2BpsJo2SR0JZ5lq83";
+        var them = document.getElementById("you").textContent;
         var Rank;
         firebase.database().ref("Users/" + them).once("value", function(data){
           Rank = data.val().Rank + 1;
