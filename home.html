@@ -106,6 +106,9 @@
 
 											<div class="user-specs">
 												<h3 id="usernameID"></h3>
+												<script type="text/javascript">
+													document.getElementById("usernameID").innerText = firebase.auth().currentUser.displayName;
+												</script>
 												<span>LSU Student</span>
 											</div>
 										</div>
@@ -304,7 +307,7 @@
 <script type="text/javascript" src="js/script.js"></script>
 <script src="js/functions.js"></script>
 <script>
-	  document.getElementById("usernameID").innerText = firebase.auth().currentUser.displayName;
+	  //document.getElementById("usernameID").innerText = firebase.auth().currentUser.displayName;
 </script>
 
 </body>
