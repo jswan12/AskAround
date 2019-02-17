@@ -44,6 +44,7 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
+    color: black;
 }
 /* makes the font 33% larger relative to the icon container */
 .la-lg {
