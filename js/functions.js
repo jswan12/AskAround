@@ -10,40 +10,44 @@ var config = {
 
 firebase.initializeApp(config);
 
-//var authData = firebase.getAuth();
 var dataBase = firebase.database();
+var uid = null;
+var displayName = null;
 // Save a new post to the database, using the input in the form
+firebase.auth().onAuthStateChanged(function (user) {
+  if (user) {
+    uid = firebase.auth().currentUser.uid;
+    displayName = firebase.auth().currentUser.displayName;
+  }
+  else {
+    uid = null;
+    display = 'anonymous';
+  }
+});
+
+
 var submitPost = function () {
 
   // Get input values from each of the form elements
-  //var uid = authdata.uid;
-  var uid = null;
-  firebase.auth().onAuthStateChanged(function (user) {
-		if (user) {
-      //uid = firebase.auth().currentUser.uid;
-      //var displayName = firebase.auth().currUser.displayName;
-      var question = document.getElementById('question').value;
-      var description = document.getElementById('description').value;
-      var bounty = document.getElementById('price').value;
-      var category = document.getElementById('category').value;
-      // Reference to the post object in Firebase database
-      dataBase = dataBase.ref("Posts/" + category);
-      //alert(displayName + "\n" + uid + "\n" + question + "\n" + description + "\n" + bounty + "\n" + category);
-      // Push a new post to the database using those values
-    
-      dataBase.push({
-        //"uid": uid,
-        //"displayName": displayName,
-        "question": question,
-        "description": description,
-        "bounty": bounty,
-        "category": category
-      });
-    }
-    else {
-      uid = null;
-    }
-	});
+    var myUid = uid;
+    var mydisplayName = displayName;
+    var question = document.getElementById('question').value;
+    var description = document.getElementById('description').value;
+    var bounty = document.getElementById('price').value;
+    var category = document.getElementById('category').value;
+    // Reference to the post object in Firebase database
+    dataBase = dataBase.ref("Posts/" + category);
+    //alert(displayName + "\n" + uid + "\n" + question + "\n" + description + "\n" + bounty + "\n" + category);
+    // Push a new post to the database using those values
+  
+    dataBase.push({
+      "uid": myUid,
+      "displayName": displayName,
+      "question": question,
+      "description": description,
+      "bounty": bounty,
+      "category": category
+    });
 };
 
 
@@ -89,9 +93,8 @@ function getPost(sub) {
       var description = childData.description;
       var bounty = childData.bounty;
       var category = childData.category;
-      //var displayName = childData.displayName;
-      //var uid = childData.uid;
-      //var uid = childData.uid;
+      var displayName = childData.displayName;
+      var myUid = childData.uid;
       //console.log(question, "\n"+description, '\n'+bounty, "\n"+category);   
 
       var html = [
@@ -100,8 +103,8 @@ function getPost(sub) {
 
         '<div class="usy-name">',
         '<h3>',
-        //displayName,
-        'getName(uid)',
+        displayName + ' ----- ' + myUid,
+        //'getName(uid)',
         '</h3>',
         '<span><img src="images/clock.png" alt="">$',
         bounty,
