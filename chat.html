@@ -69,23 +69,33 @@
   </div>
   <div class="textbox">
     <form onsubmit="return false" id="myMess">
-      <input type="text"  id="myName" name="myName" placeholder="Enter Your Name Here" required>
       <input type="text"  id="message" name="message" placeholder="put your message here">
       <input type="button" id="mybutton" value="send">
     </form>
     <a href="javascript:void(0)" id="downLog">downlaod log</a>
   </div>
 
-
+<script>    firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password");</script>
   <script>
-    console.log(firebase.auth().currentUser);
     var line = '';
     var btn = document.getElementById("mybutton");
     var download = document.getElementById("downLog");
-    var chan = 'a';
+    var chan  = "a";
     var messA = document.getElementById("message").value;
-    var name = /*firebase.auth().currentUser;*/document.getElementById("myName").value;
-    console.log(name);
+    var name;//= /*firebase.auth().currentUser;*/document.getElementById("myName").value;
+    //var flag = 0;
+    firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
+    firebase.auth().onAuthStateChanged(function(user){
+     if(user){
+		   name = user.email;
+       //chan = user.uid;
+       console.log(chan);
+       //flag = 1;
+		 }
+     //console.log(chan);
+	 });
+   //console.log(chan);
+
       firebase.database().ref('chats/'+ chan + '/').once('value', function(chat){
         chat.forEach(function(el){
           var element = el.val();
@@ -98,13 +108,8 @@
           line = line +(mess+ "\n");
         });
       });
-
     btn.addEventListener("click", function(){
       messA = document.getElementById("message").value;
-	    name = document.getElementById("myName").value;
-      if(name == null){
-        name = "anon";
-      }
       messJ = name + ": " + messA;
       firebase.database().ref('chats/'+chan+'/').push(messJ);
       document.getElementById("message").value = '';
