@@ -40,7 +40,13 @@
     // return name based on a UID input
     var currUser = firebase.database().ref("Users/" + aUID).once('value', 
     function(data){
-      document.getElementById('userName').innerText = data.val().Name;
+      // document.getElementById('userName').innerText = data.val().Name;
+
+      // If testing offline, use this block instead:
+      // firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password");
+      // document.getElementById('userName').innerText = firebase.auth().currentUser.email;
+
+      document.getElementById('userName').innerText = firebase.auth().currentUser.displayName;
     }, function(error){ console.log(error); }
     );
   }
