@@ -55,7 +55,8 @@ var submitPost = function () {
   // Push a new post to the database using those values
 
   dataBase.push({
-    //"uid": uid,
+    "uid": uid,
+    "displayName": firebase.auth().currUser.displayName,
     "question": question,
     "description": description,
     "bounty": bounty,
@@ -106,6 +107,8 @@ function getPost(sub) {
       var description = childData.description;
       var bounty = childData.bounty;
       var category = childData.category;
+      var displayName = childData.displayName;
+      var uid = childData.uid;
       //var uid = childData.uid;
       //console.log(question, "\n"+description, '\n'+bounty, "\n"+category);   
 
@@ -115,8 +118,8 @@ function getPost(sub) {
 
         '<div class="usy-name">',
         '<h3>',
-        //getName(uid),
-        'getName(uid)',
+        displayName,
+        //'getName(uid)',
         '</h3>',
         '<span><img src="images/clock.png" alt="">$',
         bounty,
