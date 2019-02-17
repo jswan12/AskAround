@@ -1,60 +1,67 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="cache-control" content="no-cache" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="-1" />
-<title>AskAround</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<link rel="stylesheet" type="text/css" href="css/animate.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/line-awesome.css">
-<link rel="stylesheet" type="text/css" href="css/line-awesome-font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
-<link rel="stylesheet" type="text/css" href="lib/slick/slick.css">
-<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/responsive.css">
 
-<link rel="shortcut icon" href="images/favicon - 32px x 32px.png" />
-<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
-<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="-1" />
+	<title>AskAround</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/line-awesome.css">
+	<link rel="stylesheet" type="text/css" href="css/line-awesome-font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
+	<link rel="stylesheet" type="text/css" href="lib/slick/slick.css">
+	<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+
+	<link rel="shortcut icon" href="images/favicon - 32px x 32px.png" />
+
+	<link rel="manifest" href="manifest.json">
+
+	<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+
+
 
 </head>
 
-
 <body>
 	<div class="wrapper">
-		<header> 
+		<header>
 			<div class="container">
 				<div class="header-data">
 					<div class="logo">
 						<a href="home.html" title=""><img src="images/logo.png" alt="" style="height: 34px;"></a>
-					</div><!--logo end-->
+					</div>
+					<!--logo end-->
 
 					<div class="search-bar">
 						<form>
 							<input type="text" name="search" placeholder="Search...">
 							<button type="submit"><i class="la la-search"></i></button>
 						</form>
-					</div><!--search-bar end-->
+					</div>
+					<!--search-bar end-->
 
 					<nav>
 						<ul>
 							<li>
-								<a href="home.html" title="">								
+								<a href="home.html" title="">
 									Home
 								</a>
 							</li>
 							<li>
 								<a href="" title="">
-									
+
 									Categories
 								</a>
 								<ul>
@@ -69,16 +76,16 @@
 									</li>
 								</ul>
 							</li>
-							
+
 							<li>
-								<a href="#" title="" class="not-box-open">									
+								<a href="#" title="" class="not-box-open">
 									Chat
-								</a>							
+								</a>
 							</li>
 							<li>
 								<a href="#" title="" class="not-box-open">
 									Notification
-								</a>		
+								</a>
 							</li>
 						</ul>
 					</nav>
@@ -92,7 +99,7 @@
 						</div>
 
 						<div class="user-account-settingss">
-													
+
 							<h3>Profile</h3>
 							<ul class="us-links">
 								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
@@ -117,9 +124,10 @@
 								<div class="main-left-sidebar no-margin">
 									<div class="user-data full-width">
 										<div class="user-profile">
-											
+
 											<div class="user-specs">
-												<h3>Giovanni Gonzaga</h3>
+												<h3 id="usernameID"></h3>
+
 												<span>LSU Student</span>
 											</div>
 										</div>
@@ -130,31 +138,34 @@
 												<span id="userRank"></span>
 											</li>
 											<li class="post-st">
-													<ul>
-														<li style="border-top: none"><a class="post-jb active" href="#" title="">Post a Question</a></li>
-													</ul>
+												<ul>
+													<li style="border-top: none"><a class="post-jb active" href="#" title="">Post a Question</a>
+													</li>
+												</ul>
 											</li>
 											<li>
 												<a href="#" title="">View Profile</a>
 											</li>
 										</ul>
 									</div>
-									
+
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-8 no-pd">
 								<div class="main-ws-sec">
-									
 
 
 									<div class="posts-section" id="posts-section">
-                                        <div class="post-bar company-title">
-                                            <center><h3 id="pageTitle">Computer Science</h3></center>
-                                        </div>
+										<div class="post-bar company-title">
+											<center>
+												<h3 id="pageTitle">Computer Science</h3>
+											</center>
+										</div>
+
 										<!--<div class="post-bar">
 											<div class="post_topbar">
 												<div class="usy-dt">
-													
+
 													<div class="usy-name">
 														<h3>Giovanni Gonzaga</h3>
 														<span><img src="images/clock.png" alt="">3 min ago</span>
@@ -174,15 +185,15 @@
 
 											<div class="job_descp">
 												<h3>How to code html??</h3>
-												
-												<p>It keeps asking me to translate the page everytime I run a test so Im going ahead and 
-													putting it in English since we speak that. The quick brown fox jumped over the lazy dog. 
-													The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. 
-													The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. 
+
+												<p>It keeps asking me to translate the page everytime I run a test so Im going ahead and
+													putting it in English since we speak that. The quick brown fox jumped over the lazy dog.
+													The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.
+													The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.
 													The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.
 													. . . . . . .
 												</p>
-												
+
 											</div>
 
 										</div>-->
@@ -192,7 +203,7 @@
 							</div>
 						</div>
 					</div>
-				</div> 
+				</div>
 			</div>
 		</main>
 
@@ -217,7 +228,7 @@
 									</select>
 								</div>
 							</div>
-							
+
 							<div class="col-lg-12">
 								<input type="text" name="skills" placeholder="Skills">
 							</div>
@@ -281,7 +292,7 @@
 								<input type="text" name="skills" placeholder="Skills">
 							</div>
 							<div class="col-lg-6">
-								
+
 							</div>
 							<div class="col-lg-6">
 								<div class="inp-field">
@@ -294,14 +305,97 @@
 							<div class="col-lg-12">
 								<ul>
 									<li><button type="submit" class="active">Post</button></li>
-									<li><a href="index.html">Cancel</a></li>
+									<li><a href="#" class="close-question">Cancel</a></li>
 								</ul>
 							</div>
 						</div>
 					</form>
 				</div>
-				<a href="#" title=""><i class="la-times-circle-o"></i></a>
 			</div>
+		</div>
+
+		<div class="chatbox-parent" style="position: fixed; bottom: 0; right: 25px;">
+			<style>
+			.messagebox{
+        background-color: transparent;
+        width:90%;
+        margin-left:5%;
+        margin-right:5%;
+        float: left;
+				padding-bottom: 15px;
+			}
+
+			#txtBox{
+        list-style-type:none;
+        height: 22em;
+				overflow: auto;
+				color: black;
+			}
+
+			.textbox{
+				margin:5%;
+			}
+			
+			#message{
+				font-size: 13px;
+			}
+
+			#myName{
+				font-size: 13px;
+			}
+
+			#downLog {
+				font-size: 13px;
+				color: gray;
+				margin-top: 5px;
+			}
+
+      input[type=text]{
+				width:85%;
+				height: 30px;
+			}
+			
+      input[type=button]{
+        width:12%;
+        height:2em;
+        color:rgb(62,31,88);
+        border-radius:5px;
+      }
+
+			
+			</style>
+			<div class="chatbox">
+				<div class="chat-mg bx">
+					<a href="#" title=""><img src="images/speech-bubble.png" alt=""></a>
+					<span>2</span>
+				</div>
+				<div class="conversation-box">
+					<div class="con-title">
+						<h3>Chat</h3>
+						<a href="#" title="" class="close-chat"><i class="la la-minus-square"></i></a>
+					</div>
+				
+					<div class="chat-list">
+
+						<div class="messagebox">
+								<ul id="txtBox"></ul>
+						</div>
+
+						<div class="textbox">
+								<form onsubmit="return false" id="myMess">
+									<input type="text"  id="myName" name="myName" placeholder="Enter Your Name" required>
+									<input type="text"  id="message" name="message" placeholder="Enter Your Message" required>
+									<input type="button" id="mybutton" value="send">
+								</form>
+
+								<a href="javascript:void(0)" id="downLog">Download log</a>
+							</div>
+
+
+					</div><!--chat-list end-->
+				</div><!--conversation-box end-->
+			</div>
+
 		</div>
 
 
@@ -316,7 +410,81 @@
 <script type="text/javascript" src="lib/slick/slick.min.js"></script>
 <script type="text/javascript" src="js/scrollbar.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/notifications.js>"></script>
 <script src="js/functions.js"></script>
+
+<script>
+    console.log(firebase.auth().currentUser);
+    var line = '';
+    var btn = document.getElementById("mybutton");
+    var download = document.getElementById("downLog");
+    var chan = 'a';
+    var messA = document.getElementById("message").value;
+    var name = /*firebase.auth().currentUser;*/document.getElementById("myName").value;
+    console.log(name);
+      firebase.database().ref('chats/'+ chan + '/').once('value', function(chat){
+        chat.forEach(function(el){
+          var element = el.val();
+          var mess = JSON.stringify(element);
+          mess = mess.slice(1,mess.length-1);
+          var messLi = document.createElement("LI");
+          var messTxt= document.createTextNode(mess);
+          messLi.appendChild(messTxt);
+          document.getElementById("txtBox").appendChild(messLi);
+          line = line +(mess+ "\n");
+        });
+      });
+
+    btn.addEventListener("click", function(){
+      messA = document.getElementById("message").value;
+	    name = document.getElementById("myName").value;
+      if(name == null){
+        name = "anon";
+      }
+      messJ = name + ": " + messA;
+      firebase.database().ref('chats/'+chan+'/').push(messJ);
+      document.getElementById("message").value = '';
+
+    });
+    var chatRef = firebase.database().ref('chats/' + chan + '/');
+
+    chatRef.on('child_added', function(msg){
+      var mess = JSON.stringify(msg);
+      mess = mess.slice(1,mess.length-1);
+      var messLi = document.createElement("LI");
+      var messTxt= document.createTextNode(mess);
+      messLi.appendChild(messTxt);
+      document.getElementById("txtBox").appendChild(messLi);
+      line = line +(mess+ "\n");
+    });
+
+    download.addEventListener("click", function(){
+      var date = new Date();
+      var d = "messageOn-"+ date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear() + ".txt"
+      var atr = document.createAttribute("download");
+      atr.value = d;
+      this.setAttributeNode(atr);
+      var blob = new Blob([line], {type: "text/plain;charset=utf-8"});
+      var downloadUrl = URL.createObjectURL(blob);
+      this.setAttribute("href", downloadUrl);
+    });
+  </script>
+
+<script>
+	// firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
+	firebase.auth().onAuthStateChanged(function (user) {
+		if (user) {
+			// document.getElementById("usernameID").innerText = user.email;
+			// document.getElementById("userName").innerText = user.email;
+			// want to switch to ... = firebase.auth().currentUser.displayName; for online version
+			document.getElementById("usernameID").innerText = firebase.auth().currentUser.displayName;
+			document.getElementById("userName").innerText = firebase.auth().currentUser.displayName;
+			console.log(user);
+
+
+		}
+	});
+</script>
 
 </body>
 </html>

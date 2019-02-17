@@ -1,8 +1,9 @@
-var ref = new Firebase("https://<YOUR-FIREBASE-APP>.firebaseio.com");
+var ref = new Firebase("https://askaround-01.firebaseio.com");
 ref.createUser({
   email: "xxxx@xxxx.com",
   password: "xxxx"
-}, function(error, userData) {
+},
+function(error, userData) {
   if (error) {
     switch (error.code) {
       case "EMAIL_TAKEN":

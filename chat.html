@@ -74,12 +74,25 @@
     <form onsubmit="return false" id="myMess">
       <input type="text"  id="message" name="message" placeholder="put your message here">
       <input type="button" id="mybutton" value="send">
+      <input type="button" id="upvote" value="Upvote">
+      <input type="button" id="downvote" value="Downvote">
     </form>
-    <a href="javascript:void(0)" id="downLog">downlaod log</a>
+    <a href="javascript:void(0)" id="downLog">download log</a>
   </div>
-
+<ul hidden>
+  <li id="me"></li>
+  <li id="you"></li>
+</ul>
 
   <script>
+
+/////////////////
+    var conMe = document.getElementById('me');
+    var conYou = document.getElementById('you');
+
+/////////////////
+
+
     var line = '';
     var btn = document.getElementById("mybutton");
     var download = document.getElementById("downLog");
@@ -92,11 +105,11 @@
     firebase.auth().onAuthStateChanged(function(user){
      if(user){
 		   name = user.email;
-       //chan = user.uid;
-       console.log(chan);
-       //flag = 1;
+       ///////////////////////////////////////////////////////
+       conMe.appendChild(document.createTextNode(user.uid));
+       firebase.database().ref('chats/'+chan+'/connections').push(user.uid);
+       ///////////////////////////////////////////////////////
 		 }
-     //console.log(chan);
 	 });
    //console.log(chan);
 ////////////////////////
@@ -105,26 +118,14 @@
     //console.log(name);
 //////////////////////
 
-      firebase.database().ref('chats/'+ chan + '/').once('value', function(chat){
-        chat.forEach(function(el){
-          var element = el.val();
-          var mess = JSON.stringify(element);
-          mess = mess.slice(1,mess.length-1);
-          var messLi = document.createElement("LI");
-          var messTxt= document.createTextNode(mess);
-          messLi.appendChild(messTxt);
-          document.getElementById("txtBox").appendChild(messLi);
-          line = line +(mess+ "\n");
-          txtBox.scrollTop = txtBox.scrollHeight;
-        });
-      });
+
     btn.addEventListener("click", function(){
       messA = document.getElementById("message").value;
       messJ = name + ": " + messA;
-      firebase.database().ref('chats/'+chan+'/').push(messJ);
+      firebase.database().ref('chats/'+chan+'/txts').push(messJ);
       document.getElementById("message").value = '';
     });
-    var chatRef = firebase.database().ref('chats/' + chan + '/');
+    var chatRef = firebase.database().ref('chats/' + chan + '/txts');
 
     chatRef.on('child_added', function(msg){
       var mess = JSON.stringify(msg);
@@ -147,6 +148,55 @@
       var downloadUrl = URL.createObjectURL(blob);
       this.setAttribute("href", downloadUrl);
     });
+
+
+
+
+
+    //////////////////up and down vote
+    firebase.database().ref('chats/'+chan+'/connections').on("child_added", function(per){
+      var s = JSON.stringify(per);
+      s = s.slice(1,s.length-1);
+      //console.log(s);
+      if(document.getElementById("me").textContent != s){
+        document.getElementById("you").textContent = s;
+      }
+    });
+
+
+
+    var uvote = document.getElementById("upvote");
+    var dvote = document.getElementById("downvote");
+    uvote.addEventListener("click", function(){ stuff(1);});
+    dvote.addEventListener("click", function(){ stuff(0);});
+    function stuff(val){
+      uvote.style.visibility = "hidden";
+      dvote.style.visibility = "hidden";
+      if(val ===1){
+        //var them =  "KuopYAm6v4Y2BpsJo2SR0JZ5lq83";
+        var them = document.getElementById("you").textContent;
+        var Rank;
+        firebase.database().ref("Users/" + them).once("value", function(data){
+          Rank = data.val().Rank + 1;
+          console.log(Rank);
+          firebase.database().ref('Users/' + them ).update({Rank});
+        });
+        //firebase.database().ref('users/' + them ).update({Rank:})
+      }
+      if(val ===0){
+        //var them =  "KuopYAm6v4Y2BpsJo2SR0JZ5lq83";
+        var them = document.getElementById("you").textContent;
+        var Rank;
+        firebase.database().ref("Users/" + them).once("value", function(data){
+          Rank = data.val().Rank - 1;
+          console.log(Rank);
+          firebase.database().ref('Users/' + them ).update({Rank});
+        });
+        //firebase.database().ref('users/' + them ).update({Rank:})
+      }
+    }
+
+
   </script>
 
   </body>
