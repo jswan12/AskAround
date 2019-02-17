@@ -39,7 +39,7 @@ var submitPost = function () {
   //var uid = authdata.uid;
   firebase.auth().onAuthStateChanged(function (user) {
 		if (user) {
-			var uid = firebase.auth().currentUser.getToken();
+			var uid = firebase.auth().currentUser.uid;
     }
     else {
       var uid = null;
