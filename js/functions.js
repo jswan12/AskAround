@@ -214,7 +214,7 @@ function getPost(sub) {
       var question = childData.question;
       var description = childData.description;
       var bounty = childData.bounty;
-      //var category = childData.category;
+      var category = childData.category;
       //var displayName = childData.displayName;
       //var uid = childData.uid;
       //var uid = childData.uid;
