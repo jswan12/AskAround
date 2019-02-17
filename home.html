@@ -28,7 +28,7 @@
 
 <body>
 	<div class="wrapper">
-		<header> 
+		<header>
 			<div class="container">
 				<div class="header-data">
 					<div class="logo">
@@ -45,26 +45,26 @@
 					<nav>
 						<ul>
 							<li>
-								<a href="home.html" title="">								
+								<a href="home.html" title="">
 									Home
 								</a>
 							</li>
 							<li>
 								<a href="" title="">
-									
+
 									Categories
 								</a>
 							</li>
-							
+
 							<li>
-								<a href="#" title="" class="not-box-open">									
+								<a href="#" title="" class="not-box-open">
 									Chat
-								</a>							
+								</a>
 							</li>
 							<li>
 								<a href="#" title="" class="not-box-open">
 									Notification
-								</a>		
+								</a>
 							</li>
 						</ul>
 					</nav>
@@ -78,7 +78,7 @@
 						</div>
 
 						<div class="user-account-settingss">
-													
+
 							<h3>Profile</h3>
 							<ul class="us-links">
 								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
@@ -103,9 +103,9 @@
 								<div class="main-left-sidebar no-margin">
 									<div class="user-data full-width">
 										<div class="user-profile">
-											
+
 											<div class="user-specs">
-												<h3>Giovanni Gonzaga</h3>
+												<h3 id="usernameID"></h3>
 												<span>LSU Student</span>
 											</div>
 										</div>
@@ -125,22 +125,22 @@
 											</li>
 										</ul>
 									</div>
-									
+
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-8 no-pd">
 								<div class="main-ws-sec">
-									
+
 
 									<div class="posts-section" id="posts-section">
 									<div class="post-bar company-title">
 										<center><h3 id="pageTitle">Mathematics</h3></center>
 									</div>
-										
+
 										<!--<div class="post-bar">
 											<div class="post_topbar">
 												<div class="usy-dt">
-													
+
 													<div class="usy-name">
 														<h3>Giovanni Gonzaga</h3>
 														<span><img src="images/clock.png" alt="">3 min ago</span>
@@ -160,15 +160,15 @@
 
 											<div class="job_descp">
 												<h3>How to code html??</h3>
-												
-												<p>It keeps asking me to translate the page everytime I run a test so Im going ahead and 
-													putting it in English since we speak that. The quick brown fox jumped over the lazy dog. 
-													The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. 
-													The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. 
+
+												<p>It keeps asking me to translate the page everytime I run a test so Im going ahead and
+													putting it in English since we speak that. The quick brown fox jumped over the lazy dog.
+													The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.
+													The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.
 													The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.
 													. . . . . . .
 												</p>
-												
+
 											</div>
 
 										</div>-->
@@ -178,7 +178,7 @@
 							</div>
 						</div>
 					</div>
-				</div> 
+				</div>
 			</div>
 		</main>
 
@@ -203,7 +203,7 @@
 									</select>
 								</div>
 							</div>
-							
+
 							<div class="col-lg-12">
 								<input type="text" name="skills" placeholder="Skills">
 							</div>
@@ -267,7 +267,7 @@
 								<input type="text" name="skills" placeholder="Skills">
 							</div>
 							<div class="col-lg-6">
-								
+
 							</div>
 							<div class="col-lg-6">
 								<div class="inp-field">
@@ -303,6 +303,9 @@
 <script type="text/javascript" src="js/scrollbar.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 <script src="js/functions.js"></script>
+<script>
+	  document.getElementById("usernameID").innerText = firebase.auth().currentUser.displayName;
+</script>
 
 </body>
 </html>
