@@ -310,7 +310,9 @@
     firebase.auth().onAuthStateChanged(function(user){
      if(user){
 		   document.getElementById("usernameID").innerText = user.email;
-			 console.log(user);
+		   document.getElementById("userName").innerText = user.email;
+		   // want to switch to ... = firebase.auth().currentUser.displayName; for online version
+		   console.log(user);
 	   }
 	 });
 </script>
