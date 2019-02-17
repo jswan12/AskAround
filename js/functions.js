@@ -37,31 +37,33 @@ var submitPost = function () {
 
   // Get input values from each of the form elements
   //var uid = authdata.uid;
+  var uid = null;
   firebase.auth().onAuthStateChanged(function (user) {
 		if (user) {
-			var uid = firebase.auth().currentUser.uid;
+      //uid = firebase.auth().currentUser.uid;
+      //var displayName = firebase.auth().currUser.displayName;
+      var question = document.getElementById('question').value;
+      var description = document.getElementById('description').value;
+      var bounty = document.getElementById('price').value;
+      var category = document.getElementById('category').value;
+      // Reference to the post object in Firebase database
+      dataBase = dataBase.ref("Posts/" + category);
+      //alert(displayName + "\n" + uid + "\n" + question + "\n" + description + "\n" + bounty + "\n" + category);
+      // Push a new post to the database using those values
+    
+      dataBase.push({
+        //"uid": uid,
+        //"displayName": displayName,
+        "question": question,
+        "description": description,
+        "bounty": bounty,
+        "category": category
+      });
     }
     else {
-      var uid = null;
+      uid = null;
     }
 	});
-  var question = document.getElementById('question').value;
-  var description = document.getElementById('description').value;
-  var bounty = document.getElementById('price').value;
-  var category = document.getElementById('category').value;
-  // Reference to the post object in Firebase database
-  dataBase = dataBase.ref("Posts/" + category);
-
-  // Push a new post to the database using those values
-
-  dataBase.push({
-    "uid": uid,
-    "displayName": firebase.auth().currUser.displayName,
-    "question": question,
-    "description": description,
-    "bounty": bounty,
-    "category": category
-  });
 };
 
 
@@ -106,9 +108,9 @@ function getPost(sub) {
       var question = childData.question;
       var description = childData.description;
       var bounty = childData.bounty;
-      var category = childData.category;
-      var displayName = childData.displayName;
-      var uid = childData.uid;
+      //var category = childData.category;
+      //var displayName = childData.displayName;
+      //var uid = childData.uid;
       //var uid = childData.uid;
       //console.log(question, "\n"+description, '\n'+bounty, "\n"+category);   
 
@@ -118,8 +120,8 @@ function getPost(sub) {
 
         '<div class="usy-name">',
         '<h3>',
-        displayName,
-        //'getName(uid)',
+        //displayName,
+        'getName(uid)',
         '</h3>',
         '<span><img src="images/clock.png" alt="">$',
         bounty,
