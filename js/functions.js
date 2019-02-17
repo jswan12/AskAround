@@ -18,6 +18,7 @@ firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     uid = firebase.auth().currentUser.uid;
     displayName = firebase.auth().currentUser.displayName;
+    getRank();
   }
   else {
     uid = null;
@@ -60,9 +61,9 @@ var submitPost = function () {
 //   );
 // }
 
-function getRank(aUID) {
-  // return rank based on a UID input
-  var currUser = firebase.database().ref("Users/" + aUID).once('value',
+function getRank() {
+  // return rank 
+  var currUser = firebase.database().ref("Users/" + uid).once('value',
     function (data) {
       document.getElementById('userRank').innerText = data.val().Rank;
     }, function (error) { console.log(error); }
@@ -145,8 +146,8 @@ function getPost(sub) {
 }
 
 
+
 $(window).load(function () {
   $("#postForm").submit(submitPost);
-}, getPost(document.getElementById("pageTitle").innerText),
-  getRank(firebase.auth().currentUser.uid));
+}, getPost(document.getElementById("pageTitle").innerText));
 
