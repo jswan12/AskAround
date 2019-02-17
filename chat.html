@@ -184,8 +184,8 @@
         //firebase.database().ref('users/' + them ).update({Rank:})
       }
       if(val ===0){
-        var them =  "KuopYAm6v4Y2BpsJo2SR0JZ5lq83";
-        //var them = document.getElementById("you").textContent;
+        //var them =  "KuopYAm6v4Y2BpsJo2SR0JZ5lq83";
+        var them = document.getElementById("you").textContent;
         var Rank;
         firebase.database().ref("Users/" + them).once("value", function(data){
           Rank = data.val().Rank - 1;
