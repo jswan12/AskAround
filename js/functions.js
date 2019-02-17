@@ -131,4 +131,4 @@ var placeholderUID = "KuopYAm6v4Y2BpsJo2SR0JZ5lq83"; // Evan's
   $(window).load(function() {
     $("#postForm").submit(submitPost);
   }, getPost(document.getElementById("pageTitle").innerText), 
-     getRank(placeholderUID),  ); 
+     getRank(placeholderUID)  ); 
