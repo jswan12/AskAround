@@ -309,7 +309,7 @@
     firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password");
     firebase.auth().onAuthStateChanged(function(user){
      if(user){
-		   document.getElementById("usernameID").innerText = user.uid;
+		   document.getElementById("usernameID").innerText = user.email;
 			 console.log(user);
 	   }
 	 });
