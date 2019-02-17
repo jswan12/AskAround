@@ -466,9 +466,11 @@
 	firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
 	firebase.auth().onAuthStateChanged(function (user) {
 		if (user) {
-			document.getElementById("usernameID").innerText = user.email;
-			document.getElementById("userName").innerText = user.email;
+			// document.getElementById("usernameID").innerText = user.email;
+			// document.getElementById("userName").innerText = user.email;
 			// want to switch to ... = firebase.auth().currentUser.displayName; for online version
+			document.getElementById("usernameID").innerText = firebase.auth().currentUser.displayName;
+			document.getElementById("userName").innerText = firebase.auth().currentUser.displayName;
 			console.log(user);
 
 
