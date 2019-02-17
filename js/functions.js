@@ -31,7 +31,6 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 
 
-
 var submitPost = function () {
 
 
@@ -56,25 +55,28 @@ var submitPost = function () {
       "category": category
     });
 
-
-    firebase.database().ref("postCount").once('value',
-    function(data){
-      data.val() = data.val() + 1;
-      document.getElementById('notification').textContent = "Notification " + data.val();
-      firebase.database().ref('postCount/').update(data.val());
-    }, function (err) { 
-      console.log("notificaion is not working: " + error); 
-    }
-  );
-
-  
-
   console.log("I just posted");
   
 
 
 };
 
+//var count = 0;
+//calling addCount() actually works, but idk how to get it when a post is submited
+function addCount(){
+firebase.database().ref("Counter/").once('value',
+    function(data){
+      var postCount = data.val().postCount;
+      postCount++;
+      document.getElementById('notification').innerText = "Notification " + postCount;
+      console.log(postCount);
+      firebase.database().ref('Counter/').update({postCount});
+      
+    }, function (err) { 
+      console.log("notificaion is not working: " + error); 
+    }
+  );
+}
 
 //   function getName(aUID){
 //   // return name based on a UID input
