@@ -306,10 +306,11 @@
 <script type="text/javascript" src="js/script.js"></script>
 <script src="js/functions.js"></script>
 <script>
-    firebase.auth().createUserWithEmailAndPassword("priver3@lsu.edu", "password");
+    firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password");
     firebase.auth().onAuthStateChanged(function(user){
      if(user){
-		   document.getElementById("usernameID").innerText = user.displayName;
+		   document.getElementById("usernameID").innerText = user.uid;
+			 console.log(user);
 	   }
 	 });
 </script>
