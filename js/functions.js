@@ -26,7 +26,13 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 
+
+
+
+
+
 var submitPost = function () {
+
 
   // Get input values from each of the form elements
     var myUid = uid;
@@ -48,6 +54,24 @@ var submitPost = function () {
       "bounty": bounty,
       "category": category
     });
+
+
+    firebase.database().ref("postCount").once('value',
+    function(data){
+      data.val() = data.val() + 1;
+      document.getElementById('notification').textContent = "Notification " + data.val();
+      firebase.database().ref('postCount/').update(data.val());
+    }, function (err) { 
+      console.log("notificaion is not working: " + error); 
+    }
+  );
+
+  
+
+  console.log("I just posted");
+  
+
+
 };
 
 
@@ -149,4 +173,6 @@ $(window).load(function () {
   $("#postForm").submit(submitPost);
 }, getPost(document.getElementById("pageTitle").innerText),
   getRank(uid));
+
+
 
