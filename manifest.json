@@ -1,3 +1,9 @@
 {
-    "short_name": "AskAround"
+    "short_name": "AskAround",
+    "name": "AskAround",
+    "background": "#FFF",
+    "orientation": "portrait",
+    "start_url": "./",
+    "display": "standalone",
+    "gcm_sender_id": "103953800507"
 }
