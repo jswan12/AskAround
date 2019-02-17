@@ -85,40 +85,27 @@
 </ul>
 
   <script>
-
-/////////////////
+    //get data from the html and create some needed variables
     var conMe = document.getElementById('me');
     var conYou = document.getElementById('you');
-
-/////////////////
-
-
     var line = '';
     var btn = document.getElementById("mybutton");
     var download = document.getElementById("downLog");
     var chan  = "a";
     var messA = document.getElementById("message").value;
-//////////////////////////////
-    var name;//= /*firebase.auth().currentUser;*/document.getElementById("myName").value;
-    //var flag = 0;
+    var name;
     //firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
     firebase.auth().onAuthStateChanged(function(user){
      if(user){
 		   name = user.email;
-       ///////////////////////////////////////////////////////
        conMe.appendChild(document.createTextNode(user.uid));
        firebase.database().ref('chats/'+chan+'/connections').push(user.uid);
-       ///////////////////////////////////////////////////////
 		 }
 	 });
-   //console.log(chan);
-////////////////////////
-    //var name = /*firebase.auth().currentUser;*/document.getElementById("myName").value;
     var txtBox = document.getElementById("txtBox");
-    //console.log(name);
-//////////////////////
 
 
+    //when the user adds a message send it to the db
     btn.addEventListener("click", function(){
       messA = document.getElementById("message").value;
       messJ = name + ": " + messA;
@@ -127,6 +114,7 @@
     });
     var chatRef = firebase.database().ref('chats/' + chan + '/txts');
 
+    //if a new message is added to the db then this event will grab it from the db and add it to the screen
     chatRef.on('child_added', function(msg){
       var mess = JSON.stringify(msg);
       mess = mess.slice(1,mess.length-1);
@@ -137,7 +125,8 @@
       line = line +(mess+ "\n");
       txtBox.scrollTop = txtBox.scrollHeight;
     });
-
+    //create text file of log for user to keep
+    //new line is curretnly not working but this is not an easy feature
     download.addEventListener("click", function(){
       var date = new Date();
       var d = "messageOn-"+ date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear() + ".txt"
@@ -149,11 +138,7 @@
       this.setAttribute("href", downloadUrl);
     });
 
-
-
-
-
-    //////////////////up and down vote
+    //if there is an update on the connections list then grab the new connection
     firebase.database().ref('chats/'+chan+'/connections').on("child_added", function(per){
       var s = JSON.stringify(per);
       s = s.slice(1,s.length-1);
@@ -164,16 +149,18 @@
     });
 
 
-
+    //get the elements create an event then call the functions
     var uvote = document.getElementById("upvote");
     var dvote = document.getElementById("downvote");
     uvote.addEventListener("click", function(){ stuff(1);});
     dvote.addEventListener("click", function(){ stuff(0);});
+    //function for dealing with hiding the buttons and updating the db
     function stuff(val){
       uvote.style.visibility = "hidden";
       dvote.style.visibility = "hidden";
+      //if upvote
       if(val ===1){
-        //var them =  "KuopYAm6v4Y2BpsJo2SR0JZ5lq83";
+        //var them =  "KuopYAm6v4Y2BpsJo2SR0JZ5lq83"; //hard code test please disregard
         var them = document.getElementById("you").textContent;
         var Rank;
         firebase.database().ref("Users/" + them).once("value", function(data){
@@ -181,10 +168,10 @@
           console.log(Rank);
           firebase.database().ref('Users/' + them ).update({Rank});
         });
-        //firebase.database().ref('users/' + them ).update({Rank:})
       }
+      //if downvote
       if(val ===0){
-        //var them =  "KuopYAm6v4Y2BpsJo2SR0JZ5lq83";
+        //var them =  "KuopYAm6v4Y2BpsJo2SR0JZ5lq83"; //hard code test please diregard
         var them = document.getElementById("you").textContent;
         var Rank;
         firebase.database().ref("Users/" + them).once("value", function(data){
@@ -192,7 +179,6 @@
           console.log(Rank);
           firebase.database().ref('Users/' + them ).update({Rank});
         });
-        //firebase.database().ref('users/' + them ).update({Rank:})
       }
     }
 
