@@ -306,7 +306,7 @@
 <script type="text/javascript" src="js/script.js"></script>
 <script src="js/functions.js"></script>
 <script>
-    firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password");
+    firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
     firebase.auth().onAuthStateChanged(function(user){
      if(user){
 		   document.getElementById("usernameID").innerText = user.email;
