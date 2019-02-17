@@ -78,7 +78,7 @@
     <a href="javascript:void(0)" id="downLog">downlaod log</a>
   </div>
 
-<script>    firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password");</script>
+
   <script>
     var line = '';
     var btn = document.getElementById("mybutton");
@@ -88,7 +88,7 @@
 //////////////////////////////
     var name;//= /*firebase.auth().currentUser;*/document.getElementById("myName").value;
     //var flag = 0;
-    firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
+    //firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
     firebase.auth().onAuthStateChanged(function(user){
      if(user){
 		   name = user.email;
