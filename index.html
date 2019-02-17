@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>AskAround Sign-In</title>
-
-	<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
-
-	<script>
+	<head>
+		<meta charset="UTF-8">
+		<title>AskAround Sign-In</title>
+		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-messaging.js"></script>
+		<script>
 		// Initialize Firebase
 		var config = {
 			apiKey: "AIzaSyCpwgCgLOfU9l27TvFGVYkFQdeyJJnB-ck",
@@ -20,17 +17,10 @@
 			messagingSenderId: "527860430663"
 		};
 		firebase.initializeApp(config);
-	</script>
-
-	<!-- Firebase services -->
-	<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-messaging.js"></script>
-
-	<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-	
-	<script type="text/javascript">
+		</script>
+		<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+		<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+		<script type="text/javascript">
 		// FirebaseUI config.
 		var uiConfig = {
 			signInSuccessUrl: 'home.html',
@@ -44,17 +34,14 @@
 		var ui = new firebaseui.auth.AuthUI(firebase.auth());
 		// The start method will wait until the DOM is loaded.
 		ui.start('#firebaseui-auth-container', uiConfig);
-	</script>
-
 	
-	<style>
-		body {
-			font-family: Arial, Helvetica, sans-serif;
-		}
+		</script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+		body {font-family: Arial, Helvetica, sans-serif;}
 
 		/* Full-width input fields */
-		input[type=text],
-		input[type=password] {
+		input[type=text], input[type=password] {
 			width: 100%;
 			padding: 12px 20px;
 			margin: 8px 0;
@@ -108,35 +95,25 @@
 
 		/* The Modal (background) */
 		.modal {
-			display: none;
-			/* Hidden by default */
-			position: fixed;
-			/* Stay in place */
-			z-index: 1;
-			/* Sit on top */
+			display: none; /* Hidden by default */
+			position: fixed; /* Stay in place */
+			z-index: 1; /* Sit on top */
 			left: 0;
 			top: 0;
-			width: 100%;
-			/* Full width */
-			height: 100%;
-			/* Full height */
-			overflow: auto;
-			/* Enable scroll if needed */
-			background-color: rgb(0, 0, 0);
-			/* Fallback color */
-			background-color: rgba(0, 0, 0, 0.4);
-			/* Black w/ opacity */
+			width: 100%; /* Full width */
+			height: 100%; /* Full height */
+			overflow: auto; /* Enable scroll if needed */
+			background-color: rgb(0,0,0); /* Fallback color */
+			background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 			padding-top: 60px;
 		}
 
 		/* Modal Content/Box */
 		.modal-content {
 			background-color: #fefefe;
-			margin: 5% auto 25% auto;
-			/* 5% from the top, 25% from the bottom and centered */
+			margin: 5% auto 25% auto; /* 5% from the top, 25% from the bottom and centered */
 			border: 1px solid #888;
-			width: 60%;
-			/* Could be more or less, depending on screen size */
+			width: 60%; /* Could be more or less, depending on screen size */
 		}
 
 		/* The Close Button (x) */
@@ -162,23 +139,13 @@
 		}
 
 		@-webkit-keyframes animatezoom {
-			from {
-				-webkit-transform: scale(0)
-			}
-
-			to {
-				-webkit-transform: scale(1)
-			}
+			from {-webkit-transform: scale(0)} 
+			to {-webkit-transform: scale(1)}
 		}
-
+  
 		@keyframes animatezoom {
-			from {
-				transform: scale(0)
-			}
-
-			to {
-				transform: scale(1)
-			}
+			from {transform: scale(0)} 
+			to {transform: scale(1)}
 		}
 
 		/* Change styles for span and cancel button on extra small screens */
@@ -187,42 +154,35 @@
 				display: block;
 				float: none;
 			}
-
 			.cancelbtn {
 				width: 100%;
 			}
 		}
-	</style>
-</head>
-
-<body>
-	<!-- The surrounding HTML is left untouched by FirebaseUI.
+		</style>
+	</head>
+	
+	<body>
+		<!-- The surrounding HTML is left untouched by FirebaseUI.
 			Your app may use that space for branding, controls and other customizations.-->
-	<center>
-		<h1>AskAround Sign-In</h1><br>
-		<img src="https://github.com/jswan12/AskAround/blob/master/images/logo.png?raw=true" alt=""
-			style="height: 200px;">
-		<p>AskAround is a platform where students can ask questions and receive answers from certified instructors!</p>
-	</center><br><br>
-	<center>
-		<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign in with
-			Username/Password</button>
+		<center><h1>AskAround Sign-In</h1><br>
+		<img src="https://github.com/jswan12/AskAround/blob/master/images/logo.png?raw=true" alt="" style="height: 200px;">
+		<p>AskAround is a platform where students can ask questions and receive answers from certified instructors!</p></center><br><br>
+		<center>
+		<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign in with Username/Password</button>
 		<div id="id01" class="modal">
 			<form class="modal-content animate" action="/action_page.php">
 				<div class="imgcontainer">
-					<span onclick="document.getElementById('id01').style.display='none'" class="close"
-						title="Close Modal">&times;</span>
-					<img src="https://github.com/jswan12/AskAround/blob/master/images/logo.png?raw=true" alt="Avatar"
-						class="avatar">
+					<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+					<img src="https://github.com/jswan12/AskAround/blob/master/images/logo.png?raw=true" alt="Avatar" class="avatar">
 				</div>
-
+				
 				<div class="container">
 					<label for="uname"><b>Username</b></label>
 					<input type="text" placeholder="Enter Username" name="uname" required>
 
 					<label for="psw"><b>Password</b></label>
 					<input type="password" placeholder="Enter Password" name="psw" required>
-
+        
 					<button type="submit">Login</button>
 					<label>
 						<input type="checkbox" checked="checked" name="remember"> Remember Me
@@ -230,35 +190,28 @@
 				</div>
 
 				<div class="container" style="background-color:#f1f1f1">
-					<button type="button" onclick="document.getElementById('id01').style.display='none'"
-						class="cancelbtn">Cancel</button>
+					<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
 					<span class="psw">Forgot <a href="#">Password?</a></span>
 				</div>
 			</form>
 		</div>
 		<script>
-			// Get the modal
-			var modal = document.getElementById('id01');
+		// Get the modal
+		var modal = document.getElementById('id01');
 
-			// When the user clicks anywhere outside of the modal, close it
-			window.onclick = function (event) {
-				if (event.target == modal) {
-					modal.style.display = "none";
-				}
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
 			}
+		}
 		</script>
 
-	</center>
-	<div id="firebaseui-auth-container"></div>
-</body>
-
-<body>
-	<center>
-		<p>By continuing, you are indicating that you accept our Terms of Service and Privacy Policy.</p>
-		<input type="button" onclick="alert('Do not act like you are not impressed.')" value="Terms of Service" />
-		<input type="button" onclick="alert('We definitely will not sell your information. Pinkie swear.')"
-			value="Privacy Policy" />
-	</center>
-</body>
-
+		</center>
+		<div id="firebaseui-auth-container"></div>
+	</body>
+	<body><center><p>By continuing, you are indicating that you accept our Terms of Service and Privacy Policy.</p>
+	<input type="button" onclick="alert('Do not act like you are not impressed.')" value="Terms of Service" />
+	<input type="button" onclick="alert('We definitely will not sell your information. Pinkie swear.')" value="Privacy Policy" />
+	</center></body>
 </html>
