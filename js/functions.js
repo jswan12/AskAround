@@ -23,7 +23,9 @@ messaging.requestPermission().then(function () {
   console.log("Error occured")
 });
 
+//shows notification on the webpage 
 messaging.onMessage(function(payLoad){
+  //just prints it to the console for now
   console.log('onMessage: ', payLoad);
 });
 
