@@ -37,6 +37,14 @@ var submitPost = function () {
 
   // Get input values from each of the form elements
   //var uid = authdata.uid;
+  firebase.auth().onAuthStateChanged(function (user) {
+		if (user) {
+			var uid = firebase.auth().currentUser.getToken();
+    }
+    else {
+      var uid = null;
+    }
+	});
   var question = document.getElementById('question').value;
   var description = document.getElementById('description').value;
   var bounty = document.getElementById('price').value;
