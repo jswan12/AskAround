@@ -1,28 +1,28 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>AskAround</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<link rel="stylesheet" type="text/css" href="css/animate.css">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/line-awesome.css">
-<link rel="stylesheet" type="text/css" href="css/line-awesome-font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
-<link rel="stylesheet" type="text/css" href="lib/slick/slick.css">
-<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/responsive.css">
+	<meta charset="UTF-8">
+	<title>AskAround</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/line-awesome.css">
+	<link rel="stylesheet" type="text/css" href="css/line-awesome-font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.min.css">
+	<link rel="stylesheet" type="text/css" href="lib/slick/slick.css">
+	<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
 
-<link rel="shortcut icon" href="images/favicon - 32px x 32px.png" />
+	<link rel="shortcut icon" href="images/favicon - 32px x 32px.png" />
 
-<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
-<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 
 
 </head>
@@ -34,14 +34,16 @@
 				<div class="header-data">
 					<div class="logo">
 						<a href="home.html" title=""><img src="images/logo.png" alt="" style="height: 34px;"></a>
-					</div><!--logo end-->
+					</div>
+					<!--logo end-->
 
 					<div class="search-bar">
 						<form>
 							<input type="text" name="search" placeholder="Search...">
 							<button type="submit"><i class="la la-search"></i></button>
 						</form>
-					</div><!--search-bar end-->
+					</div>
+					<!--search-bar end-->
 
 					<nav>
 						<ul>
@@ -126,9 +128,10 @@
 												<span id="userRank"></span>
 											</li>
 											<li class="post-st">
-													<ul>
-														<li style="border-top: none"><a class="post-jb active" href="#" title="">Post a Question</a></li>
-													</ul>
+												<ul>
+													<li style="border-top: none"><a class="post-jb active" href="#" title="">Post a Question</a>
+													</li>
+												</ul>
 											</li>
 											<li>
 												<a href="#" title="">View Profile</a>
@@ -143,9 +146,11 @@
 
 
 									<div class="posts-section" id="posts-section">
-									<div class="post-bar company-title">
-										<center><h3 id="pageTitle">Mathematics</h3></center>
-									</div>
+										<div class="post-bar company-title">
+											<center>
+												<h3 id="pageTitle">Mathematics</h3>
+											</center>
+										</div>
 
 										<!--<div class="post-bar">
 											<div class="post_topbar">
@@ -299,6 +304,90 @@
 			</div>
 		</div>
 
+		<div class="chatbox-list">
+			<style>
+			.messagebox{
+        background-color: transparent;
+        width:90%;
+        margin-left:5%;
+        margin-right:5%;
+        float: left;
+				padding-bottom: 15px;
+			}
+			
+			#txtBox{
+        list-style-type:none;
+        height: 22em;
+				overflow: auto;
+				color: black;
+			}
+
+			.textbox{
+				margin:5%;
+			}
+			
+			#message{
+				font-size: 13px;
+			}
+
+			#myName{
+				font-size: 13px;
+			}
+
+			#downLog {
+				font-size: 13px;
+				color: gray;
+				margin-top: 5px;
+			}
+
+      input[type=text]{
+				width:85%;
+				height: 30px;
+			}
+			
+      input[type=button]{
+        width:12%;
+        height:2em;
+        color:rgb(62,31,88);
+        border-radius:5px;
+      }
+
+			
+			</style>
+			<div class="chatbox">
+				<div class="chat-mg bx">
+					<a href="#" title=""><img src="images/speech-bubble.png" alt=""></a>
+					<span>2</span>
+				</div>
+				<div class="conversation-box">
+					<div class="con-title">
+						<h3>Chat</h3>
+						<a href="#" title="" class="close-chat"><i class="la la-minus-square"></i></a>
+					</div>
+				
+					<div class="chat-list">
+
+						<div class="messagebox">
+								<ul id="txtBox"></ul>
+						</div>
+
+						<div class="textbox">
+								<form onsubmit="return false" id="myMess">
+									<input type="text"  id="myName" name="myName" placeholder="Enter Your Name" required>
+									<input type="text"  id="message" name="message" placeholder="Enter Your Message" required>
+									<input type="button" id="mybutton" value="send">
+								</form>
+
+								<a href="javascript:void(0)" id="downLog">Download log</a>
+							</div>
+
+
+					</div><!--chat-list end-->
+				</div><!--conversation-box end-->
+			</div>
+
+		</div>
+
 
 
 
@@ -314,17 +403,74 @@
 <script src="js/functions.js"></script>
 
 <script>
-    firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
-    firebase.auth().onAuthStateChanged(function(user){
-     if(user){
-		   document.getElementById("usernameID").innerText = user.email;
-		   document.getElementById("userName").innerText = user.email;
-		   // want to switch to ... = firebase.auth().currentUser.displayName; for online version
-			 console.log(user);
+    console.log(firebase.auth().currentUser);
+    var line = '';
+    var btn = document.getElementById("mybutton");
+    var download = document.getElementById("downLog");
+    var chan = 'a';
+    var messA = document.getElementById("message").value;
+    var name = /*firebase.auth().currentUser;*/document.getElementById("myName").value;
+    console.log(name);
+      firebase.database().ref('chats/'+ chan + '/').once('value', function(chat){
+        chat.forEach(function(el){
+          var element = el.val();
+          var mess = JSON.stringify(element);
+          mess = mess.slice(1,mess.length-1);
+          var messLi = document.createElement("LI");
+          var messTxt= document.createTextNode(mess);
+          messLi.appendChild(messTxt);
+          document.getElementById("txtBox").appendChild(messLi);
+          line = line +(mess+ "\n");
+        });
+      });
+
+    btn.addEventListener("click", function(){
+      messA = document.getElementById("message").value;
+	    name = document.getElementById("myName").value;
+      if(name == null){
+        name = "anon";
+      }
+      messJ = name + ": " + messA;
+      firebase.database().ref('chats/'+chan+'/').push(messJ);
+      document.getElementById("message").value = '';
+
+    });
+    var chatRef = firebase.database().ref('chats/' + chan + '/');
+
+    chatRef.on('child_added', function(msg){
+      var mess = JSON.stringify(msg);
+      mess = mess.slice(1,mess.length-1);
+      var messLi = document.createElement("LI");
+      var messTxt= document.createTextNode(mess);
+      messLi.appendChild(messTxt);
+      document.getElementById("txtBox").appendChild(messLi);
+      line = line +(mess+ "\n");
+    });
+
+    download.addEventListener("click", function(){
+      var date = new Date();
+      var d = "messageOn-"+ date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear() + ".txt"
+      var atr = document.createAttribute("download");
+      atr.value = d;
+      this.setAttributeNode(atr);
+      var blob = new Blob([line], {type: "text/plain;charset=utf-8"});
+      var downloadUrl = URL.createObjectURL(blob);
+      this.setAttribute("href", downloadUrl);
+    });
+  </script>
+
+<script>
+	firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
+	firebase.auth().onAuthStateChanged(function (user) {
+		if (user) {
+			document.getElementById("usernameID").innerText = user.email;
+			document.getElementById("userName").innerText = user.email;
+			// want to switch to ... = firebase.auth().currentUser.displayName; for online version
+			console.log(user);
 
 
-	   }
-	 });
+		}
+	});
 </script>
 
 </body>
