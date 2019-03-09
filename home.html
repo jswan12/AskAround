@@ -168,7 +168,7 @@
 
 													<div class="usy-name">
 														<h3>Giovanni Gonzaga</h3>
-														<span><img src="images/clock.png" alt="">3 min ago</span>
+														<span><img src="images/logo.png" alt="">3 min ago</span>
 													</div>
 												</div>
 												<div class="ed-opts">
@@ -415,14 +415,14 @@
 <script src="js/functions.js"></script>
 
 <script>
-    console.log(firebase.auth().currentUser);
+    //console.log(firebase.auth().currentUser);
     var line = '';
     var btn = document.getElementById("mybutton");
     var download = document.getElementById("downLog");
     var chan = 'a';
     var messA = document.getElementById("message").value;
     var name = /*firebase.auth().currentUser;*/document.getElementById("myName").value;
-    console.log(name);
+    //console.log(name);
       firebase.database().ref('chats/'+ chan + '/').once('value', function(chat){
         chat.forEach(function(el){
           var element = el.val();
@@ -480,7 +480,7 @@
 			// want to switch to ... = firebase.auth().currentUser.displayName; for online version
 			document.getElementById("usernameID").innerText = firebase.auth().currentUser.displayName;
 			document.getElementById("userName").innerText = firebase.auth().currentUser.displayName;
-			console.log(user);
+			//console.log(user);
 
 
 		}
