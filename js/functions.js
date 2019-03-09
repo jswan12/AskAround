@@ -113,16 +113,14 @@ function pushUser(aUID, aName, aRank) {
 function getPost(sub) {
   dataBase.ref("Posts/" + sub).once('value', function (data) {
     data.forEach(function (childSnapshot) {
-      //each post's id
-      //var key = childSnapshot.key();
       var childData = childSnapshot.val();
+      var postID = childSnapshot.key;
       var question = childData.question;
       var description = childData.description;
       var bounty = childData.bounty;
-      var category = childData.category;
+      var category = childData.category;//may not be used
       var displayName = childData.displayName;
-      var myUid = childData.uid;
-      //console.log(question, "\n"+description, '\n'+bounty, "\n"+category);   
+      var myUid = childData.uid;  
 
       var html = [
         '<div class="post_topbar">',
@@ -133,16 +131,18 @@ function getPost(sub) {
         displayName + ' ----- ' + myUid,
         //'getName(uid)',
         '</h3>',
-        '<span><img src="images/clock.png" alt="">$',
+        '<span>$',
         bounty,
         '</span>',
         '</div>',
         '</div>',
         '<div class="ed-opts">',
         '<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>',
-        '<form action="chat.html" target="_blank">',
-        '<button style="float:right; background-color: green; color: white; padding: 5px 7px; border: none;" >Claim Bounty</button>',
-        '</form>',
+        '<input id="button',
+        postID,
+        '" type="button" value="Claim Bounty" onclick="openChatPage(\'',
+        postID,
+        '\');" style="float:right; background-color: green; color: white; height: 25px; width: 100px; border: none;"></input>',
         '<ul class="ed-options">',
         '<li><a href="#" title="">Edit Post</a></li>',
         '<li><a href="#" title="">Unsaved</a></li>',
@@ -165,17 +165,26 @@ function getPost(sub) {
       ].join('');
       var div = document.createElement('div');
       div.setAttribute('class', 'post-bar');
+      div.setAttribute('id', postID);
       div.innerHTML = html;
       document.getElementById('posts-section').appendChild(div);
     });
   });
 }
 
+function openChatPage(postBtn) {
+  document.getElementById('button' + postBtn).style.visibility = 'hidden';
+  window.open("chat.html");
+}
 
+function deletePost(postKey) {
+    firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).remove().then(function(){
+      document.location.reload(true);
+    }).catch(function(error){
+      console.log('Delete Failed');
+    });
+}
 
 $(window).load(function () {
   $("#postForm").submit(submitPost);
 }, getPost(document.getElementById("pageTitle").innerText));
-
-
-
