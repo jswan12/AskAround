@@ -1,3 +1,5 @@
+
+
 $(window).on("load", function() {
     "use strict";
 
@@ -23,7 +25,8 @@ $(window).on("load", function() {
         $(".wrapper").addClass("overlay");
         return false;
     });
-    $(".post-project > a").on("click", function(){
+
+    $(".close-question").on("click", function(){
         $(".post-popup.job_post").removeClass("active");
         $(".wrapper").removeClass("overlay");
         return false;
@@ -180,6 +183,7 @@ $(window).on("load", function() {
         $(".wrapper").addClass("overlay");
         return false;
     });
+    
     $(".close-box").on("click", function(){
         $("#question-box").removeClass("open");
         $(".wrapper").removeClass("overlay");

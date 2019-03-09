@@ -1,0 +1,22 @@
+<script>
+var config = {
+	apiKey: "AIzaSyCpwgCgLOfU9l27TvFGVYkFQdeyJJnB-ck",
+	authDomain: "askaround-01.firebaseapp.com",
+	databaseURL: "https://askaround-01.firebaseio.com",
+	projectId: "askaround-01",
+	storageBucket: "https://askaround-01.firebaseapp.com/",
+	messagingSenderId: "527860430663"
+};
+
+firebase.initializeApp(config);
+const auth=firebase.auth();
+const db=firebase.database();
+
+var user = firebase.auth().onAuthStateChanged(function(user) {
+	if (user) {
+	//blank if correct login
+	} else {
+		window.location.href = 'askaround-01.firebaseapp.com/index.html'; 
+	}
+});
+</script>
