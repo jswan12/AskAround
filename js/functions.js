@@ -52,7 +52,8 @@ var submitPost = function () {
       "question": question,
       "description": description,
       "bounty": bounty,
-      "category": category
+      "category": category,
+      "visibility": 'visible'
     });
 
   console.log("I just posted");
@@ -119,70 +120,87 @@ function getPost(sub) {
       var description = childData.description;
       var bounty = childData.bounty;
       var category = childData.category;//may not be used
+      var visibility = childData.visibility;
       var displayName = childData.displayName;
       var myUid = childData.uid;  
 
-      var html = [
-        '<div class="post_topbar">',
-        '<div class="usy-dt">',
+      if(visibility == 'visible'){
+        var html = [
+          '<div class="post_topbar">',
+          '<div class="usy-dt">',
 
-        '<div class="usy-name">',
-        '<h3>',
-        displayName + ' ----- ' + myUid,
-        //'getName(uid)',
-        '</h3>',
-        '<span>$',
-        bounty,
-        '</span>',
-        '</div>',
-        '</div>',
-        '<div class="ed-opts">',
-        '<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>',
-        '<input id="button',
-        postID,
-        '" type="button" value="Claim Bounty" onclick="openChatPage(\'',
-        postID,
-        '\');" style="float:right; background-color: green; color: white; height: 25px; width: 100px; border: none;"></input>',
-        '<ul class="ed-options">',
-        '<li><a href="#" title="">Edit Post</a></li>',
-        '<li><a href="#" title="">Unsaved</a></li>',
-        '<li><a href="#" title="">Unbid</a></li>',
-        '<li><a href="#" title="">Close</a></li>',
-        '<li><a href="#" title="">Hide</a></li>',
-        '</ul>',
-        '</div>',
-        '</div>',
+          '<div class="usy-name">',
+          '<h3>',
+          displayName + ' ----- ' + myUid,
+          //'getName(uid)',
+          '</h3>',
+          '<span>$',
+          bounty,
+          '</span>',
+          '</div>',
+          '</div>',
+          '<div class="ed-opts">',
+          '<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>',
+          '<input id="button',
+          postID,
+          '" type="button" value="Claim Bounty" onclick="openChatPage(\'',
+          postID,
+          '\');" style="float:right; background-color: green; color: white; height: 25px; width: 100px; border: none;"></input>',
+          '<ul class="ed-options">',
+          '<li><a href="#" title="">Edit Post</a></li>',
+          '<li><a href="#" title="">Unsaved</a></li>',
+          '<li><a href="#" title="">Unbid</a></li>',
+          '<li><a href="#" title="">Close</a></li>',
+          '<li><a href="#" title="">Hide</a></li>',
+          '</ul>',
+          '</div>',
+          '</div>',
 
-        '<div class="job_descp">',
-        '<h3>',
-        question,
-        '</h3>',
+          '<div class="job_descp">',
+          '<h3>',
+          question,
+          '</h3>',
 
-        '<p>',
-        description,
-        '</p>',
-        '</div>'
-      ].join('');
-      var div = document.createElement('div');
-      div.setAttribute('class', 'post-bar');
-      div.setAttribute('id', postID);
-      div.innerHTML = html;
-      document.getElementById('posts-section').appendChild(div);
+          '<p>',
+          description,
+          '</p>',
+          '</div>'
+        ].join('');
+        var div = document.createElement('div');
+        div.setAttribute('class', 'post-bar');
+        div.setAttribute('id', postID);
+        div.innerHTML = html;
+        document.getElementById('posts-section').appendChild(div);
+      }
+      /* MAKE SURE TO TAKE THIS LOG OUT LATER*/
+      else{console.log("hidding post " + postID);}
     });
   });
 }
 
-function openChatPage(postBtn) {
-  document.getElementById('button' + postBtn).style.visibility = 'hidden';
-  window.open("chat.html");
+function openChatPage(postKey) {
+  firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).once('value',
+    function(data){
+      var visibility = data.val().visibility;
+      visibility = 'hidden';
+      firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).update({visibility});
+      window.open("chat.html");
+      document.location.reload(true);
+    }, function (err) { 
+      console.log("Could not set post " + postKey + " to hidden."); 
+    }
+  );
 }
 
 function deletePost(postKey) {
-    firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).remove().then(function(){
-      document.location.reload(true);
-    }).catch(function(error){
-      console.log('Delete Failed');
-    });
+    if(confirm("Are you sure you want to delete post " + postKey + "?")){
+      firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).remove().then(function(){
+        document.location.reload(true);
+      }).catch(function(error){
+        console.log('Delete Failed');
+      });
+    }
+    console.log("Deletion Canceled");
 }
 
 $(window).load(function () {

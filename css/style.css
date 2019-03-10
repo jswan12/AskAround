@@ -391,7 +391,8 @@ nav ul ul li {
 	padding: 0 20px;
 }
 nav ul ul li a:hover {
-	color: #3b1c5a;
+	color: #3C1A5B;
+	text-decoration: underline;
 }
 nav ul ul li a {
 	font-size: 16px;
