@@ -169,11 +169,11 @@
 	.save-stngs ul li:last-child {margin-bottom: 0;}
 	.notification-info {width: 100%;padding: 0;margin-top: 15px;}
 	.notification-info h3 {line-height: 18px;}
-	.conversation-box {width: 100%;right: 0;}
+
 	.user-account-settingss {right: auto;left: 0;}
 	.login-resources {text-align: left;}
 	.forum-bar ul li:last-child {margin-bottom: 0;}
-	.conversation-box {left: -20px;width: 280px;}
+
 }
 
 @media (max-width: 410px) {
