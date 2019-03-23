@@ -110,7 +110,14 @@
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.1/firebaseui.js"></script>
 
     <script>
-      Stripe.setPublishableKey( pk_test_Q5ThBKpfol6VEp6vpjnxBywu00kkFXE6o8 );
+      firebase.initializeApp({
+        apiKey: "AIzaSyCpwgCgLOfU9l27TvFGVYkFQdeyJJnB-ck",
+        authDomain: "askaround-01.firebaseapp.com",
+        databaseURL: "https://askaround-01.firebaseio.com/",
+        storageBucket: "askaround-01.appspot.com/",
+        messagingSenderId: "527860430663"
+      });
+      Stripe.setPublishableKey( 'pk_test_Q5ThBKpfol6VEp6vpjnxBywu00kkFXE6o8' );
       var firebaseUI = new firebaseui.auth.AuthUI(firebase.auth());
       var firebaseAuthOptions = {
         callbacks: {
