@@ -10,15 +10,25 @@ var config = {
 
 firebase.initializeApp(config);
 
+firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
+
 var dataBase = firebase.database();
 var uid = null;
 var displayName = null;
+
+var curChatA;
+
 // Save a new post to the database, using the input in the form
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     uid = firebase.auth().currentUser.uid;
     displayName = firebase.auth().currentUser.displayName;
     getRank();
+
+    firebase.database().ref('Users/' + user.uid).once('value', function(data){
+      curChatA = data.val().curChat;
+      console.log(curChatA);
+    });
   }
   else {
     uid = null;
@@ -30,11 +40,13 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 
 
-
 var submitPost = function () {
-
-
-  // Get input values from each of the form elements
+  if(curChatA == 'null'){
+    ///channel update
+    var curChat = uid;
+    console.log('curChat = '+curChat);
+    firebase.database().ref('Users/' + uid ).update({curChat});
+    ///end of channel update
     var myUid = uid;
     var mydisplayName = displayName;
     var question = document.getElementById('question').value;
@@ -45,7 +57,6 @@ var submitPost = function () {
     dataBase = dataBase.ref("Posts/" + category);
     //alert(displayName + "\n" + uid + "\n" + question + "\n" + description + "\n" + bounty + "\n" + category);
     // Push a new post to the database using those values
-  
     dataBase.push({
       "uid": myUid,
       "displayName": displayName,
@@ -55,12 +66,13 @@ var submitPost = function () {
       "category": category,
       "visibility": 'visible'
     });
-
-  console.log("I just posted");
-  
-
+    console.log("I just posted");
+  }
 
 };
+
+
+
 
 //var count = 0;
 //calling addCount() actually works, but idk how to get it when a post is submited
@@ -72,16 +84,16 @@ firebase.database().ref("Counter/").once('value',
       document.getElementById('notification').innerText = "Notification " + postCount;
       console.log(postCount);
       firebase.database().ref('Counter/').update({postCount});
-      
-    }, function (err) { 
-      console.log("notificaion is not working: " + error); 
+
+    }, function (err) {
+      console.log("notificaion is not working: " + error);
     }
   );
 }
 
 //   function getName(aUID){
 //   // return name based on a UID input
-//   var currUser = firebase.database().ref("Users/" + aUID).once('value', 
+//   var currUser = firebase.database().ref("Users/" + aUID).once('value',
 //   function(data){
 //     document.getElementById('userName').innerText = data.val().Name;
 //   }, function(error){ console.log(error); }
@@ -89,7 +101,7 @@ firebase.database().ref("Counter/").once('value',
 // }
 
 function getRank() {
-  // return rank 
+  // return rank
   var currUser = firebase.database().ref("Users/" + uid).once('value',
     function (data) {
       document.getElementById('userRank').innerText = data.val().Rank;
@@ -122,7 +134,7 @@ function getPost(sub) {
       var category = childData.category;//may not be used
       var visibility = childData.visibility;
       var displayName = childData.displayName;
-      var myUid = childData.uid;  
+      var myUid = childData.uid;
 
       if(visibility == 'visible'){
         var html = [
@@ -164,7 +176,8 @@ function getPost(sub) {
           '<p>',
           description,
           '</p>',
-          '</div>'
+          '</div>',
+          '<script></script>'
         ].join('');
         var div = document.createElement('div');
         div.setAttribute('class', 'post-bar');
@@ -178,19 +191,41 @@ function getPost(sub) {
   });
 }
 
+
+
+
 function openChatPage(postKey) {
-  firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).once('value',
-    function(data){
-      var visibility = data.val().visibility;
-      visibility = 'hidden';
-      firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).update({visibility});
-      window.open("chat.html");
-      document.location.reload(true);
-    }, function (err) { 
-      console.log("Could not set post " + postKey + " to hidden."); 
+  var chan;
+  firebase.database().ref('Users/' + uid).on('value', function(data){
+    //console.log(data.val().curChat)
+    if(data.val().curChat == "null"){
+      console.log('hello');
+      firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).once('value',
+        function(data){
+          var visibility = data.val().visibility;
+          visibility = 'hidden';
+          ///channel update
+          chan = data.val().uid;
+          var curChat = chan;
+          firebase.database().ref('Users/' + uid ).update({curChat});
+          ///end of channel update
+          console.log('chan = '+chan);
+          firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).update({visibility});
+          window.open("chat.html");
+          document.location.reload(true);
+        }, function (err) {
+          console.log("Could not set post " + postKey + " to hidden.");
+        }
+      );
     }
-  );
+    /*else{
+      console.log(data.val().curChat);
+    }*/
+  });
 }
+
+
+
 
 function deletePost(postKey) {
     if(confirm("Are you sure you want to delete post " + postKey + "?")){
@@ -202,6 +237,9 @@ function deletePost(postKey) {
     }
     console.log("Deletion Canceled");
 }
+
+
+
 
 $(window).load(function () {
   $("#postForm").submit(submitPost);

@@ -85,25 +85,56 @@
 </ul>
 
   <script>
+
     //get data from the html and create some needed variables
     var conMe = document.getElementById('me');
     var conYou = document.getElementById('you');
     var line = '';
     var btn = document.getElementById("mybutton");
     var download = document.getElementById("downLog");
-    var chan  = "a";
+    var chan  = "";
     var messA = document.getElementById("message").value;
     var name;
-    //firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
+    var chatRef; // = firebase.database().ref('chats/'+chan+'/txts');
+    firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
     firebase.auth().onAuthStateChanged(function(user){
      if(user){
 		   name = user.email;
-       conMe.appendChild(document.createTextNode(user.uid));
-       firebase.database().ref('chats/'+chan+'/connections').push(user.uid);
-		 }
-	 });
-    var txtBox = document.getElementById("txtBox");
+       firebase.database().ref('Users/' + user.uid).once('value', function(data){
+         data = data.val().curChat;
+         console.log(data);
+         chan = data;
+         chatRef = firebase.database().ref('chats/'+chan+'/txts');
 
+         //if a new message is added to the db then this event will grab it from the db and add it to the screen
+         chatRef.on('child_added', function(msg){
+           var mess = JSON.stringify(msg);
+           mess = mess.slice(1,mess.length-1);
+           var messLi = document.createElement("LI");
+           var messTxt= document.createTextNode(mess);
+           messLi.appendChild(messTxt);
+           document.getElementById("txtBox").appendChild(messLi);
+           line = line +(mess+ "\n");
+           txtBox.scrollTop = txtBox.scrollHeight;
+         });
+         window.onbeforeunload = function(){
+           curChat = 'null';
+           firebase.database().ref('Users/' +  user.uid ).update({curChat});
+         };
+         //if there is an update on the connections list then grab the new connection
+/*         firebase.database().ref('chats/'+chan+'/connections').on("child_added", function(per){
+           var s = JSON.stringify(per);
+           s = s.slice(1,s.length-1);
+           //console.log(s);
+           if(document.getElementById("me").textContent != s){
+             document.getElementById("you").textContent = s;
+           }
+         });*/
+       });
+       conMe.appendChild(document.createTextNode(user.uid));
+		 }
+	  });
+    var txtBox = document.getElementById("txtBox");
 
     //when the user adds a message send it to the db
     btn.addEventListener("click", function(){
@@ -112,19 +143,8 @@
       firebase.database().ref('chats/'+chan+'/txts').push(messJ);
       document.getElementById("message").value = '';
     });
-    var chatRef = firebase.database().ref('chats/' + chan + '/txts');
 
-    //if a new message is added to the db then this event will grab it from the db and add it to the screen
-    chatRef.on('child_added', function(msg){
-      var mess = JSON.stringify(msg);
-      mess = mess.slice(1,mess.length-1);
-      var messLi = document.createElement("LI");
-      var messTxt= document.createTextNode(mess);
-      messLi.appendChild(messTxt);
-      document.getElementById("txtBox").appendChild(messLi);
-      line = line +(mess+ "\n");
-      txtBox.scrollTop = txtBox.scrollHeight;
-    });
+
     //create text file of log for user to keep
     //new line is curretnly not working but this is not an easy feature
     download.addEventListener("click", function(){
@@ -136,16 +156,6 @@
       var blob = new Blob([line], {type: "text/plain;charset=utf-8"});
       var downloadUrl = URL.createObjectURL(blob);
       this.setAttribute("href", downloadUrl);
-    });
-
-    //if there is an update on the connections list then grab the new connection
-    firebase.database().ref('chats/'+chan+'/connections').on("child_added", function(per){
-      var s = JSON.stringify(per);
-      s = s.slice(1,s.length-1);
-      //console.log(s);
-      if(document.getElementById("me").textContent != s){
-        document.getElementById("you").textContent = s;
-      }
     });
 
 
@@ -168,6 +178,10 @@
           console.log(Rank);
           firebase.database().ref('Users/' + them ).update({Rank});
         });
+
+        //prepare to delete the conversation when it is finished
+        //
+
       }
       //if downvote
       if(val ===0){
@@ -179,10 +193,12 @@
           console.log(Rank);
           firebase.database().ref('Users/' + them ).update({Rank});
         });
+
+        //prepare to keep the conversation for review
+        //
+
       }
     }
-
-
   </script>
 
   </body>
