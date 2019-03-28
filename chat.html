@@ -96,7 +96,7 @@
     var messA = document.getElementById("message").value;
     var name;
     var chatRef; // = firebase.database().ref('chats/'+chan+'/txts');
-    firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
+    //firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
     firebase.auth().onAuthStateChanged(function(user){
      if(user){
 		   name = user.email;

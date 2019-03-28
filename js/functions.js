@@ -10,7 +10,7 @@ var config = {
 
 firebase.initializeApp(config);
 
-firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
+//firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
 
 var dataBase = firebase.database();
 var uid = null;
