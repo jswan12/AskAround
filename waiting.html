@@ -50,10 +50,15 @@
       if(user){
         var cancel = document.getElementById("cancel");
         cancel.addEventListener("click", function(){
-          
+          var visibility = "hidden";
+          firebase.database().ref('Posts/'+  ).update({visibility});
 
           var curChat = 'null';
+          var id  = 'null';
+          var type= 'null';
           firebase.database().ref('Users/' +  user.uid ).update({curChat});
+          firebase.database().ref('Users/' +  user.uid + '/curPost').update({id});
+          firebase.database().ref('Users/' +  user.uid + '/curPost').update({type});
 
         });
       }
