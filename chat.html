@@ -100,7 +100,7 @@
     //firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
     firebase.auth().onAuthStateChanged(function(user){
      if(user){
-		   name = user.userName;
+		   name = user.displayName;
        firebase.database().ref('Users/' + user.uid).once('value', function(data){
          chan = data.val().curChat;//////////data to chan
          //console.log(data);
