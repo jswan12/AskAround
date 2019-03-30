@@ -79,3 +79,7 @@ function getNotification(sub) {
     });
   });
 }
+
+$(window).load(function () {
+  $("#postForm").submit(submitPost);
+}, getPost(document.getElementById("nott-list").innerText));
