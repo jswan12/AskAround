@@ -31,8 +31,8 @@
     <script src="https://checkout.stripe.com/checkout.js"></script>
 
     <script>
-        const STRIPE_PUBLIC_KEY = 'YOUR_PUBLIC_KEY'; // TODO: PUT YOUR STRIPE PUBLISHABLE KEY HERE
-        const FIREBASE_FUNCTION = 'https://[YOUR_FIREBASE_PROJECT].cloudfunctions.net/charge/'; // TODO: PUT YOUR FIREBASE FUNCTIONS URL HERE
+        const STRIPE_PUBLIC_KEY = 'pk_test_Q5ThBKpfol6VEp6vpjnxBywu00kkFXE6o8'; // TODO: PUT YOUR STRIPE PUBLISHABLE KEY HERE
+        const FIREBASE_FUNCTION = 'https://askaround-01.cloudfunctions.net/charge/'; // TODO: PUT YOUR FIREBASE FUNCTIONS URL HERE
         const stripe = Stripe(STRIPE_PUBLIC_KEY);
         const elements = stripe.elements();
         const charge_amount = 500;
