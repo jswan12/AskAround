@@ -121,7 +121,7 @@
 								<li><a href="#" title="">Faqs</a></li>
 								<li><a href="#" title="">Terms & Conditions</a></li>
 							</ul>
-							<h3 class="tc"><a href="index.html" title="">Logout</a></h3>
+							<h3 class="tc"><a href="index.html" onclick="logOut();" title="">Logout</a></h3>
 						</div>
 
 					</div>
@@ -250,15 +250,22 @@
 
 <script>
 	/***********************************************************************
-	 * Update top left div to display current user's profile name					 *
+	 * Update top left div to display current user's profile name		   *
 	 * Update top right drop-down menu to have user's profile name as well *
-	************************************************************************/
+	 ***********************************************************************/
 	firebase.auth().onAuthStateChanged(function (user) {
 		if (user)
 			document.getElementById("usernameID").innerText = firebase.auth().currentUser.displayName, document.getElementById("userName").innerText = firebase.auth().currentUser.displayName;
 		else
 			window.location = "index.html";
 	});
+
+	/***********************************************************************
+	 * Logout the current user											   *
+	 ***********************************************************************/
+	function logOut(){
+		firebase.auth().signOut().then(function() {alert("Logout Successful.")}).catch(function(error){alert("An Error Occured.")});
+	}
 </script>
 
 </body>
