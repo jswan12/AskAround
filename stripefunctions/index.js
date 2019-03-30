@@ -63,6 +63,16 @@ exports.createStripeCustomer = functions.auth.user().onCreate((user) => {
   });
 });
 
+// When a user is created, register them with Stripe(FireStore)
+exports.createStripeCustomer = functions.auth.user()
+	.onCreate(async (user) => {
+	const customer = await.stripe.customers.create({email: user.email});
+	return admin.firestore()
+		.collection('stripe customers')
+		.doc(user.uid)
+		.set(({customer_id: customer.id});
+});
+
 // Add a payment source (card) for a user by writing a stripe payment source token to Realtime database
 exports.addPaymentSource = functions.database
     .ref('/stripe_customers/{userId}/sources/{pushId}/token').onWrite((change, context) => {

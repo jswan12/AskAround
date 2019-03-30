@@ -193,7 +193,8 @@ function getPost(sub) {
 
 function openChatPage(postKey) {
   var chan;
-  firebase.database().ref('Users/' + uid).on('value', function(data){
+  //if claiming posts is broken chance once to on
+  firebase.database().ref('Users/' + uid).once('value', function(data){
     //console.log(data.val().curChat)
     if(data.val().curChat == "null"){
       console.log('hello');
@@ -232,6 +233,47 @@ function deletePost(postKey) {
     console.log("Deletion Canceled");
 }
 
+
+//get notifications function
+function getNotification(sub) {
+
+  console.log("some text here 1");
+  dataBase.ref("Posts/" + sub).once('value', function (data) {
+    data.forEach(function (childSnapshot) {
+      var childData = childSnapshot.val();
+      var postID = childSnapshot.key;
+      var question = childData.question;
+      var description = childData.description;
+      var bounty = childData.bounty;
+      var category = childData.category;//may not be used
+      var visibility = childData.visibility;
+      var displayName = childData.displayName;
+
+      console.log("ive made it here you dumbfuck");
+
+      if(visibility == 'visible'){
+        console.log(question + "is the question");
+        var html = [
+            '<div class="notification-info">',
+              '<h3><a href="#" title="">', displayName, '</a></h3>',
+							'<p>',question,'</p>',
+							'<span>2 min ago</span>',
+            '</div>',
+        ].join('');
+        console.log('some text here');
+        var div = document.createElement('div');
+        div.setAttribute('class', 'notification-details');
+        div.innerHTML = html;
+        document.querySelector('.nott-list').appendChild(div);
+      }
+     
+    });
+  });
+}
+
+getNotification('Mathematics');
+
 $(window).load(function () {
   $("#postForm").submit(submitPost);
 }, getPost(document.getElementById("pageTitle").innerText));
+
