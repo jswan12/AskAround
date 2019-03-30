@@ -234,6 +234,22 @@ function deletePost(postKey) {
 }
 
 
+//send email
+function sendEmail(user) {
+  // 5. Send welcome email to new users
+  const mailOptions = {
+          from: '"Dave" <dave@example.net>',
+          to: '${user.email}',
+          subject: 'Welcome!',
+          html: `<YOUR-WELCOME-MESSAGE-HERE>`
+  }
+  // 6. Process the sending of this email via nodemailer
+  return mailTransport.sendMail(mailOptions)
+          .then(() => console.log('dbCompaniesOnUpdate:Welcome confirmation email'))
+          .catch((error) => console.error('There was an error while sending the email:', error))
+}
+
+
 //get notifications function
 function getNotification(sub) {
 
