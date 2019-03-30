@@ -1,135 +1,81 @@
+
+// Initialize Firebase
 var config = {
-    apiKey: "AIzaSyCpwgCgLOfU9l27TvFGVYkFQdeyJJnB-ck",
-    authDomain: "askaround-01.firebaseapp.com",
-    databaseURL: "https://askaround-01.firebaseio.com/",
-    projectId: "askaround-01",
-    storageBucket: "askaround-01.appspot.com",
-    messagingSenderId: "527860430663"
-  };
-  
-  firebase.initializeApp(config);
-  
-//firebase notifications
-const messaging = firebase.messaging();
+  apiKey: "AIzaSyCpwgCgLOfU9l27TvFGVYkFQdeyJJnB-ck",
+  authDomain: "askaround-01.firebaseapp.com",
+  databaseURL: "https://askaround-01.firebaseio.com/",
+  projectId: "askaround-01",
+  storageBucket: "askaround-01.appspot.com",
+  messagingSenderId: "527860430663"
+};
 
-//configure web credentials
-messaging.usePublicVapidKey("BHDJhQ4VQjqBLCp96vZ4jgE9GWamgjBuPsHvAK8_FtqTN6CJYoKg0oBi-zSnTlprosTvoekancmKv4F-JXzD_3U");
+firebase.initializeApp(config);
 
 
-//[START refresh_token]
-//Callback fired if Instance ID token is updated.
-messaging.onTokenRefresh(function(){
-  messaging.getToken().then(function(refreshedToken){
-    console.log("Token refreshed.");
-    setTokenSentToServer(false);
-    sendTokenToServer(refreshedToken);
-    resetUI();
-  }).catch(function(err){
-    console.log('Unable to retrieve refreshed token' , err);
-    showToken('Unable to retrieve refreshed token ', err);
-  });
-});
+function getNotification(sub) {
+  dataBase.ref("Posts/" + sub).once('value', function (data) {
+    data.forEach(function (childSnapshot) {
+      var childData = childSnapshot.val();
+      var postID = childSnapshot.key;
+      var question = childData.question;
+      var description = childData.description;
+      var bounty = childData.bounty;
+      var category = childData.category;//may not be used
+      var visibility = childData.visibility;
+      var displayName = childData.displayName;
+      var myUid = childData.uid;
 
-//[START receive_message]
-messaging.onMessage(function(payload) {
-  console.log('Message received. ', payload);
-  // [START_EXCLUDE]
-  // Update the UI to include the received message.
-  appendMessage(payload);
-  // [END_EXCLUDE]
-});
-// [END receive_message]
+      if(visibility == 'visible'){
+        var html = [
+          '<div class="post_topbar">',
+          '<div class="usy-dt">',
 
-function resetUI() {
-  showToken('loading...');
-  // [START get_token]
-  // Get Instance ID token. Initially this makes a network call, once retrieved
-  // subsequent calls to getToken will return from cache.
-  messaging.getToken().then(function(currentToken) {
-    if (currentToken) {
-      sendTokenToServer(currentToken);
-      updateUIForPushEnabled(currentToken);
-    } else {
-      // Show permission request.
-      console.log('No Instance ID token available. Request permission to generate one.');
-      // Show permission UI.
-      updateUIForPushPermissionRequired();
-      setTokenSentToServer(false);
-    }
-  }).catch(function(err) {
-    console.log('An error occurred while retrieving token. ', err);
-    showToken('Error retrieving Instance ID token. ', err);
-    setTokenSentToServer(false);
-  });
-  // [END get_token]
-}
+          '<div class="usy-name">',
+          '<h3>',
+          displayName + ' ----- ' + myUid,
+          //'getName(uid)',
+          '</h3>',
+          '<span>$',
+          bounty,
+          '</span>',
+          '</div>',
+          '</div>',
+          '<div class="ed-opts">',
+          '<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>',
+          '<input id="button',
+          postID,
+          '" type="button" value="Claim Bounty" onclick="openChatPage(\'',
+          postID,
+          '\');" style="float:right; background-color: green; color: white; height: 25px; width: 100px; border: none;"></input>',
+          '<ul class="ed-options">',
+          '<li><a href="#" title="">Edit Post</a></li>',
+          '<li><a href="#" title="">Unsaved</a></li>',
+          '<li><a href="#" title="">Unbid</a></li>',
+          '<li><a href="#" title="">Close</a></li>',
+          '<li><a href="#" title="">Hide</a></li>',
+          '</ul>',
+          '</div>',
+          '</div>',
 
-function showToken(currentToken) {
-  // Show token in console and UI.
-  var tokenElement = document.querySelector('#token');
-  tokenElement.textContent = currentToken;
-}
+          '<div class="job_descp">',
+          '<h3>',
+          question,
+          '</h3>',
 
-  // Send the Instance ID token your application server, so that it can:
-  // - send messages back to this app
-  // - subscribe/unsubscribe the token from topics
-function sendTokenToServer(currentToken) {
-  if (!isTokenSentToServer()) {
-    console.log('Sending token to server...');
-    // TODO(developer): Send the current token to your server.
-    setTokenSentToServer(true);
-  } else {
-    console.log('Token already sent to server so won\'t send it again ' +
-        'unless it changes');
-  }
-}
-
-function isTokenSentToServer() {
-  return window.localStorage.getItem('sentToServer') === '1';
-}
-function setTokenSentToServer(sent) {
-  window.localStorage.setItem('sentToServer', sent ? '1' : '0');
-}
-
-
-
-function requestPermission() {
-  console.log('Requesting permission...');
-  // [START request_permission]
-  messaging.requestPermission().then(function() {
-    console.log('Notification permission granted.');
-    // TODO(developer): Retrieve an Instance ID token for use with FCM.
-    // [START_EXCLUDE]
-    // In many cases once an app has been granted notification permission, it
-    // should update its UI reflecting this.
-    resetUI();
-    // [END_EXCLUDE]
-  }).catch(function(err) {
-    console.log('Unable to get permission to notify.', err);
-  });
-  // [END request_permission]
-}
-
-function deleteToken() {
-  // Delete Instance ID token.
-  // [START delete_token]
-  messaging.getToken().then(function(currentToken) {
-    messaging.deleteToken(currentToken).then(function() {
-      console.log('Token deleted.');
-      setTokenSentToServer(false);
-      // [START_EXCLUDE]
-      // Once token is deleted update UI.
-      resetUI();
-      // [END_EXCLUDE]
-    }).catch(function(err) {
-      console.log('Unable to delete token. ', err);
+          '<p>',
+          description,
+          '</p>',
+          '</div>',
+          '<script></script>'
+        ].join('');
+        var div = document.createElement('div');
+        div.setAttribute('class', 'post-bar');
+        div.setAttribute('id', postID);
+        div.innerHTML = html;
+        document.getElementById('posts-section').appendChild(div);
+      }
+      /* MAKE SURE TO TAKE THIS LOG OUT LATER*/
+      else{console.log("hidding post " + postID);}
     });
-    // [END delete_token]
-  }).catch(function(err) {
-    console.log('Error retrieving Instance ID token. ', err);
-    showToken('Error retrieving Instance ID token. ', err);
   });
 }
-
-
-resetUI();
