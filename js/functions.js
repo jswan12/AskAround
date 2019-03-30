@@ -36,10 +36,6 @@ firebase.auth().onAuthStateChanged(function (user) {
   }
 });
 
-
-
-
-
 var submitPost = function () {
   if(curChatA == 'null'){
     ///channel update
@@ -52,10 +48,10 @@ var submitPost = function () {
     var question = document.getElementById('question').value;
     var description = document.getElementById('description').value;
     var bounty = document.getElementById('price').value;
+    //category variable may not be used
     var category = document.getElementById('category').value;
     // Reference to the post object in Firebase database
     dataBase = dataBase.ref("Posts/" + category);
-    //alert(displayName + "\n" + uid + "\n" + question + "\n" + description + "\n" + bounty + "\n" + category);
     // Push a new post to the database using those values
     dataBase.push({
       "uid": myUid,
@@ -67,8 +63,11 @@ var submitPost = function () {
       "visibility": 'visible'
     });
     console.log("I just posted");
+    window.open("waiting.html");
   }
-
+  else{
+    alert("You can only have one post at a time. Sorry.");
+  }
 };
 
 
@@ -131,7 +130,8 @@ function getPost(sub) {
       var question = childData.question;
       var description = childData.description;
       var bounty = childData.bounty;
-      var category = childData.category;//may not be used
+      //category variable may not be used
+      var category = childData.category;
       var visibility = childData.visibility;
       var displayName = childData.displayName;
       var myUid = childData.uid;
@@ -191,9 +191,6 @@ function getPost(sub) {
   });
 }
 
-
-
-
 function openChatPage(postKey) {
   var chan;
   firebase.database().ref('Users/' + uid).on('value', function(data){
@@ -224,9 +221,6 @@ function openChatPage(postKey) {
   });
 }
 
-
-
-
 function deletePost(postKey) {
     if(confirm("Are you sure you want to delete post " + postKey + "?")){
       firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).remove().then(function(){
@@ -237,9 +231,6 @@ function deletePost(postKey) {
     }
     console.log("Deletion Canceled");
 }
-
-
-
 
 $(window).load(function () {
   $("#postForm").submit(submitPost);
