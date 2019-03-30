@@ -8,6 +8,18 @@ var config = {
     messagingSenderId: "527860430663"
   };
   
-  firebase.initializeApp(config);
+firebase.initializeApp(config);
 
-  var dataBase = firebase.database();
+var dataBase = firebase.database();
+
+
+function pushNewUser(aUID, aName) {
+    dataBase = dataBase.ref("Users/" + aUID);
+    dataBase.push({
+        "displayName": aName,
+        "Rank": 0,
+        "curChat": null,
+        "curPostId": null,
+        "curPostType": null,
+      });
+}
