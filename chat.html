@@ -99,7 +99,7 @@
     //firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
     firebase.auth().onAuthStateChanged(function(user){
      if(user){
-		   name = user.email;
+		   name = user.userName;
        firebase.database().ref('Users/' + user.uid).once('value', function(data){
          data = data.val().curChat;
          console.log(data);
@@ -129,7 +129,7 @@
 	  });
 
     function intro(uname){
-      document.getElementById("message").value = 'Hello I am: ' + uname;
+      document.getElementById("message").value = ' has joined';
       setTimeout(second(),3000);
     }
     function second(){

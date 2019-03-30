@@ -193,7 +193,8 @@ function getPost(sub) {
 
 function openChatPage(postKey) {
   var chan;
-  firebase.database().ref('Users/' + uid).on('value', function(data){
+  //if claiming posts is broken chance once to on
+  firebase.database().ref('Users/' + uid).once('value', function(data){
     //console.log(data.val().curChat)
     if(data.val().curChat == "null"){
       console.log('hello');
