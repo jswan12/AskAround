@@ -136,9 +136,6 @@
          });
 
          window.onbeforeunload = function(){
-           if(poster || !voted){
-             window.open("voting.html");
-           }
            var curChat = 'null';
            var conWith = 'null';
            firebase.database().ref('Users/' +  user.uid ).update({curChat});
