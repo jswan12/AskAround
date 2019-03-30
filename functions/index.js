@@ -39,10 +39,8 @@ exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
 
 exports.createUser = functions.auth.user().onCreate(event => {
   const user = event.data;
-  var userObject = {
-    aName : user.displayName,
-    aUID : user.uid,
-  };
+  var aName = user.displayName,
+  var aUID = user.uid,
   dataBase = firebase.database().ref("Users/" + aUID);
     dataBase.set({
       "Name": aName,
