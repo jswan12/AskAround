@@ -20,7 +20,7 @@
         width:50%;
         height:100px;
         color:rgb(62,31,88);
-
+        font-size:xx-large;
       }
     </style>
     <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
@@ -45,25 +45,36 @@
     </div>
     <script type="text/javascript">
 
-    firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
-    firebase.auth().onAuthStateChanged(function(user){
-      if(user){
-        var cancel = document.getElementById("cancel");
-        cancel.addEventListener("click", function(){
-          var visibility = "hidden";
-          firebase.database().ref('Posts/'+  ).update({visibility});
+      //firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
+      firebase.auth().onAuthStateChanged(function(user){
+        if(user){
+          var cancel = document.getElementById("cancel");
 
-          var curChat = 'null';
-          var id  = 'null';
-          var type= 'null';
-          firebase.database().ref('Users/' +  user.uid ).update({curChat});
-          firebase.database().ref('Users/' +  user.uid + '/curPost').update({id});
-          firebase.database().ref('Users/' +  user.uid + '/curPost').update({type});
 
-        });
-      }
-    });
+          firebase.database().ref('chats/'+ user.uid +'/txts').once('child_added', function(msg){
+            window.open('chat.html');
+            console.log('hello there');
+          });
 
+          cancel.addEventListener("click", function(){
+            var visibility = "hidden";
+            var curChat = 'null';
+            var curPostId  = 'null';
+            var curPostType= 'null';
+            firebase.database().ref('Users/' + user.uid).once('value', function(data){
+              var id = data.val().curPostId;
+              var type=data.val().curPostType;
+              console.log(id);
+              console.log(type);
+              firebase.database().ref('Posts/' + type + '/' + id ).update({visibility});
+              firebase.database().ref('Users/' + user.uid ).update({curChat});
+              firebase.database().ref('Users/' + user.uid ).update({curPostId});
+              firebase.database().ref('Users/' + user.uid ).update({curPostType});
+
+            });
+          });
+        }
+      });
     </script>
   </body>
 </html>

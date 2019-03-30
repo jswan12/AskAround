@@ -117,23 +117,25 @@
            line = line +(mess+ "\n");
            txtBox.scrollTop = txtBox.scrollHeight;
          });
+
          window.onbeforeunload = function(){
            curChat = 'null';
            firebase.database().ref('Users/' +  user.uid ).update({curChat});
          };
-         //if there is an update on the connections list then grab the new connection
-/*         firebase.database().ref('chats/'+chan+'/connections').on("child_added", function(per){
-           var s = JSON.stringify(per);
-           s = s.slice(1,s.length-1);
-           //console.log(s);
-           if(document.getElementById("me").textContent != s){
-             document.getElementById("you").textContent = s;
-           }
-         });*/
+         intro(user.userName);
        });
        conMe.appendChild(document.createTextNode(user.uid));
 		 }
 	  });
+
+    function intro(uname){
+      document.getElementById("message").value = 'Hello I am: ' + uname;
+      setTimeout(second(),3000);
+    }
+    function second(){
+      btn.click();
+    }
+
     var txtBox = document.getElementById("txtBox");
 
     //when the user adds a message send it to the db
@@ -143,6 +145,7 @@
       firebase.database().ref('chats/'+chan+'/txts').push(messJ);
       document.getElementById("message").value = '';
     });
+
 
 
     //create text file of log for user to keep
@@ -199,6 +202,7 @@
 
       }
     }
+
   </script>
 
   </body>
