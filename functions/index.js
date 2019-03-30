@@ -37,11 +37,10 @@ exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
       return snapshot.ref.parent.child('uppercase').set(uppercase);
     });
 
-exports.createUser = functions.auth.user().onCreate(event => {
-  const user = event.data;
-  admin.database().ref("Users/" + user.uid).set({
-      "Name": "tester", // user.displayName,
-      "Rank": 123, // 0,
+exports.createUser = functions.auth.user().onCreate(function(user, context) {
+  return admin.database().ref("Users/" + user.uid).set({
+      "Name": user.displayName,
+      "Rank": 0,
       "curChat": "null",
       "curPostId": "null",
       "curPostType": "null",
