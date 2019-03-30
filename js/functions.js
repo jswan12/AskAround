@@ -252,6 +252,7 @@ function getNotification(sub) {
       console.log("ive made it here you dumbfuck");
 
       if(visibility == 'visible'){
+        console.log(question + "is the question");
         var html = [
             '<div class="notification-info">',
               '<h3><a href="#" title="">', displayName, '</a></h3>',
@@ -263,14 +264,14 @@ function getNotification(sub) {
         var div = document.createElement('div');
         div.setAttribute('class', 'notification-details');
         div.innerHTML = html;
-        document.getElementById('nott-list').appendChild(div);
+        document.querySelector('.nott-list').appendChild(div);
       }
      
     });
   });
 }
 
-getNotification(document.getElementById("subjectTitle").innerText);
+getNotification('Mathematics');
 
 $(window).load(function () {
   $("#postForm").submit(submitPost);
