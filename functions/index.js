@@ -36,3 +36,11 @@ exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
       // Setting an "uppercase" sibling in the Realtime Database returns a Promise.
       return snapshot.ref.parent.child('uppercase').set(uppercase);
     });
+
+// exports.createUser = functions.auth.user().onCreate(event => {
+//   const user = event.data;
+//   var userObject = {
+//     displayName : user.displayName,
+//     uid : user.uid,
+//   };
+// });
