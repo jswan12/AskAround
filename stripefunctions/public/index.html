@@ -16,12 +16,12 @@
             <div id="card-element">
                 <!-- Stripe card inputs get injected here -->
             </div>
-            <button type="submit">Donate $5 USD</button>
+            <button type="submit">Donate $3.50 USD</button>
             <div id="error" style="color: #e25950;"></div>
         </form>
 
-        <div id="processing" style="display: none;">processing...</div>
-        <div id="thanks" style="display: none;">Thanks for your donation!</div>
+        <div id="processing" style="display: none;">The Loch Ness Monster is processing...</div>
+        <div id="thanks" style="display: none;">The Loch Ness Monster thanks for your donation!</div>
     </div>
 
     <!-- This script used for the Payment Request and Card Element methods -->
@@ -35,7 +35,7 @@
         const FIREBASE_FUNCTION = 'https://askaround-01.cloudfunctions.net/charge/'; // TODO: PUT YOUR FIREBASE FUNCTIONS URL HERE
         const stripe = Stripe(STRIPE_PUBLIC_KEY);
         const elements = stripe.elements();
-        const charge_amount = 500;
+        const charge_amount = 350;
         const charge_currency = 'usd';
         // Store the elements used
         const elForm = document.getElementById('form');
@@ -138,7 +138,7 @@
             elCheckout.addEventListener('click', e => {
                 e.preventDefault();
                 handler.open({
-                    name: 'Firebase Example',
+                    name: 'AskAround Post Question',
                     amount: charge_amount,
                     currency: charge_currency,
                 });
