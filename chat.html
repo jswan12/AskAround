@@ -1,10 +1,12 @@
 <!doctype html>
 <html>
   <head>
+    <link rel="shortcut icon" href="images/favicon - 32px x 32px.png" />
     <meta charset="utf-8">
     <meta http-equiv="cache-control" content="no-cache" />
 		<meta http-equiv="Pragma" content="no-cache" />
 		<meta http-equiv="Expires" content="-1" />
+
     <title>AskAroundChat</title>
     <style>
       .title{
@@ -88,6 +90,7 @@
 
     //get data from the html and create some needed variables
     var line = '';
+    var saveFlag=false;
     var btn = document.getElementById("mybutton");
     var download = document.getElementById("downLog");
     var chan  = "";
@@ -127,6 +130,10 @@
          chatRef.on('child_added', function(msg){
            var mess = JSON.stringify(msg);
            mess = mess.slice(1,mess.length-1);
+           if(mess.indexOf("has left") >= 0){
+             document.getElementById('myMess').removeChild(document.getElementById('message'));
+             document.getElementById('myMess').removeChild(document.getElementById('mybutton'));
+           }
            var messLi = document.createElement("LI");
            var messTxt= document.createTextNode(mess);
            messLi.appendChild(messTxt);
@@ -136,12 +143,37 @@
          });
 
          window.onbeforeunload = function(){
+           intro("left");
+           if(saveFlag === true && poster === true){
+             save();
+           }
+           if(saveFlag === false && poster === true){
+             rem();
+           }
+           del();
+         };
+         function save(){
+           //firebase.database().ref('chats/' + me).once('value', function(data){
+             //var errors = data.val().txts;
+             //var poster = me;
+             //var conWith =
+             //firebase.database().ref('chats/' + me ).update({errors});
+             rem();
+           //});
+         }
+         function rem(){
+           firebase.database().ref("chats/" + me + '/txts').remove();
+         }
+         function del(){
            var curChat = 'null';
            var conWith = 'null';
+           var curPostId  = 'null';
+           var curPostType= 'null';
            firebase.database().ref('Users/' +  user.uid ).update({curChat});
            firebase.database().ref('Users/' +  user.uid ).update({conWith});
-           intro("left");
-         };
+           firebase.database().ref('Users/' +  user.uid ).update({curPostId});
+           firebase.database().ref('Users/' +  user.uid ).update({curPostType});
+         }
 
          intro("joined");
        });
@@ -214,7 +246,7 @@
             firebase.database().ref('Users/' + them ).update({Rank});
           });
         });
-
+        saveFlag = true;
       }
     }
 

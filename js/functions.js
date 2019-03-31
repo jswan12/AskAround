@@ -26,17 +26,13 @@ firebase.auth().onAuthStateChanged(function (user) {
     getRank();
 
     firebase.database().ref('Users/' + user.uid).once('value', function(data){
-      if(data.val().Name != displayName){
-        var Name = displayName;
-        firebase.database().ref('Users/' + uid ).update({Name});
-      }
       curChatA = data.val().curChat;
       console.log(curChatA);
     });
   }
   else {
     uid = null;
-    displayName = 'Anonymous';
+    display = 'anonymous';
   }
 });
 
@@ -44,8 +40,11 @@ var submitPost = function () {
   if(curChatA == 'null'){
     ///channel update
     var curChat = uid;
+    //var curPostId =
+    var curPostType = document.getElementById('category').value;
     console.log('curChat = '+curChat);
     firebase.database().ref('Users/' + uid ).update({curChat});
+    firebase.database().ref('Users/' + uid ).update({curPostType});
     ///end of channel update
     var myUid = uid;
     var mydisplayName = displayName;
@@ -286,7 +285,7 @@ function getNotification(sub) {
         div.innerHTML = html;
         document.querySelector('.nott-list').appendChild(div);
       }
-     
+
     });
   });
 }
@@ -296,4 +295,3 @@ getNotification('Mathematics');
 $(window).load(function () {
   $("#postForm").submit(submitPost);
 }, getPost(document.getElementById("pageTitle").innerText));
-
