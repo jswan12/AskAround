@@ -260,7 +260,6 @@ function sendEmail(user) {
 //get notifications function
 function getNotification(sub) {
 
-  console.log("some text here 1");
   dataBase.ref("Posts/" + sub).once('value', function (data) {
     data.forEach(function (childSnapshot) {
       var childData = childSnapshot.val();
@@ -272,10 +271,7 @@ function getNotification(sub) {
       var visibility = childData.visibility;
       var displayName = childData.displayName;
 
-      console.log("ive made it here you dumbfuck");
-
       if(visibility == 'visible'){
-        console.log(question + "is the question");
         var html = [
             '<div class="notification-info">',
               '<h3><a href="#" title="">', displayName, '</a></h3>',
@@ -283,7 +279,6 @@ function getNotification(sub) {
 							'<span>2 min ago</span>',
             '</div>',
         ].join('');
-        console.log('some text here');
         var div = document.createElement('div');
         div.setAttribute('class', 'notification-details');
         div.innerHTML = html;
