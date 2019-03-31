@@ -37,9 +37,9 @@ exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
       return snapshot.ref.parent.child('uppercase').set(uppercase);
     });
 
-exports.createUser = functions.auth.user().onCreate(event => {
-  admin.database().ref("Users/" + event.data.uid).set({
-      "Name": event.data.displayName,
+exports.createUser = functions.auth.user().onCreate(function(user, context) {
+  return admin.database().ref("Users/" + user.uid).set({
+      "Name": admin.auth().currentUser.displayName,
       "Rank": 0,
       "conWith" : "null",
       "curChat": "null",
