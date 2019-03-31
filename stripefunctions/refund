@@ -1,0 +1,49 @@
+//THE REFUND OBJECT
+{
+  "id": "re_1EK8g5AuL2zGcuMkyZRjWXVP",
+  "object": "refund",
+  "amount": 100,
+  "balance_transaction": null,
+  "charge": "ch_1EK8g4AuL2zGcuMkT7pyyDYl",
+  "created": 1554058005,
+  "currency": "usd",
+  "metadata": {},
+  "reason": null,
+  "receipt_number": null,
+  "source_transfer_reversal": null,
+  "status": "succeeded",
+  "transfer_reversal": null
+}
+
+
+//CREATE A REFUND
+var stripe = require("stripe")("sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs");
+
+stripe.refunds.create({
+  charge: "ch_1EK8g4AuL2zGcuMkT7pyyDYl"
+}, function(err, refund) {
+  // asynchronously called
+});
+
+
+//RETRIEVE A REFUND
+var stripe = require("stripe")("sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs");
+
+stripe.refunds.retrieve(
+  're_1EK8g5AuL2zGcuMkyZRjWXVP',
+  function(err, refund) {
+    // asynchronously called
+  }
+);
+
+
+//UPDATE A REFUND
+var stripe = require("stripe")("sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs");
+
+stripe.refunds.update(
+  're_1EK8g5AuL2zGcuMkyZRjWXVP',
+  {metadata: {order_id: '6735'}},
+    function(err, refund) {
+    // asynchronously called
+  }
+);
