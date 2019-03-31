@@ -47,3 +47,9 @@ exports.createUser = functions.auth.user().onCreate(function(user, context) {
       "curPostType": "null",
     })
 });
+
+exports.sendEmailNotification = functions.database.ref('/Posts/Mathematics/').onWrite(
+  async() => {
+    
+  }
+);
