@@ -1,0 +1,8 @@
+// Set your secret key: remember to change this to your live secret key in production
+// See your keys here: https://dashboard.stripe.com/account/apikeys
+Stripe.apiKey = "sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs";
+
+Map<String, Object> params = new HashMap<>();
+params.put("email", "paying.user@example.com");
+params.put("source", "tok_mastercard");
+Customer customer = Customer.create(params);
