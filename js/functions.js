@@ -26,13 +26,17 @@ firebase.auth().onAuthStateChanged(function (user) {
     getRank();
 
     firebase.database().ref('Users/' + user.uid).once('value', function(data){
+      if(data.val().Name != displayName){
+        var Name = displayName;
+        firebase.database().ref('Users/' + uid ).update({Name});
+      }
       curChatA = data.val().curChat;
       console.log(curChatA);
     });
   }
   else {
     uid = null;
-    display = 'anonymous';
+    displayName = 'Anonymous';
   }
 });
 
