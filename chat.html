@@ -133,6 +133,8 @@
            if(mess.indexOf("has left") >= 0){
              document.getElementById('myMess').removeChild(document.getElementById('message'));
              document.getElementById('myMess').removeChild(document.getElementById('mybutton'));
+             var curChat = "null";
+             firebase.database().ref('Users/' + me).update({curChat});
            }
            var messLi = document.createElement("LI");
            var messTxt= document.createTextNode(mess);
