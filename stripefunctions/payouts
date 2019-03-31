@@ -1,0 +1,20 @@
+//CREATE A PAYOUT
+var stripe = require("stripe")("sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs");
+
+stripe.payouts.create({
+  amount: 400,
+  currency: "usd"
+}, function(err, payout) {
+  // asynchronously called
+});
+
+
+//RETRIEVE A PAYOUT
+var stripe = require("stripe")("sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs");
+
+stripe.payouts.retrieve(
+  'po_1EK8g5AuL2zGcuMkQJsgK8M1',
+  function(err, payout) {
+    // asynchronously called
+  }
+);
