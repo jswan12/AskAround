@@ -38,13 +38,21 @@ exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
     });
 
 exports.createUser = functions.auth.user().onCreate(function(user, context) {
-  // var name = user.displayName;
   return admin.database().ref("Users/" + user.uid).set({
-      "Name": admin.auth().currentUser.displayName,
+      "Name": user.displayName,
       "Rank": 0,
       "conWith" : "null",
       "curChat": "null",
       "curPostId": "null",
       "curPostType": "null",
+    })
+    .then(function(userRecord){
+      const fullName = userRecord.displayName || 'Anonymous';
+      return admin.database().ref("Users/" + user.uid).set({
+        Name: fullName,
+      });
+    })
+    .catch(function(error){
+      console.log("Error fetching user data:", error);
     });
 });
