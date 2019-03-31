@@ -39,17 +39,11 @@ exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
 
 exports.createUser = functions.auth.user().onCreate(function(user, context) {
   return admin.database().ref("Users/" + user.uid).set({
-      "Name": user.data.displayName,
+      "Name": admin.auth().currentUser.displayName,
       "Rank": 0,
       "conWith" : "null",
       "curChat": "null",
       "curPostId": "null",
       "curPostType": "null",
     })
-    // .then(function(userRecord){
-    //   const fullName = userRecord.displayName;
-    //   return admin.database().ref("Users/" + user.uid).update({
-    //     Name: fullName,
-    //   });
-    // })
 });
