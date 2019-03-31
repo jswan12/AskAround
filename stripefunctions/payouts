@@ -43,3 +43,15 @@ stripe.payouts.retrieve(
   "status": "in_transit",
   "type": "bank_account"
 }
+
+
+//USING INSTANT PAYOUT
+var stripe = require('stripe')(PLATFORM_SECRET_KEY);
+stripe.payouts.create(
+  {
+    amount: 1000,
+    currency: "usd",
+    method: "instant"
+  },
+  {stripe_account: CONNECTED_STRIPE_ACCOUNT_ID}
+);
