@@ -419,17 +419,21 @@ nav ul ul li a {
 	background-color: #fff;
 	opacity: 0;
 	visibility: hidden;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 .notification-box.active {
 	opacity: 1;
 	visibility: visible;
 	z-index: 999999999;
+	margin: 17px 0px 0px 0px;
+	padding-bottom: 20px;
 }
+
 .nt-title {
 	float: left;
 	width: 100%;
 	border-bottom: 1px solid #e5e5e5;
-	padding: 10px 20px;
+	padding: 0px 20px;
 }
 .nt-title h4 {
 	float: left;
@@ -448,7 +452,7 @@ nav ul ul li a {
 	width: 100%;
 }
 .nott-list .notification-info {
-	width: 86%;
+	width: 93%;
 	float: left;
 	text-align: left;
 	position: relative;
@@ -4343,7 +4347,7 @@ a:hover {
 .notification-info {
 	float: left;
 	width: auto;
-	padding-left: 10px;
+	padding:  0px 15px;
 }
 .notification-info h3 {
 	color: #686868;

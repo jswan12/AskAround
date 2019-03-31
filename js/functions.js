@@ -12,6 +12,18 @@ firebase.initializeApp(config);
 
 //firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
 
+const messaging = firebase.messaging();
+messaging.requestPermission().then(function() {
+  console.log('Have permission');
+  return messaging.getToken();
+})
+.then(function(token) {
+  console.log(token + ' is the token');
+})
+.catch(function(err){
+  console.log('Error, no permission');
+})
+
 var dataBase = firebase.database();
 
 var uid = null;
@@ -269,7 +281,6 @@ function sendEmail(user) {
 //get notifications function
 function getNotification(sub) {
 
-  console.log("some text here 1");
   dataBase.ref("Posts/" + sub).once('value', function (data) {
     data.forEach(function (childSnapshot) {
       var childData = childSnapshot.val();
@@ -281,18 +292,13 @@ function getNotification(sub) {
       var visibility = childData.visibility;
       var displayName = childData.displayName;
 
-      console.log("ive made it here you dumbfuck");
-
       if(visibility == 'visible'){
-        console.log(question + "is the question");
         var html = [
             '<div class="notification-info">',
               '<h3><a href="#" title="">', displayName, '</a></h3>',
 							'<p>',question,'</p>',
-							'<span>2 min ago</span>',
             '</div>',
         ].join('');
-        console.log('some text here');
         var div = document.createElement('div');
         div.setAttribute('class', 'notification-details');
         div.innerHTML = html;

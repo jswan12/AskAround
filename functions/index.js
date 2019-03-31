@@ -49,11 +49,6 @@ exports.createUser = functions.auth.user().onCreate(function(user, context) {
     })
 });
 
-exports.createPost = functions.database.ref('/Posts/Mathematics')
-.onCreate((snapshot, context) => {
-  console.log('--New post in Math--');
-});
-
 // exports.sendEmailNotification = functions.database.ref('/Posts/Mathematics/').onWrite(
 //   async() => {
 //     var user = firebase.auth().currentUser;

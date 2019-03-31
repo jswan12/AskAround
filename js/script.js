@@ -228,8 +228,11 @@ $(window).on("load", function() {
     });
 
     // ============= Notifications Clear ==============
-    $(".clear-notif").on("clicl", function() {
-        $(this).next(".nott-list").removeClass("active");
+    $(".clear-notif").on("click", function() {
+        var elements = document.getElementsByClassName('nott-list');
+        for(var i=0; i<elements.length; i++){
+            elements[i].hidden = true;
+        }
     });
 
     // ============= User Account Setting Open ===========
