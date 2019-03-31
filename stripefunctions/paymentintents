@@ -1,0 +1,116 @@
+//THE PAYMENTINTENTS OBJECT
+{
+  "id": "pi_Aabcxyz01aDfoo",
+  "object": "payment_intent",
+  "amount": 1000,
+  "amount_capturable": 0,
+  "amount_received": 0,
+  "application": null,
+  "application_fee_amount": null,
+  "canceled_at": null,
+  "cancellation_reason": null,
+  "capture_method": "automatic",
+  "charges": {
+    "object": "list",
+    "data": [],
+    "has_more": false,
+    "total_count": 0,
+    "url": "/v1/charges?payment_intent=pi_Aabcxyz01aDfoo"
+  },
+  "client_secret": null,
+  "confirmation_method": "automatic",
+  "created": 123456789,
+  "currency": "usd",
+  "customer": null,
+  "description": "PaymentIntent Description",
+  "last_payment_error": null,
+  "livemode": false,
+  "metadata": {
+    "order_id": "123456789"
+  },
+  "next_action": null,
+  "on_behalf_of": null,
+  "payment_method_types": [
+    "card"
+  ],
+  "receipt_email": "jenny@example.com",
+  "review": null,
+  "shipping": {
+    "address": {
+      "city": "San Francisco",
+      "country": "US",
+      "line1": "1234 Fake Street",
+      "line2": null,
+      "postal_code": "94102",
+      "state": null
+    },
+    "carrier": null,
+    "name": "Jenny Rosen",
+    "phone": null,
+    "tracking_number": null
+  },
+  "source": null,
+  "statement_descriptor": "PaymentIntent Statement Descriptor",
+  "status": "requires_payment_method",
+  "transfer_data": null,
+  "transfer_group": null
+}
+
+
+//CREATE PAYMENTINTENTS
+var stripe = require("stripe")("sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs");
+
+stripe.paymentIntents.create({
+  amount: 1099,
+  currency: 'usd',
+  payment_method_types: ['card'],
+}, function(err, paymentIntent) {
+  // asynchronously called
+});
+
+
+//RETRIEVE A PAYMENTINTENTS
+var stripe = require("stripe")("sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs");
+
+stripe.paymentIntents.retrieve(
+  'pi_Aabcxyz01aDfoo',
+  function(err, paymentIntent) {
+    // asynchronously called
+  }
+);
+
+
+//UPDATE A PAYMENTINTENTS
+var stripe = require("stripe")("sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs");
+
+stripe.paymentIntents.update(
+  'pi_Aabcxyz01aDfoo',
+  {metadata: {order_id: '6735'}},
+    function(err, paymentIntent) {
+    // asynchronously called
+  }
+);
+
+
+//CONFIRM A PAYMENTINTENTS
+var stripe = require("stripe")("sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs");
+
+stripe.paymentIntents.confirm("pi_Aabcxyz01aDfoo", {source: "src_1EK8g4AuL2zGcuMk2pEKfxhn"} function(err, intent) {
+  // asynchronously called
+});
+
+
+//CAPTURE A PAYMENTINTENTS
+var stripe = require("stripe")("sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs");
+
+stripe.paymentIntents.capture("pi_Aabcxyz01aDfoo", {amount: 750}, function(err, intent) {
+  // asynchronously called
+});
+
+
+//CANCEL A PAYMENTINTENTS
+var stripe = require("stripe")("sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs");
+
+stripe.paymentIntents.cancel("pi_Aabcxyz01aDfoo", function(err, intent) {
+  // asynchronously called
+});
