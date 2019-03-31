@@ -12,6 +12,13 @@ firebase.initializeApp(config);
 
 //firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
 
+const messaging = firebase.messaging();
+messaging.requestPermission().then(function() {
+  console.log('Have permission');
+}).catch(function(err){
+  console.log('Error, no permission');
+})
+
 var dataBase = firebase.database();
 var uid = null;
 var displayName = null;
