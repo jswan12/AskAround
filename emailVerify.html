@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="images/favicon - 32px x 32px.png" />
+    <meta charset="utf-8">
+    <meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="-1" />
+    <title>Verify Your Email</title>
+    <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+    <script>
+      var config = {
+        apiKey: "AIzaSyCpwgCgLOfU9l27TvFGVYkFQdeyJJnB-ck",
+        authDomain: "askaround-01.firebaseapp.com",
+        databaseURL: "https://askaround-01.firebaseio.com",
+        projectId: "askaround-01",
+        storageBucket: "askaround-01.appspot.com",
+        messagingSenderId: "527860430663"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <style>
+    h1{
+      color: rgb(62,31,88);
+      font-size: 70px;
+      float: center;
+      margin-left:25%;
+      margin-right: 25%;
+
+    }
+    p{
+      color: rgb(62,31,88);
+      float:center;
+      font-size: 40px;
+      margin-left:25%;
+      margin-right: 25%;
+    }
+    input[type=button]{
+      width:50%;
+      height:100px;
+      color:rgb(62,31,88);
+      font-size:xx-large;
+      margin-left: 25%;
+      margin-right: 25%;
+    }
+    </style>
+  </head>
+  <body>
+    <h1>Please Verify Your Email</h1>
+    <p>please check your inbox and spam folders</p>
+    <form >
+      <input type="button" id="resend" value="resend verificaiton email">
+    </form>
+
+    <script>
+
+    firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
+
+    firebase.auth().onAuthStateChanged(function(user){
+      if(user){
+        document.getElementById("resend").addEventListener("click",function(){
+          console.log("send");
+          user.sendEmailVerification().then(function() {
+            console.log("email has been sent");
+            document.location.reload(true);
+          }).catch(function(error){
+            console.log("can not seem to send email");
+          });
+        });
+        if(user.emailVerified){
+          document.location.replace('home.html');
+        }
+      }
+    });
+
+    </script>
+  </body>
+</html>

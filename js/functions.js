@@ -38,6 +38,15 @@ firebase.auth().onAuthStateChanged(function (user) {
     displayName = firebase.auth().currentUser.displayName;
     getRank();
 
+    if(!user.emailVerified){
+      user.sendEmailVerification().then(function() {
+        console.log("email has been sent");
+        document.location.replace('emailVerify.html');
+      }).catch(function(error){
+        console.log("can not seem to send email");
+      });
+    }
+
     firebase.database().ref('Users/' + user.uid).once('value', function(data){
       if(data.val().Name != displayName){
         var Name = displayName;
@@ -56,8 +65,8 @@ firebase.auth().onAuthStateChanged(function (user) {
 var submitPost = function () {
   /*
     should get all the post data here and then from here they will be prompted with payment popup
-  
-  
+
+
   */
   // Open Checkout with further options:
 
