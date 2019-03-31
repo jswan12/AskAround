@@ -295,6 +295,8 @@ function getNotification(sub) {
 }
 
 getNotification('Mathematics');
+getNotification('Computer Science');
+getNotification('Science');
 
 $(window).load(function () {
   $("#postForm").submit(submitPost);
