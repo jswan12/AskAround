@@ -36,3 +36,38 @@ exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
       // Setting an "uppercase" sibling in the Realtime Database returns a Promise.
       return snapshot.ref.parent.child('uppercase').set(uppercase);
     });
+
+exports.createUser = functions.auth.user().onCreate(function(user, context) {
+  return admin.database().ref("Users/" + user.uid).set({
+      "Name": "Anonymous",
+      "Rank": 0,
+      "conWith" : "null",
+      "curChat": "null",
+      "curPostId": "null",
+      "curPostType": "null",
+    })
+});
+
+// exports.sendEmailNotification = functions.database.ref('/Posts/Mathematics/').onWrite(
+//   async() => {
+//     var user = firebase.auth().currentUser;
+//     var email, name;
+//     if(user != null){
+//       displayName = user.displayName;
+//       email = user.email;
+//       return sendEmailNotification(email, displayName);
+//     }
+// });
+
+// async function sendEmailNotification(email, displayName){
+//   const mailOptions = {
+//     from: 'AskAround <noreply@firebase.com>',
+//     to: email,
+//   };
+
+//   mailOptions.subject = 'A new post has been created';
+//   mailOptions.text = 'This is the description of the post';
+//   await mailTransport.sendMail(mailOptions);
+//   console.log('new email sent to:', email);
+//   return null;
+// }

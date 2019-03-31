@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="-1" />
+    <title>Waiting...</title>
+    <style>
+      .box{
+        margin-left:25%;
+      }
+      h1{
+        color: rgb(62,31,88);
+        font-size: 100px;
+        float: center;
+
+      }
+      input[type=button]{
+        width:50%;
+        height:100px;
+        color:rgb(62,31,88);
+        font-size:xx-large;
+      }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+    <script>
+      var config = {
+        apiKey: "AIzaSyCpwgCgLOfU9l27TvFGVYkFQdeyJJnB-ck",
+        authDomain: "askaround-01.firebaseapp.com",
+        databaseURL: "https://askaround-01.firebaseio.com",
+        projectId: "askaround-01",
+        storageBucket: "askaround-01.appspot.com",
+        messagingSenderId: "527860430663"
+      };
+      firebase.initializeApp(config);
+    </script>
+  </head>
+  <body>
+    <div class="box">
+      <h1>Waiting...</h1>
+      <form id="waiting">
+        <input type="button" id="cancel" value="cancel request">
+      </form>
+    </div>
+    <script type="text/javascript">
+
+      //firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
+      firebase.auth().onAuthStateChanged(function(user){
+        if(user){
+          var cancel = document.getElementById("cancel");
+
+
+          firebase.database().ref('chats/'+ user.uid +'/txts').once('child_added', function(msg){
+            window.open('chat.html');
+            console.log('hello there');
+          });
+
+          cancel.addEventListener("click", function(){
+            var visibility = "hidden";
+            var curChat = 'null';
+            var curPostId  = 'null';
+            var curPostType= 'null';
+            firebase.database().ref('Users/' + user.uid).once('value', function(data){
+              var id = data.val().curPostId;
+              var type=data.val().curPostType;
+              console.log(id);
+              console.log(type);
+              firebase.database().ref('Posts/' + type + '/' + id ).update({visibility});
+              firebase.database().ref('Users/' + user.uid ).update({curChat});
+              firebase.database().ref('Users/' + user.uid ).update({curPostId});
+              firebase.database().ref('Users/' + user.uid ).update({curPostType});
+
+            });
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

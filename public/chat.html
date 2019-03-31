@@ -85,25 +85,78 @@
 </ul>
 
   <script>
+
     //get data from the html and create some needed variables
-    var conMe = document.getElementById('me');
-    var conYou = document.getElementById('you');
     var line = '';
     var btn = document.getElementById("mybutton");
     var download = document.getElementById("downLog");
-    var chan  = "a";
+    var chan  = "";
     var messA = document.getElementById("message").value;
     var name;
+    var voted = false;
+    var poster;
+    var me;
+    var chatRef; // = firebase.database().ref('chats/'+chan+'/txts');
     //firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
     firebase.auth().onAuthStateChanged(function(user){
      if(user){
-		   name = user.email;
-       conMe.appendChild(document.createTextNode(user.uid));
-       firebase.database().ref('chats/'+chan+'/connections').push(user.uid);
-		 }
-	 });
-    var txtBox = document.getElementById("txtBox");
+		   name = user.displayName;
+       firebase.database().ref('Users/' + user.uid).once('value', function(data){
+         chan = data.val().curChat;//////////data to chan
+         //console.log(data);
+         //chan = data;
+         me = user.uid;
+         if(user.uid != chan){
+           var formRef = document.getElementById('myMess');
+           var uVoteRef= document.getElementById('upvote');
+           var dVoteRef= document.getElementById('downvote');
+           formRef.removeChild(uVoteRef);
+           formRef.removeChild(dVoteRef);
+           console.log("You are not the poster");
+           poster = false;
+           var conWith = user.uid;
+           firebase.database().ref('Users/' + data.val().curChat).update({conWith});
+         }
+         else{
+           poster = true;
+         }
 
+         chatRef = firebase.database().ref('chats/'+chan+'/txts');
+
+         //if a new message is added to the db then this event will grab it from the db and add it to the screen
+         chatRef.on('child_added', function(msg){
+           var mess = JSON.stringify(msg);
+           mess = mess.slice(1,mess.length-1);
+           var messLi = document.createElement("LI");
+           var messTxt= document.createTextNode(mess);
+           messLi.appendChild(messTxt);
+           document.getElementById("txtBox").appendChild(messLi);
+           line = line +(mess+ "\n");
+           txtBox.scrollTop = txtBox.scrollHeight;
+         });
+
+         window.onbeforeunload = function(){
+           var curChat = 'null';
+           var conWith = 'null';
+           firebase.database().ref('Users/' +  user.uid ).update({curChat});
+           firebase.database().ref('Users/' +  user.uid ).update({conWith});
+           intro("left");
+         };
+
+         intro("joined");
+       });
+		 }
+	  });
+
+    function intro(x){
+      document.getElementById("message").value = ' has ' + x;
+      setTimeout(second(),3000);
+    }
+    function second(){
+      btn.click();
+    }
+
+    var txtBox = document.getElementById("txtBox");
 
     //when the user adds a message send it to the db
     btn.addEventListener("click", function(){
@@ -112,19 +165,9 @@
       firebase.database().ref('chats/'+chan+'/txts').push(messJ);
       document.getElementById("message").value = '';
     });
-    var chatRef = firebase.database().ref('chats/' + chan + '/txts');
 
-    //if a new message is added to the db then this event will grab it from the db and add it to the screen
-    chatRef.on('child_added', function(msg){
-      var mess = JSON.stringify(msg);
-      mess = mess.slice(1,mess.length-1);
-      var messLi = document.createElement("LI");
-      var messTxt= document.createTextNode(mess);
-      messLi.appendChild(messTxt);
-      document.getElementById("txtBox").appendChild(messLi);
-      line = line +(mess+ "\n");
-      txtBox.scrollTop = txtBox.scrollHeight;
-    });
+
+
     //create text file of log for user to keep
     //new line is curretnly not working but this is not an easy feature
     download.addEventListener("click", function(){
@@ -136,16 +179,6 @@
       var blob = new Blob([line], {type: "text/plain;charset=utf-8"});
       var downloadUrl = URL.createObjectURL(blob);
       this.setAttribute("href", downloadUrl);
-    });
-
-    //if there is an update on the connections list then grab the new connection
-    firebase.database().ref('chats/'+chan+'/connections').on("child_added", function(per){
-      var s = JSON.stringify(per);
-      s = s.slice(1,s.length-1);
-      //console.log(s);
-      if(document.getElementById("me").textContent != s){
-        document.getElementById("you").textContent = s;
-      }
     });
 
 
@@ -160,28 +193,30 @@
       dvote.style.visibility = "hidden";
       //if upvote
       if(val ===1){
-        //var them =  "KuopYAm6v4Y2BpsJo2SR0JZ5lq83"; //hard code test please disregard
-        var them = document.getElementById("you").textContent;
-        var Rank;
-        firebase.database().ref("Users/" + them).once("value", function(data){
-          Rank = data.val().Rank + 1;
-          console.log(Rank);
-          firebase.database().ref('Users/' + them ).update({Rank});
+        firebase.database().ref("Users/" + me).once("value", function(values){
+          var Rank;
+          var them = values.val().conWith;
+          firebase.database().ref("Users/" + them).once("value", function(data){
+            Rank = data.val().Rank + 1;
+            console.log(Rank);
+            firebase.database().ref('Users/' + them ).update({Rank});
+          });
         });
       }
       //if downvote
       if(val ===0){
-        //var them =  "KuopYAm6v4Y2BpsJo2SR0JZ5lq83"; //hard code test please diregard
-        var them = document.getElementById("you").textContent;
-        var Rank;
-        firebase.database().ref("Users/" + them).once("value", function(data){
-          Rank = data.val().Rank - 1;
-          console.log(Rank);
-          firebase.database().ref('Users/' + them ).update({Rank});
+        firebase.database().ref("Users/" + me).once("value", function(values){
+          var Rank;
+          var them = values.val().conWith;
+          firebase.database().ref("Users/" + them).once("value", function(data){
+            Rank = data.val().Rank - 1;
+            console.log(Rank);
+            firebase.database().ref('Users/' + them ).update({Rank});
+          });
         });
+
       }
     }
-
 
   </script>
 

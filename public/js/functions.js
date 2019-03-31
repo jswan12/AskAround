@@ -10,42 +10,59 @@ var config = {
 
 firebase.initializeApp(config);
 
+//firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
+
 var dataBase = firebase.database();
 var uid = null;
 var displayName = null;
+
+var curChatA;
+
 // Save a new post to the database, using the input in the form
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     uid = firebase.auth().currentUser.uid;
     displayName = firebase.auth().currentUser.displayName;
     getRank();
+
+    firebase.database().ref('Users/' + user.uid).once('value', function(data){
+      if(data.val().Name != displayName){
+        var Name = displayName;
+        firebase.database().ref('Users/' + uid ).update({Name});
+      }
+      curChatA = data.val().curChat;
+      console.log(curChatA);
+    });
   }
   else {
     uid = null;
-    display = 'anonymous';
+    displayName = 'Anonymous';
   }
 });
 
-
-
-
-
+/*
+Do a check,
+if in database under uid, displayname not equal to curDisplayName
+    set displayname in the database to current user . displayname
+*/
 
 var submitPost = function () {
-
-
-  // Get input values from each of the form elements
+  if(curChatA == 'null'){
+    ///channel update
+    var curChat = uid;
+    console.log('curChat = '+curChat);
+    firebase.database().ref('Users/' + uid ).update({curChat});
+    ///end of channel update
     var myUid = uid;
     var mydisplayName = displayName;
     var question = document.getElementById('question').value;
     var description = document.getElementById('description').value;
     var bounty = document.getElementById('price').value;
+    //category variable may not be used
     var category = document.getElementById('category').value;
     // Reference to the post object in Firebase database
     dataBase = dataBase.ref("Posts/" + category);
-    //alert(displayName + "\n" + uid + "\n" + question + "\n" + description + "\n" + bounty + "\n" + category);
     // Push a new post to the database using those values
-  
     dataBase.push({
       "uid": myUid,
       "displayName": displayName,
@@ -55,12 +72,16 @@ var submitPost = function () {
       "category": category,
       "visibility": 'visible'
     });
-
-  console.log("I just posted");
-  
-
-
+    console.log("I just posted");
+    window.open("waiting.html");
+  }
+  else{
+    alert("You can only have one post at a time. Sorry.");
+  }
 };
+
+
+
 
 //var count = 0;
 //calling addCount() actually works, but idk how to get it when a post is submited
@@ -72,16 +93,16 @@ firebase.database().ref("Counter/").once('value',
       document.getElementById('notification').innerText = "Notification " + postCount;
       console.log(postCount);
       firebase.database().ref('Counter/').update({postCount});
-      
-    }, function (err) { 
-      console.log("notificaion is not working: " + error); 
+
+    }, function (err) {
+      console.log("notificaion is not working: " + error);
     }
   );
 }
 
 //   function getName(aUID){
 //   // return name based on a UID input
-//   var currUser = firebase.database().ref("Users/" + aUID).once('value', 
+//   var currUser = firebase.database().ref("Users/" + aUID).once('value',
 //   function(data){
 //     document.getElementById('userName').innerText = data.val().Name;
 //   }, function(error){ console.log(error); }
@@ -89,7 +110,7 @@ firebase.database().ref("Counter/").once('value',
 // }
 
 function getRank() {
-  // return rank 
+  // return rank
   var currUser = firebase.database().ref("Users/" + uid).once('value',
     function (data) {
       document.getElementById('userRank').innerText = data.val().Rank;
@@ -119,10 +140,11 @@ function getPost(sub) {
       var question = childData.question;
       var description = childData.description;
       var bounty = childData.bounty;
-      var category = childData.category;//may not be used
+      //category variable may not be used
+      var category = childData.category;
       var visibility = childData.visibility;
       var displayName = childData.displayName;
-      var myUid = childData.uid;  
+      var myUid = childData.uid;
 
       if(visibility == 'visible'){
         var html = [
@@ -164,7 +186,8 @@ function getPost(sub) {
           '<p>',
           description,
           '</p>',
-          '</div>'
+          '</div>',
+          '<script></script>'
         ].join('');
         var div = document.createElement('div');
         div.setAttribute('class', 'post-bar');
@@ -179,17 +202,34 @@ function getPost(sub) {
 }
 
 function openChatPage(postKey) {
-  firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).once('value',
-    function(data){
-      var visibility = data.val().visibility;
-      visibility = 'hidden';
-      firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).update({visibility});
-      window.open("chat.html");
-      document.location.reload(true);
-    }, function (err) { 
-      console.log("Could not set post " + postKey + " to hidden."); 
+  var chan;
+  //if claiming posts is broken chance once to on
+  firebase.database().ref('Users/' + uid).once('value', function(data){
+    //console.log(data.val().curChat)
+    if(data.val().curChat == "null"){
+      console.log('hello');
+      firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).once('value',
+        function(data){
+          var visibility = data.val().visibility;
+          visibility = 'hidden';
+          ///channel update
+          chan = data.val().uid;
+          var curChat = chan;
+          firebase.database().ref('Users/' + uid ).update({curChat});
+          ///end of channel update
+          console.log('chan = '+chan);
+          firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).update({visibility});
+          window.open("chat.html");
+          document.location.reload(true);
+        }, function (err) {
+          console.log("Could not set post " + postKey + " to hidden.");
+        }
+      );
     }
-  );
+    /*else{
+      console.log(data.val().curChat);
+    }*/
+  });
 }
 
 function deletePost(postKey) {
@@ -203,6 +243,63 @@ function deletePost(postKey) {
     console.log("Deletion Canceled");
 }
 
+
+//send email
+function sendEmail(user) {
+  // 5. Send welcome email to new users
+  const mailOptions = {
+          from: '"Dave" <dave@example.net>',
+          to: '${user.email}',
+          subject: 'Welcome!',
+          html: `<YOUR-WELCOME-MESSAGE-HERE>`
+  }
+  // 6. Process the sending of this email via nodemailer
+  return mailTransport.sendMail(mailOptions)
+          .then(() => console.log('dbCompaniesOnUpdate:Welcome confirmation email'))
+          .catch((error) => console.error('There was an error while sending the email:', error))
+}
+
+
+//get notifications function
+function getNotification(sub) {
+
+  console.log("some text here 1");
+  dataBase.ref("Posts/" + sub).once('value', function (data) {
+    data.forEach(function (childSnapshot) {
+      var childData = childSnapshot.val();
+      var postID = childSnapshot.key;
+      var question = childData.question;
+      var description = childData.description;
+      var bounty = childData.bounty;
+      var category = childData.category;//may not be used
+      var visibility = childData.visibility;
+      var displayName = childData.displayName;
+
+      console.log("ive made it here you dumbfuck");
+
+      if(visibility == 'visible'){
+        console.log(question + "is the question");
+        var html = [
+            '<div class="notification-info">',
+              '<h3><a href="#" title="">', displayName, '</a></h3>',
+							'<p>',question,'</p>',
+							'<span>2 min ago</span>',
+            '</div>',
+        ].join('');
+        console.log('some text here');
+        var div = document.createElement('div');
+        div.setAttribute('class', 'notification-details');
+        div.innerHTML = html;
+        document.querySelector('.nott-list').appendChild(div);
+      }
+     
+    });
+  });
+}
+
+getNotification('Mathematics');
+
 $(window).load(function () {
   $("#postForm").submit(submitPost);
 }, getPost(document.getElementById("pageTitle").innerText));
+
