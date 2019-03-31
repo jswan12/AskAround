@@ -419,6 +419,7 @@ nav ul ul li a {
 	background-color: #fff;
 	opacity: 0;
 	visibility: hidden;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 .notification-box.active {
 	opacity: 1;
