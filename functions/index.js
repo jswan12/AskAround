@@ -47,3 +47,27 @@ exports.createUser = functions.auth.user().onCreate(function(user, context) {
       "curPostType": "null",
     })
 });
+
+// exports.sendEmailNotification = functions.database.ref('/Posts/Mathematics/').onWrite(
+//   async() => {
+//     var user = firebase.auth().currentUser;
+//     var email, name;
+//     if(user != null){
+//       displayName = user.displayName;
+//       email = user.email;
+//       return sendEmailNotification(email, displayName);
+//     }
+// });
+
+// async function sendEmailNotification(email, displayName){
+//   const mailOptions = {
+//     from: 'AskAround <noreply@firebase.com>',
+//     to: email,
+//   };
+
+//   mailOptions.subject = 'A new post has been created';
+//   mailOptions.text = 'This is the description of the post';
+//   await mailTransport.sendMail(mailOptions);
+//   console.log('new email sent to:', email);
+//   return null;
+// }
