@@ -151,8 +151,9 @@
 											</li>
 											<li class="post-st">
 												<ul>
-													<li style="border-top: none"><a class="post-jb active" href="#" title="">Post a Question</a>
-													</li>
+														<li><input type="number" min="1.00" class="" value="1.00" step="0.01" id="userBounty" placeholder="Enter Bounty Claim Amount" required></li>
+														<li style="border-top: none"><a type="button" class="payment_methods active" id="postButton">Post a Question</button></li>
+														<!--<li style="border-top: none"><a class="post-jb active" href="#" title="">Post a Question</a></li>-->
 												</ul>
 											</li>
 											<li>
@@ -203,7 +204,7 @@
 										<option value="Science">Science</option>
 									</select>
 									<div class="price-br" style="margin-right: 10px">
-										<input type="number" min="0" name="price" id="price" placeholder="Bounty" required>
+										<input type="number" min="0" name="price" id="price" placeholder="Bounty" disabled>
 										<i class="la la-dollar"></i>
 									</div>
 								</div>
@@ -226,8 +227,8 @@
 							<div class="col-lg-12">
 								<ul>
 									<!--<li><button class="active" id="customButton">Purchase</button></li>-->
-									<li><button type="submit" style="visibility: visible;" class="active" id="submitButton"></button></li>
-									<li><a href="#" class="close-question">Cancel</a></li>
+									<li><button type="submit" class="active" id="submitButton">Post</button></li>
+									<!--<li><a href="#" class="close-question">Cancel</a></li>-->
 								</ul>
 							</div>
 						</div>
@@ -268,7 +269,39 @@
 </script>
 
 <script>
+  var handler = StripeCheckout.configure({
+  key: 'pk_test_Q5ThBKpfol6VEp6vpjnxBywu00kkFXE6o8',
+  image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+  locale: 'auto',
+  token: function(token) {
+    // You can access the token ID with `token.id`.
+	// Get the token ID to your server-side code for use.
+	alert("success");
+        $(".post-popup.job_post").addClass("active");
+		$(".wrapper").addClass("overlay");
+		document.getElementById('price').value = document.getElementById('userBounty').value;
+		console.log(token.id);
 
+		var tokenString = token.id;
+        firebase.database().ref('Users/' + uid ).update({tokenString});
+  }
+  });
+
+  document.getElementById('postButton').addEventListener('click', function(e) {
+  // Open Checkout with further options:
+  handler.open({
+    name: 'AskAround',
+    description: '2 widgets',
+    amount: document.getElementById('userBounty').value*100,
+    zipCode: true
+  });
+  e.preventDefault();
+  });
+      
+  // Close Checkout on page navigation:
+  window.addEventListener('popstate', function() {
+    handler.close();
+  });
 </script>
 
 </body>

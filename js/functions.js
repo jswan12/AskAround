@@ -14,16 +14,6 @@ firebase.initializeApp(config);
 
 var dataBase = firebase.database();
 
-var handler = StripeCheckout.configure({
-  key: 'pk_test_Q5ThBKpfol6VEp6vpjnxBywu00kkFXE6o8',
-  image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-  locale: 'auto',
-  token: function(token) {
-    // You can access the token ID with `token.id`.
-    // Get the token ID to your server-side code for use.
-  }
-  });
-  
 var uid = null;
 var displayName = null;
 
@@ -57,7 +47,7 @@ var submitPost = function () {
   
   
   */
-  getPayment();
+  // Open Checkout with further options:
 
 
   if(curChatA == 'null'){
@@ -320,22 +310,3 @@ getNotification('Science');
 $(window).load(function () {
   $("#postForm").submit(submitPost);
 }, getPost(document.getElementById("pageTitle").innerText));
-
-/////////////////////////////////////////////////////////////////////////////////////
-
-function getPayment(e){
-    // Open Checkout with further options:
-    handler.open({
-      name: 'AskAround',
-      description: '2 widgets',
-      amount: document.getElementById('price').value,
-      zipCode: true
-    });
-    e.preventDefault();
-        
-    // Close Checkout on page navigation:
-    window.addEventListener('popstate', function() {
-      handler.close();
-    });
-
-}
