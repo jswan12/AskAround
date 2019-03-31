@@ -39,7 +39,7 @@ exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
 
 exports.createUser = functions.auth.user().onCreate(function(user, context) {
   return admin.database().ref("Users/" + user.uid).set({
-      // "Name": user.displayName,
+      "Name": "Anonymous",
       "Rank": 0,
       "conWith" : "null",
       "curChat": "null",
@@ -47,12 +47,9 @@ exports.createUser = functions.auth.user().onCreate(function(user, context) {
       "curPostType": "null",
     })
     .then(function(userRecord){
-      const fullName = userRecord.displayName || 'Anonymous';
-      return admin.database().ref("Users/" + user.uid).set({
+      const fullName = userRecord.displayName;
+      return admin.database().ref("Users/" + user.uid).update({
         Name: fullName,
       });
     })
-    .catch(function(error){
-      console.log("Error fetching user data:", error);
-    });
 });
