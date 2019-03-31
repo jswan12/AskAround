@@ -83,9 +83,23 @@
 								</a>
 							</li>
 							<li>
-								<a href="#" title="" class="not-box-open">
+								<a href="#" id="notification" class="not-box-open">
 									Notification
 								</a>
+								<div class="notification-box msg">
+										<div class="nt-title">											
+											<a href="#" title="">Clear all</a>
+										</div>
+										<div class="nott-list">
+
+											<div class="notification-details">										
+												<div class="notification-info">
+													<h3 id="subjectTitle">Computer Science</h3>												
+												</div>
+											</div>
+																				
+										</div><!--nott-list end-->
+									</div><!--notification-box end-->
 							</li>
 						</ul>
 					</nav>
@@ -107,7 +121,7 @@
 								<li><a href="#" title="">Faqs</a></li>
 								<li><a href="#" title="">Terms & Conditions</a></li>
 							</ul>
-							<h3 class="tc"><a href="index.html" title="">Logout</a></h3>
+							<h3 class="tc"><a href="index.html" onclick="logOut();" title="">Logout</a></h3>
 						</div>
 
 					</div>
@@ -161,43 +175,6 @@
 												<h3 id="pageTitle">Computer Science</h3>
 											</center>
 										</div>
-
-										<!--<div class="post-bar">
-											<div class="post_topbar">
-												<div class="usy-dt">
-
-													<div class="usy-name">
-														<h3>Giovanni Gonzaga</h3>
-														<span><img src="images/clock.png" alt="">3 min ago</span>
-													</div>
-												</div>
-												<div class="ed-opts">
-													<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-													<ul class="ed-options">
-														<li><a href="#" title="">Edit Post</a></li>
-														<li><a href="#" title="">Unsaved</a></li>
-														<li><a href="#" title="">Unbid</a></li>
-														<li><a href="#" title="">Close</a></li>
-														<li><a href="#" title="">Hide</a></li>
-													</ul>
-												</div>
-											</div>
-
-											<div class="job_descp">
-												<h3>How to code html??</h3>
-
-												<p>It keeps asking me to translate the page everytime I run a test so Im going ahead and
-													putting it in English since we speak that. The quick brown fox jumped over the lazy dog.
-													The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.
-													The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.
-													The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.
-													. . . . . . .
-												</p>
-
-											</div>
-
-										</div>-->
-
 									</div>
 								</div>
 							</div>
@@ -206,61 +183,6 @@
 				</div>
 			</div>
 		</main>
-
-
-
-		<!--
-		<div class="post-popup pst-pj">
-			<div class="post-project">
-				<h3>Ask Around</h3>
-				<div class="post-project-fields">
-					<form>
-						<div class="row">
-							<div class="col-lg-12">
-								<input type="text" name="title" placeholder="Title" id="title">
-							</div>
-							<div class="col-lg-12">
-								<div class="inp-field">
-									<select id="category">
-										<option>Category 1</option>
-										<option>Category 2</option>
-										<option>Category 3</option>
-									</select>
-								</div>
-							</div>
-
-							<div class="col-lg-12">
-								<input type="text" name="skills" placeholder="Skills">
-							</div>
-							<div class="col-lg-12">
-								<div class="price-sec">
-									<div class="price-br">
-										<input type="number" name="price1" id="price1" placeholder="Bounty">
-										<i class="la la-dollar"></i>
-									</div>
-									<span>To</span>
-									<div class="price-br">
-										<input type="number" name="price1" id="price1" placeholder="Bounty">
-										<i class="la la-dollar"></i>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-12">
-								<textarea name="description" id="description" placeholder="Description"></textarea>
-							</div>
-							<div class="col-lg-12">
-								<ul>
-									<li><button class="active" type="submit" value="post" id='Submit'>Post</button></li>
-									<li><a href="#" title="">Cancel</a></li>
-								</ul>
-							</div>
-						</div>
-					</form>
-				</div>
-				<a href="#" title=""><i class="la la-times-circle-o"></i></a>
-			</div>
-		</div>
-		-->
 
 		<div class="post-popup job_post">
 			<div class="post-project">
@@ -302,6 +224,7 @@
 									</select>
 								</div>
 							</div>-->
+							
 							<div class="col-lg-12">
 								<ul>
 									<li><button type="submit" class="active">Post</button></li>
@@ -314,95 +237,6 @@
 			</div>
 		</div>
 
-		<div class="chatbox-parent" style="position: fixed; bottom: 0; right: 25px;">
-			<style>
-			.messagebox{
-        background-color: transparent;
-        width:90%;
-        margin-left:5%;
-        margin-right:5%;
-        float: left;
-				padding-bottom: 15px;
-			}
-
-			#txtBox{
-        list-style-type:none;
-        height: 22em;
-				overflow: auto;
-				color: black;
-			}
-
-			.textbox{
-				margin:5%;
-			}
-			
-			#message{
-				font-size: 13px;
-			}
-
-			#myName{
-				font-size: 13px;
-			}
-
-			#downLog {
-				font-size: 13px;
-				color: gray;
-				margin-top: 5px;
-			}
-
-      input[type=text]{
-				width:85%;
-				height: 30px;
-			}
-			
-      input[type=button]{
-        width:12%;
-        height:2em;
-        color:rgb(62,31,88);
-        border-radius:5px;
-      }
-
-			
-			</style>
-			<div class="chatbox">
-				<div class="chat-mg bx">
-					<a href="#" title=""><img src="images/speech-bubble.png" alt=""></a>
-					<span>2</span>
-				</div>
-				<div class="conversation-box">
-					<div class="con-title">
-						<h3>Chat</h3>
-						<a href="#" title="" class="close-chat"><i class="la la-minus-square"></i></a>
-					</div>
-				
-					<div class="chat-list">
-
-						<div class="messagebox">
-								<ul id="txtBox"></ul>
-						</div>
-
-						<div class="textbox">
-								<form onsubmit="return false" id="myMess">
-									<input type="text"  id="myName" name="myName" placeholder="Enter Your Name" required>
-									<input type="text"  id="message" name="message" placeholder="Enter Your Message" required>
-									<input type="button" id="mybutton" value="send">
-								</form>
-
-								<a href="javascript:void(0)" id="downLog">Download log</a>
-							</div>
-
-
-					</div><!--chat-list end-->
-				</div><!--conversation-box end-->
-			</div>
-
-		</div>
-
-
-
-
-	</div>
-
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/popper.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -410,80 +244,28 @@
 <script type="text/javascript" src="lib/slick/slick.min.js"></script>
 <script type="text/javascript" src="js/scrollbar.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
-<script type="text/javascript" src="js/notifications.js>"></script>
+<script type="text/javascript" src="js/notifications.js"></script>
 <script src="js/functions.js"></script>
+<script src="js/update.js"></script>
 
 <script>
-    console.log(firebase.auth().currentUser);
-    var line = '';
-    var btn = document.getElementById("mybutton");
-    var download = document.getElementById("downLog");
-    var chan = 'a';
-    var messA = document.getElementById("message").value;
-    var name = /*firebase.auth().currentUser;*/document.getElementById("myName").value;
-    console.log(name);
-      firebase.database().ref('chats/'+ chan + '/').once('value', function(chat){
-        chat.forEach(function(el){
-          var element = el.val();
-          var mess = JSON.stringify(element);
-          mess = mess.slice(1,mess.length-1);
-          var messLi = document.createElement("LI");
-          var messTxt= document.createTextNode(mess);
-          messLi.appendChild(messTxt);
-          document.getElementById("txtBox").appendChild(messLi);
-          line = line +(mess+ "\n");
-        });
-      });
-
-    btn.addEventListener("click", function(){
-      messA = document.getElementById("message").value;
-	    name = document.getElementById("myName").value;
-      if(name == null){
-        name = "anon";
-      }
-      messJ = name + ": " + messA;
-      firebase.database().ref('chats/'+chan+'/').push(messJ);
-      document.getElementById("message").value = '';
-
-    });
-    var chatRef = firebase.database().ref('chats/' + chan + '/');
-
-    chatRef.on('child_added', function(msg){
-      var mess = JSON.stringify(msg);
-      mess = mess.slice(1,mess.length-1);
-      var messLi = document.createElement("LI");
-      var messTxt= document.createTextNode(mess);
-      messLi.appendChild(messTxt);
-      document.getElementById("txtBox").appendChild(messLi);
-      line = line +(mess+ "\n");
-    });
-
-    download.addEventListener("click", function(){
-      var date = new Date();
-      var d = "messageOn-"+ date.getMonth() + "-" + date.getDate() + "-" + date.getFullYear() + ".txt"
-      var atr = document.createAttribute("download");
-      atr.value = d;
-      this.setAttributeNode(atr);
-      var blob = new Blob([line], {type: "text/plain;charset=utf-8"});
-      var downloadUrl = URL.createObjectURL(blob);
-      this.setAttribute("href", downloadUrl);
-    });
-  </script>
-
-<script>
-	// firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
+	/***********************************************************************
+	 * Update top left div to display current user's profile name		   *
+	 * Update top right drop-down menu to have user's profile name as well *
+	 ***********************************************************************/
 	firebase.auth().onAuthStateChanged(function (user) {
-		if (user) {
-			// document.getElementById("usernameID").innerText = user.email;
-			// document.getElementById("userName").innerText = user.email;
-			// want to switch to ... = firebase.auth().currentUser.displayName; for online version
-			document.getElementById("usernameID").innerText = firebase.auth().currentUser.displayName;
-			document.getElementById("userName").innerText = firebase.auth().currentUser.displayName;
-			console.log(user);
-
-
-		}
+		if (user)
+			document.getElementById("usernameID").innerText = firebase.auth().currentUser.displayName, document.getElementById("userName").innerText = firebase.auth().currentUser.displayName;
+		else
+			window.location = "index.html";
 	});
+
+	/***********************************************************************
+	 * Logout the current user											   *
+	 ***********************************************************************/
+	function logOut(){
+		firebase.auth().signOut().then(function() {alert("Logout Successful.")}).catch(function(error){alert("An Error Occured.")});
+	}
 </script>
 
 </body>
