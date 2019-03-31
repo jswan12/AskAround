@@ -144,15 +144,24 @@
 
          window.onbeforeunload = function(){
            intro("left");
-           if(saveFlag === true && poster === true){
+           /*if(saveFlag === true && poster === true){
              save();
-           }
+           }*/
            if(saveFlag === false && poster === true){
-             rem();
+             //rem();
+             firebase.database().ref("chats/" + me + '/txts').remove();
+
            }
-           del();
+           var curChat = 'null';
+           var conWith = 'null';
+           var curPostId  = 'null';
+           var curPostType= 'null';
+           firebase.database().ref('Users/' +  user.uid ).update({curChat});
+           firebase.database().ref('Users/' +  user.uid ).update({conWith});
+           firebase.database().ref('Users/' +  user.uid ).update({curPostId});
+           firebase.database().ref('Users/' +  user.uid ).update({curPostType});
          };
-         function save(){
+         /*function save(){
            //firebase.database().ref('chats/' + me).once('value', function(data){
              //var errors = data.val().txts;
              //var poster = me;
@@ -163,17 +172,7 @@
          }
          function rem(){
            firebase.database().ref("chats/" + me + '/txts').remove();
-         }
-         function del(){
-           var curChat = 'null';
-           var conWith = 'null';
-           var curPostId  = 'null';
-           var curPostType= 'null';
-           firebase.database().ref('Users/' +  user.uid ).update({curChat});
-           firebase.database().ref('Users/' +  user.uid ).update({conWith});
-           firebase.database().ref('Users/' +  user.uid ).update({curPostId});
-           firebase.database().ref('Users/' +  user.uid ).update({curPostType});
-         }
+         }*/
 
          intro("joined");
        });
