@@ -219,11 +219,17 @@ $(window).on("load", function() {
         return false;
     });
 
+    
 
     //  ============ Notifications Open =============
 
     $(".not-box-open").on("click", function(){
         $(this).next(".notification-box").toggleClass("active");
+    });
+
+    // ============= Notifications Clear ==============
+    $(".clear-notif").on("clicl", function() {
+        $(this).next(".nott-list").removeClass("active");
     });
 
     // ============= User Account Setting Open ===========
