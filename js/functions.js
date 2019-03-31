@@ -276,7 +276,6 @@ function getNotification(sub) {
             '<div class="notification-info">',
               '<h3><a href="#" title="">', displayName, '</a></h3>',
 							'<p>',question,'</p>',
-							'<span>2 min ago</span>',
             '</div>',
         ].join('');
         var div = document.createElement('div');
