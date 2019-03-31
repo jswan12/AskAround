@@ -152,10 +152,10 @@
              firebase.database().ref("chats/" + me + '/txts').remove();
 
            }
-           var curChat = 'null';
-           var conWith = 'null';
-           var curPostId  = 'null';
-           var curPostType= 'null';
+           var curChat = "null";
+           var conWith = "null";
+           var curPostId  = "null";
+           var curPostType= "null";
            firebase.database().ref('Users/' +  user.uid ).update({curChat});
            firebase.database().ref('Users/' +  user.uid ).update({conWith});
            firebase.database().ref('Users/' +  user.uid ).update({curPostId});
@@ -198,6 +198,12 @@
     });
 
 
+    document.getElementById("message").addEventListener("keyup", function(event) {
+      event.preventDefault();
+      if (event.keyCode === 13) {
+          document.getElementById("mybutton").click();
+      }
+    });
 
     //create text file of log for user to keep
     //new line is curretnly not working but this is not an easy feature
