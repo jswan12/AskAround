@@ -163,7 +163,8 @@
 												</center>
 											</div>
 											<div class="post_topbar">
-												<a href="#" title="">Reset Password</a>
+												<li><input id="newPass" placeholder="Enter new password" required></li>
+												<li><a type="button" id="changePass">Change Password</button></li>
 											</div>
 
 											</div>
@@ -176,7 +177,18 @@
 			</div>
 		</main>
 
-		
+<script>
+document.getElementById('changePass').addEventListener('click', function(e) {
+	var newPassword = document.getElementById('newPass').value;
+
+	var user = firebase.auth().currentUser;
+	user.updatePassword(newPassword).then(function() {
+		alert("Password changed to: " + newPassword);
+	}).catch(function(error) {
+		alert(error);
+	});
+});
+</script>		
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/popper.js"></script>
