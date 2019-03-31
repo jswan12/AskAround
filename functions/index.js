@@ -19,18 +19,19 @@ const auth = admin.auth();
  * @param {Object} req Express Request Object.
  * @param {Object} res Express Response Object
  */
-const getAllUsers = (req, res) => {
-  const maxResults = 1; // optional arg.
+// const getAllUsers = (req, res) => {
+//   const maxResults = 1; // optional arg.
 
-  auth.listUsers(maxResults).then((userRecords) => {
-    userRecords.users.forEach((user) => console.log(user.toJSON()));
-    res.end('Retrieved users list successfully.');
-  }).catch((error) => console.log(error));
-};
+//   auth.listUsers(maxResults).then((userRecords) => {
+//     userRecords.users.forEach((user) => console.log(user.toJSON()));
+//     res.end('Retrieved users list successfully.');
+    
+//   }).catch((error) => console.log(error));
+// };
 
-module.exports = {
-  api: functions.https.onRequest(getAllUsers),
-};
+// module.exports = {
+//   api: functions.https.onRequest(getAllUsers),
+// };
 
 
 // Take the text parameter passed to this HTTP endpoint and insert it into the
