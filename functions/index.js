@@ -37,6 +37,7 @@ exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
       return snapshot.ref.parent.child('uppercase').set(uppercase);
     });
 
+
 exports.createUser = functions.auth.user().onCreate(function(user, context) {
   return admin.database().ref("Users/" + user.uid).set({
       "Name": "Anonymous",
@@ -46,6 +47,11 @@ exports.createUser = functions.auth.user().onCreate(function(user, context) {
       "curPostId": "null",
       "curPostType": "null",
     })
+});
+
+exports.createPost = functions.database.ref('/Posts/Mathematics')
+.onCreate((snapshot, context) => {
+  console.log('--New post in Math--');
 });
 
 // exports.sendEmailNotification = functions.database.ref('/Posts/Mathematics/').onWrite(
