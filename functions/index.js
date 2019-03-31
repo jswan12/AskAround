@@ -9,6 +9,10 @@ const functions = require('firebase-functions');
 // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
 // The Firebase Admin SDK to access the Firebase Realtime Database.
 const admin = require('firebase-admin');
+
+//module for sending emails using Node.js
+const nodemailer = require('nodemailer');
+
 admin.initializeApp();
 
 // Take the text parameter passed to this HTTP endpoint and insert it into the
