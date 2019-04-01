@@ -55,6 +55,10 @@
         firebase.database().ref('Users/' + uid).once('value', function(data){
             var claimAmount = data.val().claimAmount;
             alert("Congrats you have earned yourself: $" + claimAmount);
+            claimAmount = 0.00;
+            //reset claim to 0.00
+            firebase.database().ref('Users/' + uid ).update({claimAmount});
+
             document.location.replace("home.html");
         });
     }
