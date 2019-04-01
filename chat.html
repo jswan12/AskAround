@@ -169,11 +169,11 @@
              /*var curChat = "null";
              firebase.database().ref('Users/' +  user.uid ).update({curChat});
            }*/
-           //var curChat = "null";
+           var curChat = "null";
            var conWith = "null";
            var curPostId  = "null";
            var curPostType= "null";
-           //firebase.database().ref('Users/' +  user.uid ).update({curChat});
+           firebase.database().ref('Users/' +  user.uid ).update({curChat});
            firebase.database().ref('Users/' +  user.uid ).update({conWith});
            firebase.database().ref('Users/' +  user.uid ).update({curPostId});
            firebase.database().ref('Users/' +  user.uid ).update({curPostType});
