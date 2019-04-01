@@ -1,3 +1,5 @@
+
+
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyCpwgCgLOfU9l27TvFGVYkFQdeyJJnB-ck",
@@ -40,6 +42,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
     if(!user.emailVerified){
       user.sendEmailVerification().then(function() {
+        sendMail();
         console.log("email has been sent");
         document.location.replace('emailVerify.html');
       }).catch(function(error){
@@ -100,6 +103,7 @@ var submitPost = function () {
       "visibility": 'visible'
     });
     console.log("I just posted");
+
     window.open("waiting.html");
   }
   else{

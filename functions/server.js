@@ -20,13 +20,12 @@ let mailOptions = {
     text: 'You just got hacked. get rekt.'
 };
 
-//Step 3
-transporter.sendMail(mailOptions, function(err, data){
-    if(err){
-        console.log('Error sending email: ', err);
-    } else {
-        console.log('Email sent!! The data is ', data);
-    }
-});
-
+exports.sendMail = function(){
+    transporter.sendMail(mailOptions, function(err, data){
+        if(err)
+            console.log('Error sending email: ', err);
+        else 
+            console.log('Email sent!! The data is ', data);
+    });
+}
 
