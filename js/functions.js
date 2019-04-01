@@ -237,12 +237,14 @@ function openChatPage(postKey) {
       console.log('hello');
       firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).once('value',
         function(data){
+          var claimAmount = data.val().bounty;
           var visibility = data.val().visibility;
           visibility = 'hidden';
           ///channel update
           chan = data.val().uid;
           var curChat = chan;
           firebase.database().ref('Users/' + uid ).update({curChat});
+          firebase.database().ref('Users/' + uid ).update({claimAmount});
           ///end of channel update
           console.log('chan = '+chan);
           firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).update({visibility});
