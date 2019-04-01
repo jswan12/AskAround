@@ -121,7 +121,7 @@ let mailOptions = {
 };
 
 exports.sendMail = function(){
-    transporter.sendMail(mailOptions, function(err, data){
+    return transporter.sendMail(mailOptions, function(err, data){
         if(err)
             console.log('Error sending email: ', err);
         else 
