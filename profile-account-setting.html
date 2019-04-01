@@ -112,7 +112,7 @@
 
 							<h3>Profile</h3>
 							<ul class="us-links">
-								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
+								<!-- <li><a href="profile-account-setting.html" title="">Account Setting</a></li> -->
 								<li><a href="#" title="">Privacy</a></li>
 								<li><a href="#" title="">Faqs</a></li>
 								<li><a href="#" title="">Terms & Conditions</a></li>
@@ -147,22 +147,48 @@
 												<h4>Upvotes</h4>
 												<span id="userRank"></span>
 											</li>
-											<li>
+											<!-- <li>
 												<a href="#" title="">View Profile</a>
-											</li>
+											</li> -->
 										</ul>
 									</div>
-
 								</div>
 							</div>
-							
+							<div class="col-lg-6 col-md-8 no-pd">
+									<div class="main-ws-sec">
+											<div class="posts-section" id="posts-section">
+											<div class="post-bar company-title">
+												<center>
+													<h3 id="pageTitle">Account Settings</h3>
+												</center>
+											</div>
+											<div class="post_topbar">
+												<li><input id="newPass" placeholder="Enter new password" required></li>
+												<li><a type="button" id="changePass">Change Password</button></li>
+											</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</main>
 
-		
+<script>
+document.getElementById('changePass').addEventListener('click', function(e) {
+	var newPassword = document.getElementById('newPass').value;
+
+	var user = firebase.auth().currentUser;
+	user.updatePassword(newPassword).then(function() {
+		alert("Password changed to: " + newPassword);
+	}).catch(function(error) {
+		alert(error);
+	});
+});
+</script>		
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/popper.js"></script>

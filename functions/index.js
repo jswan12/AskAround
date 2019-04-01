@@ -65,6 +65,7 @@ exports.createUser = functions.auth.user().onCreate(function(user, context) {
   return admin.database().ref("Users/" + user.uid).set({
       "Name": "Anonymous",
       "Rank": 0,
+      "Funds": 0,
       "conWith" : "null",
       "curChat": "null",
       "curPostId": "null",
