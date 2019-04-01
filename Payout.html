@@ -8,9 +8,6 @@
 		<meta http-equiv="Expires" content="-1" />
     <title>AskAround Payout</title>
     <style>
-      .box{
-        margin-left:25%;
-      }
       h1{
         color: rgb(62,31,88);
         font-size: 100px;
@@ -18,16 +15,48 @@
 
       }
       input[type=button]{
-        width:50%;
-        height:100px;
+        width:inherit;
+        height:50px;
         color:rgb(62,31,88);
         font-size:xx-large;
       }
+      img{
+          width: 200px;
+          height: 200px;
+      }
     </style>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
   </head>
   <body>
-    <div class="box">
-      <h2>Waiting for server...</h2>
-    </div>
+      <center>
+        <img src="images/main - 160px x 160px.png">
+        <h2>Waiting for server...</h2>
+        <input type="button" onclick="payout();" value="Get ur $"></button>
+      </center>
   </body>
+
+  <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCpwgCgLOfU9l27TvFGVYkFQdeyJJnB-ck",
+        authDomain: "askaround-01.firebaseapp.com",
+        databaseURL: "https://askaround-01.firebaseio.com/",
+        projectId: "askaround-01",
+        storageBucket: "askaround-01.appspot.com",
+        messagingSenderId: "527860430663"
+    };
+
+    firebase.initializeApp(config);
+
+    function payout(){
+        var uid = firebase.auth().currentUser.uid;
+        var displayName = firebase.auth().currentUser.displayName;
+        firebase.database().ref('Users/' + uid).once('value', function(data){
+            var claimAmount = data.val().claimAmount;
+            alert("Congrats you have earned yourself: $" + claimAmount);
+            document.location.replace("home.html");
+        });
+    }
+  </script>
 </html>
