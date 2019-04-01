@@ -98,6 +98,7 @@
     var name;
     var voted = false;
     var poster;
+    //var messFlag = false;
     var me;
     var chatRef; // = firebase.database().ref('chats/'+chan+'/txts');
     //firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
@@ -131,10 +132,16 @@
            var mess = JSON.stringify(msg);
            mess = mess.slice(1,mess.length-1);
            if(mess.indexOf("has left") >= 0){
+             //messFlag = true;
              document.getElementById('myMess').removeChild(document.getElementById('message'));
              document.getElementById('myMess').removeChild(document.getElementById('mybutton'));
-             var curChat = "null";
-             firebase.database().ref('Users/' + me).update({curChat});
+             //var curChat = "null";
+             //firebase.database().ref('Users/' + me).update({curChat});
+             /////////////////////////////////////////////////////////////////
+             if(!poster){
+               document.location.replace('Payout.html');
+             }
+             /////////////////////////////////////////////////////////////////
            }
            var messLi = document.createElement("LI");
            var messTxt= document.createTextNode(mess);
@@ -145,18 +152,23 @@
          });
 
          window.onbeforeunload = function(){
-           intro("left");
            /*if(saveFlag === true && poster === true){
              save();
            }*/
-           /*if(saveFlag === true){
-             firebase.database().ref("chats/" + curChat).update(firebase.database().ref("chats/" + curChat + "/txts").val())
-             firebase.database().ref("chats/" + curChat + '/txts').remove();
-           }*/
+           /*if(saveFlag === true && poster === true){
+             intro('left');
+             firebase.database().ref("chats/" + curChat).once("value", function(data){
+               firebase.database().ref("chats/"+ curChat +"/" + Math.floor(Math.random() * 10001)).update(data.val().txts);
+             });
+             //firebase.database().ref("chats/" + curChat + '/txts').remove();
+           }
            if(saveFlag === false && poster === true){
              //rem();
+             intro('left');*/
              firebase.database().ref("chats/" + me + '/txts').remove();
-           }
+             /*var curChat = "null";
+             firebase.database().ref('Users/' +  user.uid ).update({curChat});
+           }*/
            //var curChat = "null";
            var conWith = "null";
            var curPostId  = "null";
@@ -166,18 +178,6 @@
            firebase.database().ref('Users/' +  user.uid ).update({curPostId});
            firebase.database().ref('Users/' +  user.uid ).update({curPostType});
          };
-         /*function save(){
-           //firebase.database().ref('chats/' + me).once('value', function(data){
-             //var errors = data.val().txts;
-             //var poster = me;
-             //var conWith =
-             //firebase.database().ref('chats/' + me ).update({errors});
-             rem();
-           //});
-         }
-         function rem(){
-           firebase.database().ref("chats/" + me + '/txts').remove();
-         }*/
 
          intro("joined");
        });
@@ -185,8 +185,10 @@
 	  });
 
     function intro(x){
-      document.getElementById("message").value = ' has ' + x;
-      setTimeout(second(),3000);
+      //if(!messFlag){
+        document.getElementById("message").value = ' has ' + x;
+        setTimeout(second(),3000);
+      //}
     }
     function second(){
       btn.click();
@@ -199,7 +201,9 @@
       messA = document.getElementById("message").value;
       messJ = name + ": " + messA;
       firebase.database().ref('chats/'+chan+'/txts').push(messJ);
-      document.getElementById("message").value = '';
+      //if(!messFlag){
+        document.getElementById("message").value = '';
+    //  }
     });
 
 
@@ -250,7 +254,10 @@
         firebase.database().ref("Users/" + me).once("value", function(values){
           var Rank;
           var them = values.val().conWith;
+          console.log(them);
           firebase.database().ref("Users/" + them).once("value", function(data){
+            console.log('here');
+            console.log(data.val().Rank);
             Rank = data.val().Rank - 1;
             console.log(Rank);
             firebase.database().ref('Users/' + them ).update({Rank});
