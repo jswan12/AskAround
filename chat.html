@@ -135,8 +135,8 @@
              //messFlag = true;
              document.getElementById('myMess').removeChild(document.getElementById('message'));
              document.getElementById('myMess').removeChild(document.getElementById('mybutton'));
-             //var curChat = "null";
-             //firebase.database().ref('Users/' + me).update({curChat});
+             var curChat = "null";
+             firebase.database().ref('Users/' + me).update({curChat});
              /////////////////////////////////////////////////////////////////
              if(!poster){
                document.location.replace('Payout.html');
