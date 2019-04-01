@@ -192,9 +192,7 @@ function getPost(sub) {
           '<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>',
           '<input id="button',
           postID,
-          '" type="button" value="Claim Bounty" onclick="storeMoney(\'',
-          postID,
-          '\');" onclick="openChatPage(\'',
+          '" type="button" value="Claim Bounty" onclick="openChatPage(\'',
           postID,
           '\');" style="float:right; background-color: green; color: white; height: 25px; width: 100px; border: none;"></input>',
           '<ul class="ed-options">',
@@ -228,15 +226,6 @@ function getPost(sub) {
       else{console.log("hidding post " + postID);}
     });
   });
-}
-
-function storeMoney(postKey) {
-	firebase.database().ref('Users/' + user.uid).once('value', function(data){
-      		if(data.val().Funds == 0){
-        		var Funds = document.getElementById('price').value;
-        	firebase.database().ref('Users/' + uid ).update({Funds});
-      		}
-	});
 }
 
 function openChatPage(postKey) {
