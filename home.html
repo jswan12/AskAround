@@ -86,15 +86,15 @@
 									Notification
 								</a>
 								<div class="notification-box msg">
-										<div class="nt-title">											
+										<div class="nt-title">
 											<a class="clear-notif" href="#" title="">Clear all</a>
 										</div>
 										<div class="nott-list">
-											<div class="notification-details">										
-												<div class="notification-info">												
-												</div>										
+											<div class="notification-details">
+												<div class="notification-info">
+												</div>
 											</div>
-																				
+
 										</div><!--nott-list end-->
 									</div><!--notification-box end-->
 							</li>
@@ -155,10 +155,10 @@
 														<!--<li style="border-top: none"><a class="post-jb active" href="#" title="">Post a Question</a></li>-->
 												</ul>
 												<u1>
-													
+
 														<style>
 															body {font-family: Arial, Helvetica, sans-serif;}
-															
+
 															/* The Modal (background) */
 															.modal {
 																display: none; /* Hidden by default */
@@ -184,7 +184,7 @@
 																cursor: pointer;
 																width: 100%;
 															}
-															
+
 															/* Modal Content */
 															.modal-content {
 																position: center;
@@ -199,18 +199,18 @@
 																animation-name: animatetop;
 																animation-duration: 0.4s
 															}
-															
+
 															/* Add Animation */
 															@-webkit-keyframes animatetop {
-																from {top:-300px; opacity:0} 
+																from {top:-300px; opacity:0}
 																to {top:0; opacity:1}
 															}
-															
+
 															@keyframes animatetop {
 																from {top:-300px; opacity:0}
 																to {top:0; opacity:1}
 															}
-															
+
 															/* The Close Button */
 															.close {
 																color: white;
@@ -218,26 +218,26 @@
 																font-size: 28px;
 																font-weight: bold;
 															}
-															
+
 															.close:hover,
 															.close:focus {
 																color: #000;
 																text-decoration: none;
 																cursor: pointer;
 															}
-															
+
 															.modal-header {
 																padding: 2px 16px;
 																background-color: #3c1a5b;
 																color: white;
 															}
-															
+
 															.modal-body {padding: 2px 16px;}
 														</style>
 
 														<!-- Trigger/Open The Modal -->
 														<button onclick="document.getElementById('connectToStripe').style.display='block'" style="width:auto;">Login To Stripe to Receive Payments</button>
-														
+
 														<!-- The Modal -->
 														<div id="connectToStripe" class="modal">
 
@@ -266,7 +266,7 @@
 															// Get the <span> element that closes the modal
 															var span = document.getElementsByClassName("close")[0];
 
-															// When the user clicks the button, open the modal 
+															// When the user clicks the button, open the modal
 															btn.onclick = function () {
 																var stripeID = 'cus_Eo5ehKrQRyy01Q';
 																firebase.database().ref('Users/' + uid ).update({stripeID});
@@ -284,7 +284,7 @@
 																}
 															}
 														</script>
-													
+
 												</u1>
 											</li>
 											<li>
@@ -354,7 +354,7 @@
 									</select>
 								</div>
 							</div>-->
-							
+
 							<div class="col-lg-12">
 								<ul>
 									<!--<li><button class="active" id="customButton">Purchase</button></li>-->
@@ -420,15 +420,21 @@
 
   document.getElementById('postButton').addEventListener('click', function(e) {
   // Open Checkout with further options:
-  handler.open({
-    name: 'AskAround',
-    description: 'Bounty Price',
-    amount: document.getElementById('userBounty').value*100,
-    zipCode: true
+	//console.log("curchat is::: " + curChatA);
+	if(curChatA === 'null'){
+  	handler.open({
+    	name: 'AskAround',
+    	description: 'Bounty Price',
+    	amount: document.getElementById('userBounty').value*100,
+    	zipCode: true
+  	});
+  	e.preventDefault();
+	}
+	else{
+		alert("sorry only one post at a time!!");
+	}
   });
-  e.preventDefault();
-  });
-      
+
   // Close Checkout on page navigation:
   window.addEventListener('popstate', function() {
     handler.close();
