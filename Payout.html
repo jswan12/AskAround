@@ -27,6 +27,7 @@
 		</style>
 		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+		<script src="js/initializeFirebase.js"></script>
 	</head>
 	<body>
 		<center>
@@ -35,20 +36,7 @@
 			<input type="button" onclick="payout();" value="Get ur $"></button>
 		</center>
 	</body>
-
 	<script>
-		// Initialize Firebase
-		var config = {
-			apiKey: "AIzaSyCpwgCgLOfU9l27TvFGVYkFQdeyJJnB-ck",
-			authDomain: "askaround-01.firebaseapp.com",
-			databaseURL: "https://askaround-01.firebaseio.com/",
-			projectId: "askaround-01",
-			storageBucket: "askaround-01.appspot.com",
-			messagingSenderId: "527860430663"
-		};
-
-		firebase.initializeApp(config);
-
     var btn = document.getElementById("button");
     btn.onclick = function () {
       var stripeID = data.val().stripeID;
