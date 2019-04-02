@@ -1,68 +1,82 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="shortcut icon" href="images/favicon - 32px x 32px.png" />
-    <meta charset="utf-8">
-    <meta http-equiv="cache-control" content="no-cache" />
-		<meta http-equiv="Pragma" content="no-cache" />
-		<meta http-equiv="Expires" content="-1" />
-    <title>AskAround Payout</title>
-    <style>
-      h1{
-        color: rgb(62,31,88);
-        font-size: 100px;
-        float: center;
+	<head>
+		<link rel="shortcut icon" href="images/favicon - 32px x 32px.png" />
+		<meta charset="utf-8">
+		<meta http-equiv="cache-control" content="no-cache" />
+			<meta http-equiv="Pragma" content="no-cache" />
+			<meta http-equiv="Expires" content="-1" />
+		<title>AskAround Payout</title>
+		<style>
+			h1{
+				color: rgb(62,31,88);
+				font-size: 100px;
+				float: center;
 
-      }
-      input[type=button]{
-        width:inherit;
-        height:50px;
-        color:rgb(62,31,88);
-        font-size:xx-large;
-      }
-      img{
-          width: 200px;
-          height: 200px;
-      }
-    </style>
-    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
-  </head>
-  <body>
-      <center>
-        <img src="images/main - 160px x 160px.png">
-        <h2>Waiting for server...</h2>
-        <input type="button" onclick="payout();" value="Get ur $"></button>
-      </center>
-  </body>
+			}
+			input[type=button]{
+				width:inherit;
+				height:50px;
+				color:rgb(62,31,88);
+				font-size:xx-large;
+			}
+			img{
+				width: 200px;
+				height: 200px;
+			}
+		</style>
+		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+	</head>
+	<body>
+		<center>
+			<img src="images/main - 160px x 160px.png">
+			<h2>Waiting for server...</h2>
+			<input type="button" onclick="payout();" value="Get ur $"></button>
+		</center>
+	</body>
 
-  <script>
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyCpwgCgLOfU9l27TvFGVYkFQdeyJJnB-ck",
-        authDomain: "askaround-01.firebaseapp.com",
-        databaseURL: "https://askaround-01.firebaseio.com/",
-        projectId: "askaround-01",
-        storageBucket: "askaround-01.appspot.com",
-        messagingSenderId: "527860430663"
-    };
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyCpwgCgLOfU9l27TvFGVYkFQdeyJJnB-ck",
+			authDomain: "askaround-01.firebaseapp.com",
+			databaseURL: "https://askaround-01.firebaseio.com/",
+			projectId: "askaround-01",
+			storageBucket: "askaround-01.appspot.com",
+			messagingSenderId: "527860430663"
+		};
 
-    firebase.initializeApp(config);
+		firebase.initializeApp(config);
 
-    function payout(){
-        var uid = firebase.auth().currentUser.uid;
-        var displayName = firebase.auth().currentUser.displayName;
-        firebase.database().ref('Users/' + uid).once('value', function(data){
-            var claimAmount = data.val().claimAmount;
-            var tokenString = data.val().tokenString;
-            alert("Congrats you have earned yourself: $" + claimAmount + "\nToken String: " + tokenString);
-            claimAmount = 0.00;
-            tokenString = "null";
-            //reset claim to 0.00
-            firebase.database().ref('Users/' + uid ).update({claimAmount});
-            firebase.database().ref('Users/' + uid ).update({tokenString});
-            window.close();
-        });
-    }
-  </script>
+    var btn = document.getElementById("button");
+    btn.onclick = function () {
+      var stripeID = data.val().stripeID;
+      var stripe = require('stripe')(sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs);
+			stripe.payouts.create(
+				{
+					amount: data.val().claimAmount,
+					currency: "usd",
+					method: "instant"
+				},
+				{stripe_account: stripeID}
+			);
+		}
+
+		function payout(){
+			var uid = firebase.auth().currentUser.uid;
+			var displayName = firebase.auth().currentUser.displayName;
+			firebase.database().ref('Users/' + uid).once('value', function(data){
+				var claimAmount = data.val().claimAmount;
+				var tokenString = data.val().tokenString;
+				alert("Congrats you have earned yourself: $" + claimAmount + "\nToken String: " + tokenString);
+				claimAmount = 0.00;
+				tokenString = "null";
+				//reset claim to 0.00
+				firebase.database().ref('Users/' + uid ).update({claimAmount});
+				firebase.database().ref('Users/' + uid ).update({tokenString});
+				window.close();
+			});
+		}
+	</script>
 </html>
