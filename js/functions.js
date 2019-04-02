@@ -50,6 +50,15 @@ firebase.auth().onAuthStateChanged(function (user) {
       });
     }
 
+    //////////////////////////////////////////////////////////////////
+    firebase.database().ref('Users/' + user.uid ).on('child_changed', function(data){
+      console.log(data.val());
+      if(data.val() === 'null'){
+        document.location.reload(true);
+      }
+    });
+    //////////////////////////////////////////////////////////////////
+
     firebase.database().ref('Users/' + user.uid).once('value', function(data){
       if(data.val().Name != displayName){
         var Name = displayName;
