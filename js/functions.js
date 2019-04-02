@@ -78,14 +78,6 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 var submitPost = function () {
-  /*
-    should get all the post data here and then from here they will be prompted with payment popup
-
-
-  */
-  // Open Checkout with further options:
-
-
   if(curChatA == 'null'){
     ///channel update
     var curChat = uid;
