@@ -5,7 +5,7 @@
   "emailVerified": true,
   "displayName": "Ryan Butler",
   "photoUrl": "https://lh6.googleusercontent.com/-jJYBNQUM8io/AAAAAAAAAAI/AAAAAAAAAHY/1Thj5aciBoU/photo.jpg",
-  "lastSignedInAt": "1554068726201",
+  "lastSignedInAt": "1554142090627",
   "createdAt": "1549917635000",
   "providerUserInfo": [
     {
@@ -18,24 +18,13 @@
   ]
 },
 {
-  "localId": "9cR2MXIJCzdVaxMGB9avs6ovXtE3",
-  "email": "jswan12@lsu.edu",
-  "emailVerified": true,
-  "passwordHash": "UYcK0tPMp0KE4icsOQm3iFE2xKqlxezzXIuOSXhA6enmDAe0PBsfWMSiGqq1zVIvx6FiywNthlBdhfyhWZRXGA==",
-  "salt": "wNj+hYt+mUy16g==",
-  "displayName": "Jacob Swanson #2",
-  "lastSignedInAt": "1554069813873",
-  "createdAt": "1554069813873",
-  "providerUserInfo": []
-},
-{
   "localId": "G226I5d6DpR2QXGmI4RNCn1fVX62",
   "email": "evan.hollier@yahoo.com",
-  "emailVerified": false,
-  "passwordHash": "t0D1ffBHPhv7DZhGSNhFVYVo6bzkGHQIA4S0WuI0mfkXvk528Y5HiV9nIAJf5kZqJo7sIRTFyn3qMibI+8HHmw==",
-  "salt": "OlEFrWxligyo9w==",
+  "emailVerified": true,
+  "passwordHash": "E1OcK5H+9mF1MtUkEqv7DyQerxw6e+Q0hjyzdMBM7icjQBSoAhks1+DZhxCu0gMrciplKFnTWg4fJv04uXJRxQ==",
+  "salt": "f5Z0YAOHR6r86w==",
   "displayName": "Evan Hollier2",
-  "lastSignedInAt": "1554070973886",
+  "lastSignedInAt": "1554087128446",
   "createdAt": "1554060389655",
   "providerUserInfo": []
 },
@@ -45,7 +34,7 @@
   "emailVerified": true,
   "displayName": "Evan H",
   "photoUrl": "https://lh5.googleusercontent.com/-3K5_Wu8XbqQ/AAAAAAAAAAI/AAAAAAAAAWo/s7rRw2QjcSo/photo.jpg",
-  "lastSignedInAt": "1554070044724",
+  "lastSignedInAt": "1554084559033",
   "createdAt": "1548287770000",
   "providerUserInfo": [
     {
@@ -58,13 +47,24 @@
   ]
 },
 {
+  "localId": "Nzk9lT2QXxdc7C2JL8MhjJALSUz1",
+  "email": "rbutl24@lsu.edu",
+  "emailVerified": true,
+  "passwordHash": "RtD09sAi6YrkE2U7mh9brB5GS8lCJ8n4eboH96ux2ZvE5SPfw61j7P+1w51tS4sQfa5l0aXmEQBAVPuhDlzn5w==",
+  "salt": "iEpLLVbHJDS0bg==",
+  "displayName": "Not Ryan",
+  "lastSignedInAt": "1554087269119",
+  "createdAt": "1554086358630",
+  "providerUserInfo": []
+},
+{
   "localId": "XRVHMdhdB5eUOWZbrQdrtygVEsc2",
   "email": "swanson.jacob08@gmail.com",
-  "emailVerified": false,
+  "emailVerified": true,
   "passwordHash": "/xztRsCkvuZNFhZN7x4ytoYeYVrybSMzjjOw1YOBxH+xeAPnJENb8v+4zaIwebCiICfQW1z8rDJ6daIniDLC8A==",
   "salt": "3DtT8hKJ7TvWHQ==",
   "displayName": "Jacob Swanson",
-  "lastSignedInAt": "1554068319731",
+  "lastSignedInAt": "1554149554076",
   "createdAt": "1547868009000",
   "providerUserInfo": []
 },
@@ -75,7 +75,7 @@
   "passwordHash": "rG5O8kJn5IWxGqmCq+MI4VgOwXrr6MwJpPY93QIeXaQYqcxQ9WD1zC4ouuwVreaFpM81C5/dkbjlxNVHhzkhzg==",
   "salt": "Zxpb8Nrve3NtLA==",
   "displayName": "Giovanni Gonzaga",
-  "lastSignedInAt": "1554065102831",
+  "lastSignedInAt": "1554158672000",
   "createdAt": "1554063987530",
   "providerUserInfo": []
 },
@@ -85,7 +85,7 @@
   "emailVerified": true,
   "displayName": "Pedro Rivera",
   "photoUrl": "https://lh4.googleusercontent.com/-57WHZZolHek/AAAAAAAAAAI/AAAAAAAAAAA/ACevoQMYrPjriFsnXbbt5W0KvzhlGj231w/mo/photo.jpg",
-  "lastSignedInAt": "1554069783876",
+  "lastSignedInAt": "1554091386651",
   "createdAt": "1549937820000",
   "providerUserInfo": [
     {
@@ -122,7 +122,7 @@
   "passwordHash": "RDFf1MHyzjz3SJt6BWb+ZjTCioenv33ZrvRbW1gBqHkXSUbWVAXpB5DWuETpyLHl+erlyWjA5zDvS6DRPpQjyw==",
   "salt": "+l7PBkKPWCi3kg==",
   "displayName": "Ped Riv",
-  "lastSignedInAt": "1554071647322",
+  "lastSignedInAt": "1554087743447",
   "createdAt": "1554071647322",
   "providerUserInfo": []
 }]}
