@@ -226,6 +226,7 @@ $(window).on("load", function() {
     $(".not-box-open").on("click", function(){
         $(this).next(".notification-box").toggleClass("active");
     });
+    
 
     // ============= Notifications Clear ==============
     $(".clear-notif").on("click", function() {
