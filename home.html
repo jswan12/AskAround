@@ -400,12 +400,12 @@
 <script>
   var handler = StripeCheckout.configure({
   key: 'pk_test_Q5ThBKpfol6VEp6vpjnxBywu00kkFXE6o8',
-  image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+  image: 'images/logo.png',
   locale: 'auto',
   token: function(token) {
     // You can access the token ID with `token.id`.
 	// Get the token ID to your server-side code for use.
-	alert("success");
+	alert("Payment Successful!");
         $(".post-popup.job_post").addClass("active");
 		$(".wrapper").addClass("overlay");
 		document.getElementById('price').value = document.getElementById('userBounty').value;
@@ -422,7 +422,7 @@
 	if(curChatA === 'null'){
   	handler.open({
     	name: 'AskAround',
-    	description: 'Bounty Price',
+    	description: 'Bounty Payment',
     	amount: document.getElementById('userBounty').value*100,
     	zipCode: true
   	});
