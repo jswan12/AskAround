@@ -265,8 +265,8 @@
 
 															// When the user clicks the button, open the modal
 															btn.onclick = function () {
-																var stripeID = 'cus_Eo5ehKrQRyy01Q';
-																firebase.database().ref('Users/' + uid ).update({stripeID});
+																var stripeID = 'connected';
+																	firebase.database().ref('Users/' + uid ).update({stripeID});
 															}
 
 															// When the user clicks on <span> (x), close the modal
@@ -373,6 +373,8 @@
 <script type="text/javascript" src="js/scrollbar.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/notifications.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://checkout.stripe.com/checkout.js"></script>
 <script src="js/functions.js"></script>
 <script src="js/update.js"></script>
 
