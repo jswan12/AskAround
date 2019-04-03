@@ -30,9 +30,9 @@
 	<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
 	<script src="js/initializeFirebase.js"></script>
 	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-
-
-
+	<script src="https://checkout.stripe.com/checkout.js"></script>
+	<script src="https://js.stripe.com/v3/"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
@@ -77,28 +77,20 @@
 									</li>
 								</ul>
 							</li>
-
-							<li>
-								<a href="#" title="" class="not-box-open">
-									Chat
-								</a>
-							</li>
 							<li>
 								<a href="#" id="notification" class="not-box-open">
 									Notification
 								</a>
 								<div class="notification-box msg">
-										<div class="nt-title">											
-											<a href="#" title="">Clear all</a>
+										<div class="nt-title">
+											<a class="clear-notif" href="#" title="">Clear all</a>
 										</div>
 										<div class="nott-list">
-
-											<div class="notification-details">										
+											<div class="notification-details">
 												<div class="notification-info">
-													<h3 id="subjectTitle">Computer Science</h3>												
 												</div>
 											</div>
-																				
+
 										</div><!--nott-list end-->
 									</div><!--notification-box end-->
 							</li>
@@ -154,9 +146,142 @@
 											</li>
 											<li class="post-st">
 												<ul>
-													<li style="border-top: none"><a class="post-jb active" href="#" title="">Post a Question</a>
-													</li>
+														<li><h4>Desired Bounty Amount</h4><input type="number" min="1.00" class="" value="1.00" step="0.01" id="userBounty" placeholder="Enter Desired Bounty Amount" style="text-align: center; width:71mm;" required></li>
+														<li style="border-top: none"><a type="button" class="payment_methods active" id="postButton">Post a Question</button></li>
+														<!--<li style="border-top: none"><a class="post-jb active" href="#" title="">Post a Question</a></li>-->
 												</ul>
+												<u1>
+
+														<style>
+															body {font-family: Arial, Helvetica, sans-serif;}
+
+															/* The Modal (background) */
+															.modal {
+																display: none; /* Hidden by default */
+																position: fixed; /* Stay in place */
+																z-index: 1; /* Sit on top */
+																padding-top: 100px; /* Location of the box */
+																left: 0;
+																top: 0;
+																width: 100%; /* Full width */
+																height: 100%; /* Full height */
+																overflow: auto; /* Enable scroll if needed */
+																background-color: rgb(0,0,0); /* Fallback color */
+																background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+															}
+
+															/* Set a style for all buttons */
+															button {
+																background-color: #3c1a5b;
+																color: white;
+																padding: 16px 20px;
+																margin: 0 0;
+																border: none;
+																cursor: pointer;
+																width: 100%;
+															}
+
+															/* Modal Content */
+															.modal-content {
+																position: center;
+																background-color: #fefefe;
+																margin: auto;
+																padding: 0;
+																border: 1px solid #888;
+																width: 30%;
+																box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+																-webkit-animation-name: animatetop;
+																-webkit-animation-duration: 0.4s;
+																animation-name: animatetop;
+																animation-duration: 0.4s
+															}
+
+															/* Add Animation */
+															@-webkit-keyframes animatetop {
+																from {top:-300px; opacity:0}
+																to {top:0; opacity:1}
+															}
+
+															@keyframes animatetop {
+																from {top:-300px; opacity:0}
+																to {top:0; opacity:1}
+															}
+
+															/* The Close Button */
+															.close {
+																color: white;
+																float: right;
+																font-size: 28px;
+																font-weight: bold;
+															}
+
+															.close:hover,
+															.close:focus {
+																color: #000;
+																text-decoration: none;
+																cursor: pointer;
+															}
+
+															.modal-header {
+																padding: 2px 16px;
+																background-color: #3c1a5b;
+																color: white;
+															}
+
+															.modal-body {padding: 2px 16px;}
+														</style>
+
+														<!-- Trigger/Open The Modal -->
+														<button onclick="document.getElementById('connectToStripe').style.display='block'" style="width:auto;">Login To Stripe to Receive Payments</button>
+
+														<!-- The Modal -->
+														<div id="connectToStripe" class="modal">
+
+															<!-- Modal content -->
+															<div class="modal-content">
+																<div class="modal-header">
+																	<span class="close">&times;</span>
+																	<!-- <h2>Modal Header</h2> -->
+																</div>
+																<div class="modal-body">
+																	<p>
+																		<a href="https://connect.stripe.com/oauth/authorize?response_type=code&amp;client_id=ca_EniAw91fD2i0W9Eq1idvIGKo43c3vZLL&amp;scope=read_write" class="connect-button"><span>Connect with Stripe</span></a>
+																	</p>
+																</div>
+															</div>
+
+														</div>
+
+														<script>
+															// Get the modal
+															var modal = document.getElementById('connectToStripe');
+
+															// Get the button that opens the modal
+															var btn = document.getElementById("connectToStripe");
+
+															// Get the <span> element that closes the modal
+															var span = document.getElementsByClassName("close")[0];
+
+															// When the user clicks the button, open the modal
+															btn.onclick = function () {
+																var stripeID = 'connected';
+																	firebase.database().ref('Users/' + uid ).update({stripeID});
+															}
+
+															// When the user clicks on <span> (x), close the modal
+															span.onclick = function () {
+																modal.style.display = "none";
+															}
+
+															// When the user clicks anywhere outside of the modal, close it
+															window.onclick = function (event) {
+																if (event.target == modal) {
+																	modal.style.display = "none";
+																}
+															}
+														</script>
+
+												</u1>
 											</li>
 											<li>
 												<a href="profile-account-setting.html" title="">View Profile</a>
@@ -206,7 +331,7 @@
 										<option value="Science">Science</option>
 									</select>
 									<div class="price-br" style="margin-right: 10px">
-										<input type="number" min="0" name="price" id="price" placeholder="Bounty" required>
+										<input type="number" min="0" name="price" id="price" placeholder="Bounty" disabled>
 										<i class="la la-dollar"></i>
 									</div>
 								</div>
@@ -225,11 +350,12 @@
 									</select>
 								</div>
 							</div>-->
-							
+
 							<div class="col-lg-12">
 								<ul>
-									<li><button type="submit" class="active">Post</button></li>
-									<li><a href="#" class="close-question">Cancel</a></li>
+									<!--<li><button class="active" id="customButton">Purchase</button></li>-->
+									<li><button type="submit" class="active" id="submitButton">Post</button></li>
+									<!--<li><a href="#" class="close-question">Cancel</a></li>-->
 								</ul>
 							</div>
 						</div>
@@ -246,6 +372,8 @@
 <script type="text/javascript" src="js/scrollbar.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/notifications.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://checkout.stripe.com/checkout.js"></script>
 <script src="js/functions.js"></script>
 <script src="js/update.js"></script>
 
@@ -269,6 +397,47 @@
 	}
 </script>
 
+<script>
+  var handler = StripeCheckout.configure({
+  key: 'pk_test_Q5ThBKpfol6VEp6vpjnxBywu00kkFXE6o8',
+  image: 'images/logo.png',
+  locale: 'auto',
+  token: function(token) {
+    // You can access the token ID with `token.id`.
+	// Get the token ID to your server-side code for use.
+	alert("Payment Successful!");
+        $(".post-popup.job_post").addClass("active");
+		$(".wrapper").addClass("overlay");
+		document.getElementById('price').value = document.getElementById('userBounty').value;
+		console.log(token.id);
+
+		var tokenString = token.id;
+        firebase.database().ref('Users/' + uid ).update({tokenString});
+  }
+  });
+
+  document.getElementById('postButton').addEventListener('click', function(e) {
+  // Open Checkout with further options:
+	//console.log("curchat is::: " + curChatA);
+	if(curChatA === 'null'){
+  	handler.open({
+    	name: 'AskAround',
+    	description: 'Bounty Payment',
+    	amount: document.getElementById('userBounty').value*100,
+    	zipCode: true
+  	});
+  	e.preventDefault();
+	}
+	else{
+		alert("sorry only one post at a time!!");
+	}
+  });
+
+  // Close Checkout on page navigation:
+  window.addEventListener('popstate', function() {
+    handler.close();
+  });
+</script>
 
 </body>
 </html>
