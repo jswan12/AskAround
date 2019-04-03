@@ -37,19 +37,17 @@
 		</center>
 	</body>
 	<script>
-    var btn = document.getElementById("button");
-    btn.onclick = function () {
-      var stripeID = data.val().stripeID;
-      var stripe = require('stripe')(sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs);
-			stripe.payouts.create(
-				{
-					amount: data.val().claimAmount,
-					currency: "usd",
-					method: "instant"
-				},
-				{stripe_account: stripeID}
-			);
-		}
+		var claimAmount = data.val().claimAmount;
+		var stripeID = data.val().stripeID;
+		var stripe = require('stripe')(sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs);
+		stripe.payouts.create(
+			{
+				amount: 'claimAmount',
+				currency: 'usd',
+				method: 'instant',
+			},
+			{stripe_account: 'stripeID'}
+		);
 
 		function payout(){
 			var uid = firebase.auth().currentUser.uid;
