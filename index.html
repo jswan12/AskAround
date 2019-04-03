@@ -30,188 +30,276 @@
 		</script>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 		<style>
-		body {font-family: Arial, Helvetica, sans-serif;}
 
-		/* Full-width input fields */
-		input[type=text], input[type=password] {
-			width: 100%;
-			padding: 12px 20px;
-			margin: 8px 0;
-			display: inline-block;
-			border: 1px solid #ccc;
-			box-sizing: border-box;
-		}
-
-		/* Set a style for all buttons */
-		button {
-			background-color: #4CAF50;
-			color: white;
-			padding: 14px 20px;
-			margin: 8px 0;
-			border: none;
-			cursor: pointer;
-			width: 100%;
-		}
-
-		button:hover {
-			opacity: 0.8;
-		}
-
-		/* Extra styles for the cancel button */
-		.cancelbtn {
-			width: auto;
-			padding: 10px 18px;
-			background-color: #f44336;
-		}
-
-		/* Center the image and position the close button */
-		.imgcontainer {
-			text-align: center;
-			margin: 24px 0 12px 0;
-			position: relative;
-		}
-
-		img.avatar {
-			width: 40%;
-			border-radius: 50%;
-		}
-
-		.container {
-			padding: 16px;
-		}
-
-		span.psw {
-			float: right;
-			padding-top: 16px;
-		}
-
-		/* The Modal (background) */
-		.modal {
-			display: none; /* Hidden by default */
-			position: fixed; /* Stay in place */
-			z-index: 1; /* Sit on top */
-			left: 0;
-			top: 0;
-			width: 100%; /* Full width */
-			height: 100%; /* Full height */
-			overflow: auto; /* Enable scroll if needed */
-			background-color: rgb(0,0,0); /* Fallback color */
-			background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-			padding-top: 60px;
-		}
-
-		/* Modal Content/Box */
-		.modal-content {
-			background-color: #fefefe;
-			margin: 5% auto 25% auto; /* 5% from the top, 25% from the bottom and centered */
-			border: 1px solid #888;
-			width: 60%; /* Could be more or less, depending on screen size */
-		}
-
-		/* The Close Button (x) */
-		.close {
-			position: absolute;
-			right: 20px;
-			top: 0;
-			color: #000;
-			font-size: 35px;
-			font-weight: bold;
-		}
-
-		.close:hover,
-		.close:focus {
-			color: red;
-			cursor: pointer;
-		}
-
-		/* Add Zoom Animation */
-		.animate {
-			-webkit-animation: animatezoom 0.6s;
-			animation: animatezoom 0.6s
-		}
-
-		@-webkit-keyframes animatezoom {
-			from {-webkit-transform: scale(0)} 
-			to {-webkit-transform: scale(1)}
-		}
-  
-		@keyframes animatezoom {
-			from {transform: scale(0)} 
-			to {transform: scale(1)}
-		}
-
-		/* Change styles for span and cancel button on extra small screens */
-		@media screen and (max-width: 300px) {
-			span.psw {
-				display: block;
-				float: none;
-			}
-			.cancelbtn {
-				width: 100%;
-			}
-		}
-
-		.firebaseui-button {
-    		display: block !important;
-   			height: 36px;
-    		margin-left: 8;
-			min-width: 1px;
-		}
-		</style> -->
 	</head>
-	
-	<body>
-		<!-- The surrounding HTML is left untouched by FirebaseUI.
-			Your app may use that space for branding, controls and other customizations.-->
-		<center><h1>AskAround Sign-In</h1><br>
-		<img src="images/main - 160px x 160px.png" alt="" style="height: 200px;">
-		<p>AskAround is a platform where students can ask questions and receive answers from certified instructors!</p></center><br><br>
-<!-- 		<center>
-		<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign in with Username/Password</button>
-		<div id="id01" class="modal">
-			<form class="modal-content animate" action="/action_page.php">
-				<div class="imgcontainer">
-					<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-					<img src="https://github.com/jswan12/AskAround/blob/master/images/logo.png?raw=true" alt="Avatar" class="avatar">
-				</div>
-				
-				<div class="container">
-					<label for="uname"><b>Username</b></label>
-					<input type="text" placeholder="Enter Username" name="uname" required>
 
-					<label for="psw"><b>Password</b></label>
-					<input type="password" placeholder="Enter Password" name="psw" required>
-        
-					<button type="submit">Login</button>
-					<label>
-						<input type="checkbox" checked="checked" name="remember"> Remember Me
-					</label>
-				</div>
+<body>
+    <div class="page-landing">
+        <header class="landing-header">
 
-				<div class="container" style="background-color:#f1f1f1">
-					<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-					<span class="psw">Forgot <a href="#">Password?</a></span>
-				</div>
-			</form>
-		</div>
-		<script>
-		// Get the modal
-		var modal = document.getElementById('id01');
+            <div class="content content-centered">
+                <div class="landing-title">
+                    <div class="logo-name">
+                        <img src="images/logo.png"></img>
+                        <h1>Ask Around</h1>
+                    </div>
+                   
+                    <p class="landing-title-text"><strong>AskAround</strong> is a platform where students can ask questions and receive answers from certified instructors.</p>
+                    <div id="firebaseui-auth-container"></div>
+                    <div class="terms">
+                        <p>By continuing, you are indicating that you accept <br> our Terms of Service and Privacy Policy.</p>
+	                    <input type="button" onclick="alert('Do not act like you are not impressed.')" value="Terms of Service" />
+	                    <input type="button" onclick="alert('We definitely will not sell your information. Pinkie swear.')" value="Privacy Policy" />
+                    </div>
+                </div>
+                <div class="landing-image">
+                    <img src="https://atina.io//dist/images/home/content/simpleprojectmanagementtool.svg" class="img-responsive"></img>
+                </div>
+            </div>
+        </header>
 
-		// When the user clicks anywhere outside of the modal, close it
-		window.onclick = function(event) {
-			if (event.target == modal) {
-				modal.style.display = "none";
-			}
-		}
-		</script>
+        <main>
+            <section class="section-block">
+                <div class="content content-centered">
+                    <header class="section-block-header">
+                        <small>Evan Hollier, Jacob Swanson, Ryan Butler, Pedro Rivera, Giovanni Gonzaga</small>
+                        <h2>Post Any Question</h2>
+                        <hr>
+                        <div><img src="images/questions.png" class="question-icon"></img></div>
+                        <div>
+                            <p class="section-description">Submit any question you have regarding any topic related to school.</p>
+                        </div>
+                    </header>
+                </div>
+            </section>
 
-		</center> -->
-		<div id="firebaseui-auth-container"></div>
-	</body>
-	<body><center><p>By continuing, you are indicating that you accept our Terms of Service and Privacy Policy.</p>
-	<input type="button" onclick="alert('Do not act like you are not impressed.')" value="Terms of Service" />
-	<input type="button" onclick="alert('We definitely will not sell your information. Pinkie swear.')" value="Privacy Policy" />
-	</center></body>
+            <section class="section-block" style="background-color: #fafafa;">
+                    <div class="content content-centered">
+                        <header class="section-block-header">
+                            <h2>Claim Bounty</h2>
+                            <hr>
+                            <div><img src="images/get-money.png" class="question-icon"></img></div>
+                            <div>
+                                <p class="section-description">Earn money by answering other people's questions.</p>
+                            </div>
+                        </header>
+                    </div>
+            </section>
+
+            <section class="section-block">
+                    <div class="content content-centered">
+                        <header class="section-block-header">
+                            <h2>Peer to Peer Chat</h2>
+                            <hr>
+                            <div><img src="images/chat.png" class="question-icon"></img></div>
+                            <div>
+                                <p class="section-description">Chat directly with the person asking/answering the question.</p>
+                            </div>
+                        </header>
+                    </div>
+            </section>
+            
+            <section class="section-block" style="background-color: #fafafa;">
+                    <div class="content content-centered">
+                        <header class="section-block-header">
+                            <h2>Interested?</h2>
+                            <hr>
+                            <div>
+                                <p class="section-description">Try AskAround today!</p>
+                                <a href="#" class="button round-button">Get Started</a>
+                            </div>
+                        </header>
+                    </div>
+            </section> 
+
+        </main>
+    </div>
+    
+</body>
 </html>
+
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Roboto,sans-serif;
+    }
+    .landing-header {
+        background: linear-gradient(-45deg,#341448,#354879);
+        background-size: 100%;
+        overflow: hidden;
+        height: 100vh;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        
+    }
+
+    .content-centered{
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 35px;
+        padding-right: 35px;
+
+    }
+
+    .content {
+        margin-bottom: 2em;
+        width: 100%;
+        max-width: 1140px;
+    }
+    
+    .landing-title {
+        width: 100%;
+        position: relative;
+        padding-bottom: 15vh;
+    }
+
+    .landing-image {
+        bottom: 30vh;
+        left: calc(50% + 30px);
+        position: absolute;
+    }
+
+    .img-responsive{
+        max-width: 90%;
+    }
+
+    .landing-title h1 {
+        color: white;
+        font-size: 2.5rem;
+        line-height: 1.5;
+    }
+
+    .landing-title-text {
+        color: white;
+        font-size: 1.05rem;
+        margin-bottom: 7em;
+        max-width: 450px;
+        line-height: 1.8;
+    }
+
+    .round-button {
+        padding: .8em 2.5rem;
+        border-radius: 100px;
+    }
+
+    .button {
+        color: white;
+        background: #1dcb8b;
+        outline: none;
+        border: none;
+        -webkit-font-smoothing: antialiased;
+        cursor: pointer;
+        user-select: none;
+        display: inline-block;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .firebaseui-idp-list>.firebaseui-list-item {
+        text-align: left;
+    }
+
+    .firebaseui-container{
+        margin: 0;
+    }
+
+    .firebaseui-card-content{
+        padding: 0;
+    }
+
+    .firebaseui-relative-wrapper{
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .firebaseui-card-content{
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .firebaseui-title{
+        color: black !important;
+        font-size: 25px !important;
+    }
+
+    .section-block {
+        padding-bottom: 90px;
+        padding-top: 90px;
+        position: relative;
+    }
+
+    .section-block-header {
+        margin: 0 auto 70px;
+        max-width: 70%;
+        text-align: center;
+    }
+
+    .section-block-header small {
+        color: hsla(0,0%,60%,.6);
+        display: inline-block;
+        font-size: .69em;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: .74px;
+        word-spacing: 1.9px;
+    }
+
+    .section-block-header hr {
+        margin-bottom: 1.5em;
+        margin-top: 2.5em;
+        width: 50px;
+    }
+
+    h2 {
+        color: #323d47;
+        font-weight: 400;
+        margin-top: 0;
+    }
+
+    .question-icon {
+        max-width: 20%;
+    }
+
+    .section-description {
+        color: #666;
+        font-size: 1.125em;
+        font-weight: 300;
+        line-height: 1.9;
+    }
+
+    .terms {
+        padding-left: 25px;
+    }
+
+    .terms p {
+        color: #f2f3f5;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .navigation-container{
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+        padding: 10px 0;
+    }
+
+    .logo-name {
+        width: 400px;
+        overflow: hidden;
+    }
+
+    .logo-name img {
+        margin-right: 15px;
+        float: left;
+        max-width: 80px;
+    }
+ 
+
+
+</style>
