@@ -62,14 +62,18 @@ exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
 
 
 exports.createUser = functions.auth.user().onCreate(function(user, context) {
-  return admin.database().ref("Users/" + user.uid).set({
+  admin.database().ref("Users/" + user.uid).set({
       "Name": "Anonymous",
+      "Email": user.email,
       "Rank": 0,
       "conWith" : "null",
       "curChat": "null",
       "curPostId": "null",
       "curPostType": "null",
+      "tokenString": "null"
     })
+
+    return sendWelcomeEmail(user.email, user.displayName);
 });
 
 
@@ -102,15 +106,15 @@ const APP_NAME = 'AskAround';
  * Sends a welcome email to new user.
  */
 // [START onCreateTrigger]
-exports.sendWelcomeEmail = functions.auth.user().onCreate((user) => {
-// [END onCreateTrigger]
-  // [START eventAttributes]
-  const email = user.email; // The email of the user.
-  const displayName = user.displayName; // The display name of the user.
-  // [END eventAttributes]
+// exports.sendWelcomeEmail = functions.auth.user().onCreate((user) => {
+// // [END onCreateTrigger]
+//   // [START eventAttributes]
+//   const email = user.email; // The email of the user.
+//   const displayName = user.displayName; // The display name of the user.
+//   // [END eventAttributes]
 
-  return sendWelcomeEmail(email, displayName);
-});
+//   return sendWelcomeEmail(email, displayName);
+// });
 // [END sendWelcomeEmail]
 
 // [START sendByeEmail]
@@ -156,3 +160,45 @@ function sendGoodbyeEmail(email, displayName) {
     return console.log('Account deletion confirmation email sent to:', email);
   });
 }
+
+  exports.sendNotificationEmail = functions.https.onRequest((req, res) => {
+    admin.database().ref('Users/').once('value', function (data) {
+      data.forEach(function (childSnapshot) {
+        var childData = childSnapshot.val();
+        var email = childData.email;
+        var Name = childData.Name;
+        
+        return sendNotificationEmail(email, Name);
+      });
+      res.end();
+    });
+  });
+
+
+  function sendNotificationEmail(email, displayName) {
+    const mailOptions = {
+      from: `${APP_NAME} <noreply@firebase.com>`,
+      to: email,
+    };
+  
+    // The user unsubscribed to the newsletter.
+    mailOptions.subject = `New Posting!`;
+    mailOptions.text = `Hey ${displayName || ''}!, A user just posted a new bounty! Be the first to claim it from ${APP_NAME}.`;
+    return mailTransport.sendMail(mailOptions).then(() => {
+      return console.log('Notification email sent to:', email);
+    });
+  }
+// // Sends a goodbye email to the given user.
+// function sendGoodbyeEmail(email, displayName) {
+//   const mailOptions = {
+//     from: `${APP_NAME} <noreply@firebase.com>`,
+//     to: email,
+//   };
+
+//   // The user unsubscribed to the newsletter.
+//   mailOptions.subject = `Bye!`;
+//   mailOptions.text = `Hey ${displayName || ''}!, We confirm that we have deleted your ${APP_NAME} account.`;
+//   return mailTransport.sendMail(mailOptions).then(() => {
+//     return console.log('Account deletion confirmation email sent to:', email);
+//   });
+// }
