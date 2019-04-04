@@ -78,6 +78,7 @@
     <center>
       <img src="images/main - 160px x 160px.png" style="height: 100px; width: 100px;">
       <h1>Chatroom</h1>
+      <p>If you have any concerns with the service you have recieved download the log then email us at AskAroundLSU@gmail.com</p>
       <div class = "messagebox">
         <ul id="txtBox">
         </ul>
@@ -114,7 +115,7 @@
     var formRef = document.getElementById('myMess');//reference to message form
 
 
-    //firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
+    firebase.auth().signInWithEmailAndPassword("priver3@lsu.edu", "password"); // placeholder account for offline testing
 
     //this area will be once the page recognizes that hte user is logged in
     //allows for easy acces to the current user's information as well as control
@@ -125,7 +126,6 @@
        firebase.database().ref('Users/' + user.uid).once('value', function(data){
          chan = data.val().curChat;
          me = user.uid;
-
          if(user.uid != chan){
            //THIS IS WHEN YOU ARE THE ANSWERER
            //removes the upvote and downvote
@@ -252,6 +252,8 @@
         firebase.database().ref("Users/" + me).once("value", function(values){
           var Rank;
           var them = values.val().conWith;
+          document.getElementById("message").value = ' has up-voted';
+          setTimeout(second(),3000);
           firebase.database().ref("Users/" + them).once("value", function(data){
             Rank = data.val().Rank + 1;
             console.log(Rank);
@@ -261,6 +263,9 @@
       }
       //if downvote
       if(val ===0){
+        download.click();
+        document.getElementById("message").value = ' has down-voted';
+        setTimeout(second(),3000);
         firebase.database().ref("Users/" + me).once("value", function(values){
           var Rank;
           var them = values.val().conWith;
