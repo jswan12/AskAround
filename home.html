@@ -43,155 +43,16 @@
 					<div class="logo">
 						<a href="home.html" title=""><img src="images/logo.png" alt="" style="height: 34px;"></a>
 					</div>
-					<!--logo end-->
 
-					<div class="stripe-connect">
-						<!-- <form> 
-							<input type="text" name="search" placeholder="Search...">
-							<button type="submit"><i class="la la-search"></i></button> -->
-							<!-- <ul style="list-style-type:none;">
-								<li>
-										<a href="https://connect.stripe.com/oauth/authorize?response_type=code&amp;client_id=ca_EniAw91fD2i0W9Eq1idvIGKo43c3vZLL&amp;scope=read_write">Connect To Stripe</a>
-								</li> -->
-								<!-- <style>
-									body {font-family: Arial, Helvetica, sans-serif;}
-
-									/* The Modal (background) */
-									.modal {
-										display: none; /* Hidden by default */
-										position: fixed; /* Stay in place */
-										z-index: 1; /* Sit on top */
-										padding-top: 100px; /* Location of the box */
-										left: 0;
-										top: 0;
-										width: 100%; /* Full width */
-										height: 100%; /* Full height */
-										overflow: auto; /* Enable scroll if needed */
-										background-color: rgb(0,0,0); /* Fallback color */
-										background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-									}
-
-									/* Set a style for all buttons */
-									button {
-										background-color: #3c1a5b;
-										color: white;
-										padding: 16px 20px;
-										margin: 0 0;
-										border: none;
-										cursor: pointer;
-										width: 100%;
-									}
-
-									/* Modal Content */
-									.modal-content {
-										position: center;
-										background-color: #fefefe;
-										margin: auto;
-										padding: 0;
-										border: 1px solid #888;
-										width: 30%;
-										box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-										-webkit-animation-name: animatetop;
-										-webkit-animation-duration: 0.4s;
-										animation-name: animatetop;
-										animation-duration: 0.4s
-									}
-
-									/* Add Animation */
-									@-webkit-keyframes animatetop {
-										from {top:-300px; opacity:0}
-										to {top:0; opacity:1}
-									}
-
-									@keyframes animatetop {
-										from {top:-300px; opacity:0}
-										to {top:0; opacity:1}
-									}
-
-									/* The Close Button */
-									.close {
-										color: white;
-										float: right;
-										font-size: 28px;
-										font-weight: bold;
-									}
-
-									.close:hover,
-									.close:focus {
-										color: #000;
-										text-decoration: none;
-										cursor: pointer;
-									}
-
-									.modal-header {
-										padding: 2px 16px;
-										background-color: #3c1a5b;
-										color: white;
-									}
-
-									.modal-body {padding: 2px 16px;}
-								</style>
-
-								 Trigger/Open The Modal
-								<button onclick="document.getElementById('connectToStripe').style.display='block'" style="width:auto;">Login To Stripe to Receive Payments</button>
-
-								 The Modal
-								<div id="connectToStripe" class="modal">
-
-									 Modal content
-									<div class="modal-content">
-										<div class="modal-header">
-											<span class="close">&times;</span>
-											<h2>Modal Header</h2>
-										</div>
-										<div class="modal-body">
-											<p>
-												<a href="https://connect.stripe.com/oauth/authorize?response_type=code&amp;client_id=ca_EniAw91fD2i0W9Eq1idvIGKo43c3vZLL&amp;scope=read_write" class="connect-button"><span>Connect with Stripe</span></a>
-											</p>
-										</div>
-									</div>
-
-								</div> -->
-
-								<!-- <script>
-									// Get the modal
-									var modal = document.getElementById('connectToStripe');
-
-									// Get the button that opens the modal
-									var btn = document.getElementById("connectToStripe");
-
-									// Get the <span> element that closes the modal
-									var span = document.getElementsByClassName("close")[0];
-
-									// When the user clicks the button, open the modal
-									btn.onclick = function () {
-										var stripeID = 'cus_EoWqQyppPnWgt2';
-											firebase.database().ref('Users/' + uid ).update({stripeID});
-									}
-
-									// When the user clicks on <span> (x), close the modal
-									span.onclick = function () {
-										modal.style.display = "none";
-									}
-
-									// When the user clicks anywhere outside of the modal, close it
-									window.onclick = function (event) {
-										if (event.target == modal) {
-											modal.style.display = "none";
-										}
-									}
-								</script> -->
-
-							<!-- </ul> -->
-						<!-- </form> -->
+					<div>
+						<form> 
+							<input style="visibility:hidden;" type="text" name="search" placeholder="Search...">
+							<button style="visibility:hidden;" type="submit"><i style="visibility:hidden;" class="la la-search"></i></button>
+						</form>
 					</div>
-					<!--stripe-connect end-->
 
 					<nav>
 						<ul>
-							<li>
-									<a href="https://connect.stripe.com/oauth/authorize?response_type=code&amp;client_id=ca_EniAw91fD2i0W9Eq1idvIGKo43c3vZLL&amp;scope=read_write">Connect To Stripe</a>
-							</li>
 							<li>
 								<a href="home.html" title="">
 									Home
@@ -230,6 +91,9 @@
 
 										</div><!--nott-list end-->
 									</div><!--notification-box end-->
+							</li>
+							<li>
+									<a href="https://connect.stripe.com/oauth/authorize?response_type=code&amp;client_id=ca_EniAw91fD2i0W9Eq1idvIGKo43c3vZLL&amp;scope=read_write">Connect To Stripe</a>
 							</li>
 						</ul>
 					</nav>
