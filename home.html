@@ -27,7 +27,9 @@
 	<link rel="manifest" href="manifest.json">
 
 	<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-messaging.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-database.js"></script>
 	<script src="js/initializeFirebase.js"></script>
 	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 	<script src="https://checkout.stripe.com/checkout.js"></script>
@@ -241,8 +243,6 @@
 <script type="text/javascript" src="js/scrollbar.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 <script type="text/javascript" src="js/notifications.js"></script>
-<script src="https://js.stripe.com/v3/"></script>
-<script src="https://checkout.stripe.com/checkout.js"></script>
 <script src="js/functions.js"></script>
 <script src="js/update.js"></script>
 
@@ -272,7 +272,7 @@
 <script>
   var handler = StripeCheckout.configure({
   key: 'pk_test_Q5ThBKpfol6VEp6vpjnxBywu00kkFXE6o8',
-  image: 'images/logo.png',
+  image: 'https://files.stripe.com/files/f_test_ujyIlAmzpGTMyScSYWrAK4o8',
   locale: 'auto',
   token: function(token) {
     // You can access the token ID with `token.id`.
