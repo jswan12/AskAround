@@ -174,8 +174,7 @@ function getPost(sub) {
 
           '<div class="usy-name">',
           '<h3>',
-          displayName + ' ----- ' + myUid,
-          //'getName(uid)',
+          displayName,
           '</h3>',
           '<span>$',
           bounty,
