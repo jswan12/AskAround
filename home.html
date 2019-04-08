@@ -45,7 +45,7 @@
 					</div>
 
 					<div>
-						<form> 
+						<form>
 							<input style="visibility:hidden;" type="text" name="search" placeholder="Search...">
 							<button style="visibility:hidden;" type="submit"><i style="visibility:hidden;" class="la la-search"></i></button>
 						</form>
@@ -147,7 +147,7 @@
 											</li>
 											<li class="post-st">
 												<ul>
-														<li><h4>Desired Bounty Amount</h4><input type="number" min="1.00" class="" value="1.00" step="0.01" id="userBounty" placeholder="Enter Desired Bounty Amount" style="text-align: center; width:71mm;" required></li>
+														<li><h4>Desired Bounty Amount</h4><input type="number" min="1.00" class="" value="1.00" step="0.01" id="userBounty" placeholder="Enter Desired Bounty Amount" style="text-align: center; width:-webkit-fill-available; border: none; border-top: solid 1px #e5e5e5; border-bottom: solid 1px #e5e5e5;" required></li>
 														<li style="border-top: none"><a type="button" class="payment_methods active" id="postButton">Post a Question</button></li>
 														<!--<li style="border-top: none"><a class="post-jb active" href="#" title="">Post a Question</a></li>-->
 												</ul>
@@ -252,8 +252,11 @@
 	 * Update top right drop-down menu to have user's profile name as well *
 	 ***********************************************************************/
 	firebase.auth().onAuthStateChanged(function (user) {
-		if (user)
+		if (user){
+			if(document.getElementById('userRank') === '')
+				document.location.reload(true);
 			document.getElementById("usernameID").innerText = firebase.auth().currentUser.displayName, document.getElementById("userName").innerText = firebase.auth().currentUser.displayName;
+		}
 		else
 			window.location = "index.html";
 	});
