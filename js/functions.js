@@ -151,19 +151,21 @@ function pushUser(aUID, aName, aRank) {
   //   });
 }
 
-
+function insertNoPost(sub){
+  var html = 
+  ['<p style="text-align: center; margin-top: 115px;">','There are currently no active bounties for ',sub,'</p>'].join('');
+  var div = document.createElement('div');
+  div.setAttribute('id', 'noBounties');
+  div.innerHTML = html;
+  document.getElementById('posts-section').appendChild(div);
+}
 
 function getPost(sub) {
   dataBase.ref("Posts/" + sub).once('value', function (data) {
-    if(data.numChildren() === 0){
-      var html = 
-      ['<p style="text-align: center; margin-top: 115px;">','There are currently no active bounties for ',sub,'</p>'].join('');
-      var div = document.createElement('div');
-      div.setAttribute('id', 'noBounties');
-      div.innerHTML = html;
-      document.getElementById('posts-section').appendChild(div);
-    }
+    if(data.numChildren() === 0)
+      insertNoPost(sub)
     else{
+      var hiddenCount = 0
       data.forEach(function (childSnapshot) {
         var childData = childSnapshot.val();
         var postID = childSnapshot.key;
@@ -225,7 +227,10 @@ function getPost(sub) {
           document.getElementById('posts-section').appendChild(div);
         }
         /* MAKE SURE TO TAKE THIS LOG OUT LATER*/
-        else{/*console.log("hidding post " + postID);*/}
+        else{hiddenCount++/*console.log("hidding post " + postID);*/}
+
+        if(data.numChildren() === hiddenCount)
+          insertNoPost(sub)
       });
     }
   });
