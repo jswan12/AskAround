@@ -108,7 +108,7 @@ function sendGoodbyeEmail(email, displayName) {
   });
 }
 
-  exports.sendNotificationEmail = functions.database.ref("Posts/Mathematics/").onCreate(event => {
+  exports.sendNotificationEmail = functions.database.ref('Posts/{cat}').onUpdate(event => {
     const dataSnapshot = event.data;
       email = 'jswan12@lsu.edu';
       displayName = 'Jacob Swanson';
