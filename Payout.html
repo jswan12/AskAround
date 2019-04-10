@@ -23,46 +23,80 @@
 			img{
 				width: 200px;
 				height: 200px;
+				margin-top: 20px;
+			}
+			.card {
+				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+				max-width: 300px;
+				margin: auto;
+				margin-top: 50px;
+				text-align: center;
+			}
+
+			button {
+				border: none;
+				outline: 0;
+				display: inline-block;
+				padding: 8px;
+				color: white;
+				background-color: #3c1a5b;
+				text-align: center;
+				cursor: pointer;
+				width: 100%;
+				font-size: 18px;
+			}
+
+			button:hover, a:hover {
+				opacity: 0.7;
 			}
 		</style>
 		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-database.js"></script>
 		<script src="js/initializeFirebase.js"></script>
 	</head>
 	<body>
 		<center>
-			<img src="images/main - 160px x 160px.png">
-			<h2>Waiting for server...</h2>
-			<input type="button" onclick="payout();" value="Get ur $"></button>
+			<div class="card">
+				<img src="images/main - 160px x 160px.png">
+				<h2 id="hiUser"></h2>
+				<p id="attribute0"></p>
+				<p id="attribute1"></p>
+				<p id="attribute2"></p>
+				<p><button onclick="payout();">Claim Cash</button></p>
+			</div>
 		</center>
 	</body>
 	<script>
-		var claimAmount = data.val().claimAmount;
-		var stripeID = data.val().stripeID;
-		var stripe = require('stripe')(sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs);
-		stripe.payouts.create(
-			{
-				amount: 'claimAmount',
-				currency: 'usd',
-				method: 'instant',
-			},
-			{stripe_account: 'stripeID'}
-		);
+		var displayName = firebase.auth().currentUser.displayName;
+		document.getElementById('hiUser').innerText = "Hey there,\n " + displayName;
+		var uid = firebase.auth().currentUser.uid;
+		firebase.database().ref('Users/' + uid).once('value', function(data){
+			var claimAmount0 = data.val().claimAmount;
+			var tokenString0 = data.val().tokenString;
+			var stripeID0 = data.val().stripeID;
+			document.getElementById('attribute0').innerText = "$"+ claimAmount0;
+			document.getElementById('attribute1').innerText = tokenString0;
+			document.getElementById('attribute2').innerText = stripeID0;
+		});
+
+		claimAmount = 0.00;
+		tokenString = "null";
+		//reset claim to 0.00
+
+		// var stripe = require('stripe')(sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs);
+		// stripe.payouts.create(
+		// {
+		// 	amount: 'claimAmount',
+		// 	currency: 'usd',
+		// 	method: 'instant',
+		// },{stripe_account: 'stripeID'});
+		firebase.database().ref('Users/' + uid ).update({claimAmount});
+		firebase.database().ref('Users/' + uid ).update({tokenString});
+		//window.close();
 
 		function payout(){
-			var uid = firebase.auth().currentUser.uid;
-			var displayName = firebase.auth().currentUser.displayName;
-			firebase.database().ref('Users/' + uid).once('value', function(data){
-				var claimAmount = data.val().claimAmount;
-				var tokenString = data.val().tokenString;
-				alert("Congrats you have earned yourself: $" + claimAmount + "\nToken String: " + tokenString);
-				claimAmount = 0.00;
-				tokenString = "null";
-				//reset claim to 0.00
-				firebase.database().ref('Users/' + uid ).update({claimAmount});
-				firebase.database().ref('Users/' + uid ).update({tokenString});
-				window.close();
-			});
+			alert("Congrats you have claimed yourself: $" + claimAmount0 + "\nToken String: " + tokenString0 + "\nStripe ID: " + stripeID0);
 		}
 	</script>
 </html>
