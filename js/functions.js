@@ -26,6 +26,7 @@ firebase.auth().onAuthStateChanged(function (user) {
     displayName = firebase.auth().currentUser.displayName;
     getRank();
 
+    //add a possible while loop here.
     if(!user.emailVerified){
       user.sendEmailVerification().then(function() {
         sendMail();
@@ -101,59 +102,14 @@ var submitPost = function () {
   }
 };
 
-
-
-
-//var count = 0;
-//calling addCount() actually works, but idk how to get it when a post is submited
-function addCount(){
-firebase.database().ref("Counter/").once('value',
-    function(data){
-      var postCount = data.val().postCount;
-      postCount++;
-      document.getElementById('notification').innerText = "Notification " + postCount;
-      console.log(postCount);
-      firebase.database().ref('Counter/').update({postCount});
-
-    }, function (err) {
-      console.log("notificaion is not working: " + error);
-    }
-  );
-}
-
-//   function getName(aUID){
-//   // return name based on a UID input
-//   var currUser = firebase.database().ref("Users/" + aUID).once('value',
-//   function(data){
-//     document.getElementById('userName').innerText = data.val().Name;
-//   }, function(error){ console.log(error); }
-//   );
-// }
-
 function getRank() {
-  // return rank
-  var currUser = firebase.database().ref("Users/" + uid).once('value',
-    function (data) {
+  firebase.database().ref("Users/" + uid).once('value', function (data) {
       document.getElementById('userRank').innerText = data.val().Rank;
-    }, function (error) { console.log(error); }
-  );
-}
-
-
-
-
-function pushUser(aUID, aName, aRank) {
-  // push user to database
-  // var userBase = firebase.database().ref('Users/' + aUID);
-  // dataBase.push({
-  //   "Name": aName,
-  //   "Rank": aRank
-  //   });
+  }, function (error) { console.log(error); });
 }
 
 function insertNoPost(sub){
-  var html = 
-  ['<p style="text-align: center; margin-top: 115px;">','There are currently no active bounties for ',sub,'</p>'].join('');
+  var html = ['<p style="text-align: center; margin-top: 115px;">','There are currently no active bounties for ',sub,'</p>'].join('');
   var div = document.createElement('div');
   div.setAttribute('id', 'noBounties');
   div.innerHTML = html;
@@ -181,44 +137,28 @@ function getPost(sub) {
         if(visibility == 'visible'){
           var html = [
             '<div class="post_topbar">',
-            '<div class="usy-dt">',
-
-            '<div class="usy-name">',
-            '<h3>',
-            displayName,
-            '</h3>',
-            '<span>$',
-            bounty,
-            '</span>',
+              '<div class="usy-dt">',
+                '<div class="usy-name">',
+                  '<h3>',displayName,'</h3>',
+                  '<span>$',bounty,'</span>',
+                '</div>',
+              '</div>',
+              '<div class="ed-opts">',
+                '<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>',
+                '<input id="button',postID,'" type="button" value="Claim Bounty" onclick="openChatPage(\'',postID,'\');" style="float:right; background-color: green; color: white; height: 25px; width: 100px; border: none;"></input>',
+                '<ul class="ed-options">',
+                  '<li><a href="#" title="">Edit Post</a></li>',
+                  '<li><a href="#" title="">Unsaved</a></li>',
+                  '<li><a href="#" title="">Unbid</a></li>',
+                  '<li><a href="#" title="">Close</a></li>',
+                  '<li><a href="#" title="">Hide</a></li>',
+                '</ul>',
+              '</div>',
             '</div>',
-            '</div>',
-            '<div class="ed-opts">',
-            '<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>',
-            '<input id="button',
-            postID,
-            '" type="button" value="Claim Bounty" onclick="openChatPage(\'',
-            postID,
-            '\');" style="float:right; background-color: green; color: white; height: 25px; width: 100px; border: none;"></input>',
-            '<ul class="ed-options">',
-            '<li><a href="#" title="">Edit Post</a></li>',
-            '<li><a href="#" title="">Unsaved</a></li>',
-            '<li><a href="#" title="">Unbid</a></li>',
-            '<li><a href="#" title="">Close</a></li>',
-            '<li><a href="#" title="">Hide</a></li>',
-            '</ul>',
-            '</div>',
-            '</div>',
-
             '<div class="job_descp">',
-            '<h3>',
-            question,
-            '</h3>',
-
-            '<p>',
-            description,
-            '</p>',
-            '</div>',
-            '<script></script>'
+              '<h3>',question,'</h3>',
+              '<p>',description,'</p>',
+            '</div>'
           ].join('');
           var div = document.createElement('div');
           div.setAttribute('class', 'post-bar');
@@ -226,8 +166,7 @@ function getPost(sub) {
           div.innerHTML = html;
           document.getElementById('posts-section').appendChild(div);
         }
-        /* MAKE SURE TO TAKE THIS LOG OUT LATER*/
-        else{hiddenCount++/*console.log("hidding post " + postID);*/}
+        else{hiddenCount++}
 
         if(data.numChildren() === hiddenCount)
           insertNoPost(sub)
@@ -269,37 +208,36 @@ function openChatPage(postKey) {
   });
 }
 
-function deletePost(postKey) {
-    if(confirm("Are you sure you want to delete post " + postKey + "?")){
-      firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).remove().then(function(){
-        document.location.reload(true);
-      }).catch(function(error){
-        console.log('Delete Failed');
-      });
-    }
-    console.log("Deletion Canceled");
-}
+// function deletePost(postKey) {
+//     if(confirm("Are you sure you want to delete post " + postKey + "?")){
+//       firebase.database().ref('Posts/' + document.getElementById("pageTitle").innerText + '/' + postKey).remove().then(function(){
+//         document.location.reload(true);
+//       }).catch(function(error){
+//         console.log('Delete Failed');
+//       });
+//     }
+//     console.log("Deletion Canceled");
+// }
 
 
-//send email
-function sendEmail(user) {
-  // 5. Send welcome email to new users
-  const mailOptions = {
-          from: '"Dave" <dave@example.net>',
-          to: '${user.email}',
-          subject: 'Welcome!',
-          html: `<YOUR-WELCOME-MESSAGE-HERE>`
-  }
-  // 6. Process the sending of this email via nodemailer
-  return mailTransport.sendMail(mailOptions)
-          .then(() => console.log('dbCompaniesOnUpdate:Welcome confirmation email'))
-          .catch((error) => console.error('There was an error while sending the email:', error))
-}
+// //send email
+// function sendEmail(user) {
+//   // 5. Send welcome email to new users
+//   const mailOptions = {
+//           from: '"Dave" <dave@example.net>',
+//           to: '${user.email}',
+//           subject: 'Welcome!',
+//           html: `<YOUR-WELCOME-MESSAGE-HERE>`
+//   }
+//   // 6. Process the sending of this email via nodemailer
+//   return mailTransport.sendMail(mailOptions)
+//           .then(() => console.log('dbCompaniesOnUpdate:Welcome confirmation email'))
+//           .catch((error) => console.error('There was an error while sending the email:', error))
+// }
 
 
 //get notifications function
 function getNotification(sub) {
-
   dataBase.ref("Posts/" + sub).once('value', function (data) {
     data.forEach(function (childSnapshot) {
       var childData = childSnapshot.val();
@@ -323,7 +261,6 @@ function getNotification(sub) {
         div.innerHTML = html;
         document.querySelector('.nott-list').appendChild(div);
       }
-
     });
   });
 }
