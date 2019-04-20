@@ -1,123 +1,40 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<!-- link css styling and favicon -->
 		<link rel="shortcut icon" href="images/favicon - 32px x 32px.png" />
+		<link rel="stylesheet" type="text/css" href="css/Payout.style.css">
+		<!-- end linking of css and favicon -->
 		<meta charset="utf-8">
-		<meta http-equiv="cache-control" content="no-cache" />
-			<meta http-equiv="Pragma" content="no-cache" />
-			<meta http-equiv="Expires" content="-1" />
 		<title>AskAround Payout</title>
-		<style>
-			h1{
-				color: rgb(62,31,88);
-				font-size: 100px;
-				float: center;
-
-			}
-			input[type=button]{
-				width:inherit;
-				height:50px;
-				color:rgb(62,31,88);
-				font-size:xx-large;
-			}
-			img{
-				width: 200px;
-				height: 200px;
-				margin-top: 20px;
-			}
-			.card {
-				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-				max-width: 300px;
-				margin: auto;
-				margin-top: 50px;
-				text-align: center;
-			}
-
-			button {
-				border: none;
-				outline: 0;
-				display: inline-block;
-				padding: 8px;
-				color: white;
-				background-color: #3c1a5b;
-				text-align: center;
-				cursor: pointer;
-				width: 100%;
-				font-size: 18px;
-			}
-
-			button:hover, a:hover {
-				opacity: 0.7;
-			}
-		</style>
+    	<!-- Tell the page to not hold cache -->
+    	<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="Pragma" content="no-cache" />
+    	<meta http-equiv="Expires" content="-1" />
+    	<!-- end cache cancel -->
+		<!-- import firebase utilities -->
 		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-auth.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-database.js"></script>
 		<script src="js/initializeFirebase.js"></script>
+		<!-- end firebase utilities import -->
 	</head>
 	<body>
 		<center>
+			<!-- Div for displaying claim info -->
 			<div class="card">
+				<!-- display AskAround logo -->
 				<img src="images/main - 160px x 160px.png">
+				<!-- Header to show current user's name -->
 				<h2 id="hiUser"></h2>
+				<!-- Area to display how much the user is claiming -->
 				<p id="attribute0"></p>
+				<!-- Area to display if user's stripe account is linked to AskAround -->
 				<p id="attribute1"></p>
+				<!-- Button onclick will send the payout request to Stripe (From AskAround account -> user's linked Stripe account) -->
 				<p><button onclick="payout();">Claim Cash</button></p>
 			</div>
+			<!-- end div for displaying claim info -->
 		</center>
-
-		<script>
-			if (document.readyState == 'loading') {
-    			document.addEventListener('DOMContentLoaded', ready)
-			} else {
-    			ready()
-			}
-
-			function ready(){
-				firebase.auth().onAuthStateChanged(function(user){
-					if(user){
-						console.log("user check passed")
-						var displayName = firebase.auth().currentUser.displayName;
-						document.getElementById('hiUser').innerText = "Hey there,\n " + displayName;
-						var uid = firebase.auth().currentUser.uid;
-						var done = false;
-						firebase.database().ref('Users/' + uid).once('value', function(data){
-							var claimAmount0 = data.val().claimAmount;
-							var stripeID0 = data.val().stripeID;
-							document.getElementById('attribute0').innerText = "$"+ claimAmount0;
-							document.getElementById('attribute1').innerText = stripeID0;
-							done = true;
-							console.log('finished setting DOM obj to data')
-						}).then(function(){
-							console.log('reseting firebase database')
-							claimAmount = 0.00, tokenString = "null";
-							//reset claim to 0.00
-					
-							// var stripe = require('stripe')(sk_test_LEoxihDqCYeW1QVhG6shShQn00BFRodwbs);
-							// stripe.payouts.create(
-							// {
-							// 	amount: 'claimAmount',
-							// 	currency: 'usd',
-							// 	method: 'instant',
-							// },{stripe_account: 'stripeID'});
-							firebase.database().ref('Users/' + uid ).update({claimAmount});
-							firebase.database().ref('Users/' + uid ).update({tokenString});
-						});
-					}
-					else{
-							console.error("Can't fetch data, user not logged in!");
-							document.getElementById('hiUser').innerText = "Hey there,\n " + "Mr. Null";
-							document.getElementById('attribute0').innerText = "$"+ 0.00;
-							document.getElementById('attribute1').innerText = "not connected";
-					}
-					console.log('finished function');
-				});
-			}
-			
-			function payout(){
-				alert("Congrats you have claimed your cash!\nPlease monitor your Stripe account for the amount to be posted");
-				window.close();
-			}
-		</script>
 	</body>
 </html>
