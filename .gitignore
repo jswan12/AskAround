@@ -10,7 +10,7 @@ firebase-debug.log*
 .firebase/
 
 # Hosting folder
-.public/
+public/
 
 # Firebase config
 
