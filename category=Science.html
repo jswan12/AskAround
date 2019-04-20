@@ -3,14 +3,18 @@
 
 <head>
 	<meta charset="UTF-8">
+	<title>AskAround</title>
+	<!-- Tell the page to not hold cache -->
 	<meta http-equiv="cache-control" content="no-cache" />
 	<meta http-equiv="Pragma" content="no-cache" />
 	<meta http-equiv="Expires" content="-1" />
-	<title>AskAround</title>
+	<!-- end cache cancel -->
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
+
+	<!-- link css styling, favicon and manifest -->
 	<link rel="stylesheet" type="text/css" href="css/animate.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/line-awesome.css">
@@ -21,20 +25,26 @@
 	<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/responsive.css">
-
 	<link rel="shortcut icon" href="images/favicon - 32px x 32px.png" />
-
 	<link rel="manifest" href="manifest.json">
+	<!-- end linking of css, favicon and manifest -->
 
+	<!-- import firebase utilities -->
 	<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-auth.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-messaging.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase-database.js"></script>
 	<script src="js/initializeFirebase.js"></script>
+	<!-- end firebase utilities import -->
+
+	<!-- import jQuery library -->
 	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+	<!-- end jQuery library -->
+
+	<!-- import Stripe API -->
 	<script src="https://checkout.stripe.com/checkout.js"></script>
 	<script src="https://js.stripe.com/v3/"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- end Stripe API import -->
 </head>
 
 <body>
@@ -45,71 +55,71 @@
 					<div class="logo">
 						<a href="home.html" title=""><img src="images/logo.png" alt="" style="height: 34px;"></a>
 					</div>
-
+					<!-- Start search bar to top of site -->
 					<div>
 						<form>
+							<!-- Search bar is here but hidden because of errors in css -->
 							<input style="visibility:hidden;" type="text" name="search" placeholder="Search...">
 							<button style="visibility:hidden;" type="submit"><i style="visibility:hidden;" class="la la-search"></i></button>
 						</form>
 					</div>
-
+					<!-- End search bar to top of site -->
+					<!-- Begin Top Navigation Bar -->
 					<nav>
 						<ul>
-							<li>
-								<a href="home.html" title="">
-									Home
-								</a>
-							</li>
-							<li>
-								<a href="" title="">
-
-									Categories
-								</a>
+							<!-- First link on the Navigation Bar -->
+							<li><a href="home.html" title="">Home</a></li>
+							<!-- End first link on the Navigation Bar -->
+							<!-- Second link on the Navigation Bar (Drop-down menu) -->
+							<li><a href="" title="">Categories</a>
+								<!-- Begin Drop-down menu items -->
 								<ul>
-									<li>
-										<a href="home.html">Mathematics</a>
-									</li>
-									<li>
-										<a href="category=Computer_Science.html">Computer Science</a>
-									</li>
-									<li>
-										<a href="category=Science.html">Science</a>
-									</li>
+									<li><a href="home.html">Mathematics</a></li>
+									<li><a href="category=Computer_Science.html">Computer Science</a></li>
+									<li><a href="category=Science.html">Science</a></li>
 								</ul>
+								<!-- End Drop-down menu items -->
 							</li>
-							<li>
-								<a href="#" id="notification" class="not-box-open">
-									Notification
-								</a>
+							<!-- End second link on the Navigation Bar -->
+							<!-- Third link on the Navigation Bar (Drop-down menu) -->
+							<li><a href="#" id="notification" class="not-box-open">Notification</a>
+								<!-- notification-box start -->
 								<div class="notification-box msg">
-										<div class="nt-title">
-											<a class="clear-notif" href="#" title="">Clear all</a>
+									<div class="nt-title">
+										<a class="clear-notif" href="#" title="">Clear all</a>
+									</div>
+									<!-- notification-list start -->
+									<div class="nott-list">
+										<div class="notification-details">
+											<div class="notification-info"></div>
 										</div>
-										<div class="nott-list">
-											<div class="notification-details">
-												<div class="notification-info">
-												</div>
-											</div>
-
-										</div><!--nott-list end-->
-									</div><!--notification-box end-->
+									</div>
+									<!--nottification-list end-->
+								</div>
+								<!--notification-box end-->
 							</li>
+							<!-- End third link on the Navigation Bar -->
+							<!-- Fourth link on the Navigation Bar (Connect Stripe Account) -->
 							<li>
 									<a href="https://connect.stripe.com/oauth/authorize?response_type=code&amp;client_id=ca_EniAw91fD2i0W9Eq1idvIGKo43c3vZLL&amp;scope=read_write">Connect To Stripe</a>
 							</li>
+							<!-- End fourth link on the Navigation Bar -->
 						</ul>
 					</nav>
+					<!-- End Top Navigation Bar -->
+					<!-- Drop-down menu link for Signed-In User -->
 					<div class="menu-btn">
 						<a href="#" title=""><i class="fa fa-bars"></i></a>
 					</div>
+					<!-- Begin Signed-In User Options -->
 					<div class="user-account">
 						<div class="user-info">
+							<!-- Display Signed-In User -->
 							<a href="#" id="userName"></a>
 							<i class="la la-sort-down"></i>
 						</div>
-
+						<!-- Display clickable links for Signed in User -->
 						<div class="user-account-settingss">
-
 							<h3>Profile</h3>
 							<ul class="us-links">
 								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
@@ -117,100 +127,110 @@
 								<li><a href="#" title="">Faqs</a></li>
 								<li><a href="#" title="">Terms & Conditions</a></li>
 							</ul>
+							<!-- Display Logout link -->
 							<h3 class="tc"><a href="index.html" onclick="logOut();" title="">Logout</a></h3>
 						</div>
-
+						<!-- End clickable links for Signed-In User -->
 					</div>
+					<!-- End Signed-In User Options -->
 				</div>
 			</div>
 		</header>
 
+		<!-- Begin Main Frame of the Site -->
 		<main>
 			<div class="main-section">
 				<div class="container">
 					<div class="main-section-data">
 						<div class="row">
+							<!-- Begin Left Bar of the Site -->
 							<div class="col-lg-3 col-md-4 pd-left-none no-pd profile-block">
 								<div class="main-left-sidebar no-margin">
 									<div class="user-data full-width">
 										<div class="user-profile">
-
+											<!-- User ID will start here -->
 											<div class="user-specs">
 												<h3 id="usernameID"></h3>
-
 												<span>LSU Student</span>
 											</div>
+											<!-- End User ID -->
 										</div>
-
 										<ul class="user-fw-status">
-											<li>
-												<h4>Upvotes</h4>
-												<span id="userRank"></span>
-											</li>
+											<!-- User Rank will start here -->
+											<li><h4>Upvotes</h4><span id="userRank"></span></li>
+											<!-- End User Rank -->
+											<!-- Start 'Make a Post Area' -->
 											<li class="post-st">
+												<!-- Display Number Input-field and 'Make a Post' button -->
 												<ul>
-														<li style="border-top-width: 0px;"><h4>Desired Bounty Amount</h4><input type="number" min="1.00" class="" value="1.00" step="0.01" id="userBounty" placeholder="Enter Desired Bounty Amount" 
-															style="
-																text-align: center; 
-																font-size: larger;
-																width:-webkit-fill-available; 
-																border: none; border-top: solid 1px #e5e5e5; 
-																border-bottom: solid 1px #e5e5e5;
-																padding-top: 10px;
-																padding-bottom: 10px;
-																margin-top: 8px;" required></li>
+														<li style="border-top-width: 0px;"><h4>Desired Bounty Amount</h4><input type="number" min="1.00" class="" value="1.00" step="0.01" id="userBounty" placeholder="Enter Desired Bounty Amount" style="text-align: center; font-size: larger; width:-webkit-fill-available; border: none; border-top: solid 1px #e5e5e5; border-bottom: solid 1px #e5e5e5; padding-top: 10px; padding-bottom: 10px; margin-top: 8px;" required></li>
 														<li style="border-top: none"><a style="width: 100%; border: none;border-radius: 0px; cursor: default;" class="active" id="postButton">Post a Question</button></li>
-														<!--<li style="border-top: none"><a class="post-jb active" href="#" title="">Post a Question</a></li>-->
 												</ul>
+												<!-- End display of elements -->
 											</li>
+											<!-- End 'Make a Post Area' -->
+											<!-- Start 'View Profile' Link -->
 											<li>
 												<a href="profile-account-setting.html" title="">View Profile</a>
 											</li>
+											<!-- End 'View Profile' Link -->
 										</ul>
 									</div>
-
 								</div>
 							</div>
+							<!-- End Left Bar of the Site -->
+							<!-- Start Middle Postings Area -->
 							<div class="col-lg-6 col-md-8 no-pd">
 								<div class="main-ws-sec">
-
-
 									<div class="posts-section" id="posts-section">
+										<!-- Title of page -->
 										<div class="post-bar company-title">
-											<center>
-												<h3 id="pageTitle">Science</h3>
-											</center>
+											<center><h3 id="pageTitle">Science</h3></center>
 										</div>
+										<!-- THIS IS WHERE POSTS WILL BE INJECTED TO -->
+										<!-- 																				 -->
+										<!-- 																				 -->
+										<!-- 																				 -->
+										<!-- THIS IS WHERE POSTS WILL BE INJECTED TO -->
 									</div>
 								</div>
 							</div>
+							<!-- End Middle Postings Area -->
 						</div>
 					</div>
 				</div>
 			</div>
 		</main>
+		<!-- End Main Frame of the Site -->
 
+		<!-- Begin Pop-Up for making a post -->
 		<div class="post-popup job_post">
 			<div class="post-project">
 				<h3>Ask Around: Create Post</h3>
 				<div class="post-project-fields">
+					<!-- Begin contents of the posting form -->
 					<form id="postForm">
 						<div class="row">
 							<div class="col-lg-12">
+								<!-- Title of Post -->
 								<input type="text" name="title" placeholder="Question" id="question" required>
 							</div>
 							<div class="col-lg-12">
+								<!-- Description of Post -->
 								<textarea name="description" id="description" placeholder="Description"></textarea required>
 							</div>
 							<div class="col-lg-12">
 								<div class="inp-field">
+									<!-- Drop-down menu for Category -->
 									<select id="category" required>
 										<option value="" selected disabled hidden>Select Category</option>
 										<option value="Computer Science">Computer Science</option>
 										<option value="Mathematics">Mathematics</option>
 										<option value="Science">Science</option>
 									</select>
+									<!-- End Drop-down menu for Category -->
 									<div class="price-br" style="margin-right: 10px">
+										<!-- Bounty amount shown but disabled so it can't be changed after payment -->
 										<input type="number" min="0" name="price" id="price" placeholder="Bounty" disabled>
 										<i class="la la-dollar"></i>
 									</div>
@@ -218,89 +238,29 @@
 							</div>
 
 							<div class="col-lg-12">
+								<!-- Submit button to send form data -->
 								<button type="submit" class="payment_methods active" id="submitButton" style="height: 40px; background-color: #3c1a5b; color: white; border: none; border-radius: 3px;">Post</button>
 							</div>
 						</div>
 					</form>
 				</div>
+				<!-- End contents of the posting form -->
 			</div>
 		</div>
+		<!-- End Pop-up for making a post -->
 
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/popper.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/jquery.mCustomScrollbar.js"></script>
-<script type="text/javascript" src="lib/slick/slick.min.js"></script>
-<script type="text/javascript" src="js/scrollbar.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
-<script type="text/javascript" src="js/notifications.js"></script>
-<script src="js/functions.js"></script>
-<script src="js/update.js"></script>
-
-<script>
-	/***********************************************************************
-	 * Update top left div to display current user's profile name		   *
-	 * Update top right drop-down menu to have user's profile name as well *
-	 ***********************************************************************/
-	firebase.auth().onAuthStateChanged(function (user) {
-		if (user){
-			if(document.getElementById('userRank') === '')
-				document.location.reload(true);
-			document.getElementById("usernameID").innerText = firebase.auth().currentUser.displayName, document.getElementById("userName").innerText = firebase.auth().currentUser.displayName;
-		}
-		else
-			window.location = "index.html";
-	});
-
-	/***********************************************************************
-	 * Logout the current user											   *
-	 ***********************************************************************/
-	function logOut(){
-		firebase.auth().signOut().then(function() {alert("Logout Successful.")}).catch(function(error){alert("An Error Occured.")});
-	}
-</script>
-
-<script>
-  var handler = StripeCheckout.configure({
-  key: 'pk_test_Q5ThBKpfol6VEp6vpjnxBywu00kkFXE6o8',
-  image: 'https://files.stripe.com/files/f_test_ujyIlAmzpGTMyScSYWrAK4o8',
-  locale: 'auto',
-  token: function(token) {
-    // You can access the token ID with `token.id`.
-	// Get the token ID to your server-side code for use.
-	alert("Payment Successful!");
-        $(".post-popup.job_post").addClass("active");
-		$(".wrapper").addClass("overlay");
-		document.getElementById('price').value = document.getElementById('userBounty').value;
-		console.log(token.id);
-
-		var tokenString = token.id;
-        firebase.database().ref('Users/' + uid ).update({tokenString});
-  }
-  });
-
-  document.getElementById('postButton').addEventListener('click', function(e) {
-  // Open Checkout with further options:
-	//console.log("curchat is::: " + curChatA);
-	if(curChatA === 'null'){
-  	handler.open({
-    	name: 'AskAround',
-    	description: 'Bounty Payment',
-    	amount: document.getElementById('userBounty').value*100,
-    	zipCode: true
-  	});
-  	e.preventDefault();
-	}
-	else{
-		alert("sorry only one post at a time!!");
-	}
-  });
-
-  // Close Checkout on page navigation:
-  window.addEventListener('popstate', function() {
-    handler.close();
-  });
-</script>
-
+		<!-- import .js files -->
+		<script src="js/home.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/popper.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mCustomScrollbar.js"></script>
+		<script type="text/javascript" src="lib/slick/slick.min.js"></script>
+		<script type="text/javascript" src="js/scrollbar.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
+		<script type="text/javascript" src="js/notifications.js"></script>
+		<script src="js/functions.js"></script>
+		<script src="js/update.js"></script>
+		<!-- end import or .js files -->
 </body>
 </html>
